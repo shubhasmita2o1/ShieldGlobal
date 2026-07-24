@@ -1,24 +1,29 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { MainLayout } from "@/layouts/MainLayout";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
   component: Index,
+  head: () => ({
+    meta: [
+      { title: "Shield Global Group" },
+      {
+        name: "description",
+        content:
+          "Shield Global Group — connecting talent, technology and entertainment across manpower, workforce solutions, industrial automation, and media.",
+      },
+      { property: "og:title", content: "Shield Global Group" },
+      {
+        property: "og:description",
+        content:
+          "Shield Global Group — connecting talent, technology and entertainment.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
+  // Sections will be added in later phases. Header/Navbar only for now.
+  return <MainLayout>{null}</MainLayout>;
 }
