@@ -140,5 +140,183 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif;
   }
+}
+
+/* ============================================================
+   Site header / navbar — pixel port of the original Bootstrap navbar
+   (Shield Global Group). Uses raw CSS so utilities do not fight
+   the tuned breakpoints from the original responsive.css.
+   ============================================================ */
+
+.sgg-navbar {
+  padding: 16px 0;
+  background: #ffffff;
+}
+
+.sgg-container {
+  width: 100%;
+  padding-left: 60px;
+  padding-right: 60px;
+}
+
+.sgg-logo {
+  height: 62px;
+}
+
+.sgg-nav {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sgg-nav-item {
+  display: flex;
+  align-items: center;
+}
+
+.sgg-nav-link {
+  position: relative;
+  display: inline-block;
+  padding: 8px 0;
+  margin: 0 14px;
+  color: #333;
+  font-size: 17px;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.sgg-nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0;
+  height: 2px;
+  background: #00bcd4;
+  transition: width 0.3s;
+}
+
+.sgg-nav-link:hover::after,
+.sgg-nav-link-active::after {
+  width: 100%;
+}
+
+.sgg-nav-link-active {
+  font-weight: 600;
+}
+
+.sgg-lang-item {
+  margin-left: 10px;
+}
+
+.sgg-lang {
+  border: 0;
+  border-left: 2px solid #00bcd4;
+  padding: 4px 10px 4px 12px;
+  margin-left: 0;
+  font-size: 19px;
+  color: #333;
+  background: transparent;
+  width: 120px;
+  font-family: inherit;
+  cursor: pointer;
+  outline: none;
+}
+
+/* Desktop layout: menu right-aligned on same row */
+@media (min-width: 992px) {
+  .sgg-menu {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1 1 auto;
+  }
+}
+
+/* Tablet tweak — matches original 1024px scale-down */
+@media (max-width: 1024px) and (min-width: 992px) {
+  .sgg-container { padding-left: 36px; padding-right: 36px; }
+  .sgg-logo { height: 56px; }
+  .sgg-nav-link { font-size: 15px; margin: 0 8px; }
+}
+
+/* Mobile: right-slide drawer */
+@media (max-width: 991.98px) {
+  .sgg-container { padding-left: 20px; padding-right: 20px; }
+  .sgg-logo { height: 48px; }
+
+  .sgg-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 72vw;
+    max-width: 260px;
+    height: 100dvh;
+    background: #ffffff;
+    padding: 72px 22px 24px;
+    box-shadow: -8px 0 24px rgba(0, 0, 0, 0.08);
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 50;
+    transition: right 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .sgg-menu-open {
+    right: 0;
+  }
+
+  .sgg-nav {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    gap: 0;
+  }
+
+  .sgg-nav-item {
+    width: 100%;
+  }
+
+  .sgg-nav-link {
+    display: block;
+    width: 100%;
+    font-size: 15px;
+    margin: 0;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+    text-align: left;
+  }
+
+  .sgg-nav-link::after {
+    display: none;
+  }
+
+  .sgg-lang-item {
+    margin-left: 0;
+    width: 100%;
+    padding: 12px 0;
+  }
+
+  .sgg-lang {
+    width: 100%;
+    font-size: 15px;
+    padding-left: 12px;
+  }
+}
+
+@media (max-width: 575px) {
+  .sgg-container { padding-left: 16px; padding-right: 16px; }
+  .sgg-logo { height: 40px; }
+}
+
+@media (max-width: 360px) {
+  .sgg-logo { height: 36px; }
+}
+
+body.nav-open {
+  overflow: hidden;
 }
