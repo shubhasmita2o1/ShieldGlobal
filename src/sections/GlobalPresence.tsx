@@ -1,78 +1,127 @@
 import { useMemo, useState } from "react";
-import worldMap from "@/assets/images/worldmap.jpg.asset.json";
+import { geoNaturalEarth1, geoPath } from "d3-geo";
+import { feature } from "topojson-client";
+import type { Feature, FeatureCollection, Geometry } from "geojson";
+import worldTopo from "@/assets/data/world-countries-110m.json";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 
+type Region =
+  | "South Asia"
+  | "Southeast Asia"
+  | "Middle East"
+  | "Africa"
+  | "Europe"
+  | "North America";
+
+type Kind = "hq" | "regional" | "office";
+
 type Location = {
   name: string;
+  country?: string;
   lat: number;
   lng: number;
-  region: "South Asia" | "Southeast Asia" | "Middle East" | "Africa" | "Europe" | "Americas";
-  hub?: boolean;
+  region: Region;
+  kind: Kind;
 };
 
 const LOCATIONS: Location[] = [
-  { name: "Mumbai", lat: 19.07, lng: 72.87, region: "South Asia", hub: true },
-  { name: "Kolkata", lat: 22.57, lng: 88.36, region: "South Asia", hub: true },
-  { name: "Bangalore", lat: 12.97, lng: 77.59, region: "South Asia", hub: true },
-  { name: "Bangladesh", lat: 23.81, lng: 90.41, region: "South Asia" },
-  { name: "Nepal", lat: 27.71, lng: 85.32, region: "South Asia" },
-  { name: "Sri Lanka", lat: 6.93, lng: 79.86, region: "South Asia" },
-  { name: "Singapore", lat: 1.35, lng: 103.82, region: "Southeast Asia", hub: true },
-  { name: "Malaysia", lat: 3.14, lng: 101.69, region: "Southeast Asia" },
-  { name: "Indonesia", lat: -6.21, lng: 106.85, region: "Southeast Asia" },
-  { name: "Vietnam", lat: 21.03, lng: 105.85, region: "Southeast Asia" },
-  { name: "Myanmar", lat: 16.87, lng: 96.2, region: "Southeast Asia" },
-  { name: "Thailand", lat: 13.76, lng: 100.5, region: "Southeast Asia" },
-  { name: "UAE", lat: 25.2, lng: 55.27, region: "Middle East", hub: true },
-  { name: "Qatar", lat: 25.29, lng: 51.53, region: "Middle East" },
-  { name: "Kuwait", lat: 29.38, lng: 47.99, region: "Middle East" },
-  { name: "KSA", lat: 24.71, lng: 46.68, region: "Middle East" },
-  { name: "Oman", lat: 23.59, lng: 58.41, region: "Middle East" },
-  { name: "Bahrain", lat: 26.23, lng: 50.59, region: "Middle East" },
-  { name: "Egypt", lat: 30.04, lng: 31.24, region: "Africa" },
-  { name: "Tunisia", lat: 36.81, lng: 10.18, region: "Africa" },
-  { name: "Morocco", lat: 34.02, lng: -6.83, region: "Africa" },
-  { name: "Sudan", lat: 15.5, lng: 32.56, region: "Africa" },
-  { name: "Kenya", lat: -1.29, lng: 36.82, region: "Africa" },
-  { name: "Uganda", lat: 0.35, lng: 32.58, region: "Africa" },
-  { name: "Ghana", lat: 5.6, lng: -0.19, region: "Africa" },
-  { name: "Ethiopia", lat: 9.03, lng: 38.74, region: "Africa" },
-  { name: "Nigeria", lat: 9.08, lng: 7.4, region: "Africa" },
-  { name: "South Africa", lat: -26.2, lng: 28.05, region: "Africa" },
-  { name: "Greece", lat: 37.98, lng: 23.73, region: "Europe" },
-  { name: "Turkey", lat: 39.93, lng: 32.86, region: "Europe" },
-  { name: "UK", lat: 51.51, lng: -0.13, region: "Europe", hub: true },
-  { name: "Poland", lat: 52.23, lng: 21.01, region: "Europe" },
-  { name: "Russia", lat: 55.75, lng: 37.62, region: "Europe" },
-  { name: "Canada", lat: 45.42, lng: -75.7, region: "Americas" },
+  { name: "Mumbai", country: "India", lat: 19.076, lng: 72.877, region: "South Asia", kind: "hq" },
+  { name: "Kolkata", country: "India", lat: 22.572, lng: 88.363, region: "South Asia", kind: "office" },
+  { name: "Bangalore", country: "India", lat: 12.972, lng: 77.594, region: "South Asia", kind: "office" },
+  { name: "Bangladesh", country: "Dhaka", lat: 23.810, lng: 90.412, region: "South Asia", kind: "office" },
+  { name: "Nepal", country: "Kathmandu", lat: 27.717, lng: 85.324, region: "South Asia", kind: "office" },
+  { name: "Sri Lanka", country: "Colombo", lat: 6.927, lng: 79.861, region: "South Asia", kind: "office" },
+
+  { name: "Singapore", lat: 1.352, lng: 103.820, region: "Southeast Asia", kind: "regional" },
+  { name: "Malaysia", country: "Kuala Lumpur", lat: 3.139, lng: 101.687, region: "Southeast Asia", kind: "office" },
+  { name: "Indonesia", country: "Jakarta", lat: -6.208, lng: 106.846, region: "Southeast Asia", kind: "office" },
+  { name: "Vietnam", country: "Hanoi", lat: 21.028, lng: 105.804, region: "Southeast Asia", kind: "office" },
+  { name: "Myanmar", country: "Yangon", lat: 16.866, lng: 96.195, region: "Southeast Asia", kind: "office" },
+  { name: "Thailand", country: "Bangkok", lat: 13.756, lng: 100.501, region: "Southeast Asia", kind: "office" },
+
+  { name: "UAE", country: "Dubai", lat: 25.205, lng: 55.271, region: "Middle East", kind: "regional" },
+  { name: "Qatar", country: "Doha", lat: 25.286, lng: 51.531, region: "Middle East", kind: "office" },
+  { name: "Kuwait", country: "Kuwait City", lat: 29.376, lng: 47.978, region: "Middle East", kind: "office" },
+  { name: "Saudi Arabia", country: "Riyadh", lat: 24.713, lng: 46.675, region: "Middle East", kind: "office" },
+  { name: "Oman", country: "Muscat", lat: 23.588, lng: 58.408, region: "Middle East", kind: "office" },
+  { name: "Bahrain", country: "Manama", lat: 26.228, lng: 50.586, region: "Middle East", kind: "office" },
+
+  { name: "Egypt", country: "Cairo", lat: 30.044, lng: 31.235, region: "Africa", kind: "office" },
+  { name: "Tunisia", country: "Tunis", lat: 36.806, lng: 10.181, region: "Africa", kind: "office" },
+  { name: "Morocco", country: "Rabat", lat: 34.020, lng: -6.841, region: "Africa", kind: "office" },
+  { name: "Sudan", country: "Khartoum", lat: 15.500, lng: 32.559, region: "Africa", kind: "office" },
+  { name: "Kenya", country: "Nairobi", lat: -1.292, lng: 36.822, region: "Africa", kind: "office" },
+  { name: "Uganda", country: "Kampala", lat: 0.347, lng: 32.583, region: "Africa", kind: "office" },
+  { name: "Ghana", country: "Accra", lat: 5.603, lng: -0.187, region: "Africa", kind: "office" },
+  { name: "Ethiopia", country: "Addis Ababa", lat: 9.030, lng: 38.740, region: "Africa", kind: "office" },
+  { name: "Nigeria", country: "Abuja", lat: 9.076, lng: 7.398, region: "Africa", kind: "office" },
+  { name: "South Africa", country: "Johannesburg", lat: -26.204, lng: 28.047, region: "Africa", kind: "office" },
+
+  { name: "Greece", country: "Athens", lat: 37.983, lng: 23.727, region: "Europe", kind: "office" },
+  { name: "Turkey", country: "Ankara", lat: 39.933, lng: 32.859, region: "Europe", kind: "office" },
+  { name: "United Kingdom", country: "London", lat: 51.507, lng: -0.127, region: "Europe", kind: "regional" },
+  { name: "Poland", country: "Warsaw", lat: 52.229, lng: 21.012, region: "Europe", kind: "office" },
+  { name: "Russia", country: "Moscow", lat: 55.755, lng: 37.617, region: "Europe", kind: "office" },
+
+  { name: "Canada", country: "Ottawa", lat: 45.421, lng: -75.697, region: "North America", kind: "office" },
 ];
 
-const REGION_ORDER: Location["region"][] = [
+const REGION_ORDER: Region[] = [
   "South Asia",
   "Southeast Asia",
   "Middle East",
   "Africa",
   "Europe",
-  "Americas",
+  "North America",
 ];
 
-function project(lat: number, lng: number) {
-  return {
-    x: ((lng + 180) / 360) * 100,
-    y: ((90 - lat) / 180) * 100,
-  };
-}
+const MAP_WIDTH = 900;
+const MAP_HEIGHT = 460;
+
+type TopoWorld = typeof worldTopo & {
+  objects: { countries: { type: string } };
+};
 
 export function GlobalPresence() {
   const [active, setActive] = useState<string | null>(null);
 
+  const { countries, points } = useMemo(() => {
+    const topo = worldTopo as unknown as TopoWorld;
+    const collection = feature(
+      topo as never,
+      topo.objects.countries as never,
+    ) as unknown as FeatureCollection<Geometry>;
+
+    const projection = geoNaturalEarth1().fitExtent(
+      [
+        [8, 12],
+        [MAP_WIDTH - 8, MAP_HEIGHT - 8],
+      ],
+      { type: "Sphere" } as never,
+    );
+    const pathGen = geoPath(projection);
+
+    const countryPaths = collection.features
+      .map((f: Feature<Geometry>) => pathGen(f) ?? "")
+      .filter(Boolean);
+
+    const pts = LOCATIONS.map((loc) => {
+      const p = projection([loc.lng, loc.lat]) ?? [0, 0];
+      return { ...loc, x: p[0], y: p[1] };
+    });
+
+    return { countries: countryPaths, points: pts };
+  }, []);
+
   const grouped = useMemo(() => {
-    const map = new Map<Location["region"], Location[]>();
+    const map = new Map<Region, Location[]>();
     for (const r of REGION_ORDER) map.set(r, []);
     for (const l of LOCATIONS) map.get(l.region)!.push(l);
     return map;
   }, []);
+
+  const total = LOCATIONS.length;
 
   return (
     <Section className="sgg-globe" as="section" aria-labelledby="global-presence-title">
@@ -80,85 +129,136 @@ export function GlobalPresence() {
         <header className="sgg-globe-head">
           <span className="sgg-globe-eyebrow">Global Presence</span>
           <h2 id="global-presence-title" className="sgg-globe-title">
-            Delivering across <span>34+ locations</span> worldwide
+            Delivering across <span>{total}+ locations</span> worldwide
           </h2>
           <p className="sgg-globe-lede">
             From regional headquarters to on-ground operations, Shield Global Group
             connects talent, technology and enterprise across Asia, the Middle East,
-            Africa, Europe and the Americas.
+            Africa, Europe and North America.
           </p>
         </header>
 
-        <div className="sgg-globe-grid">
-          <div className="sgg-globe-map" role="img" aria-label="World map showing Shield Global Group locations">
-            <img
-              src={worldMap.url}
-              alt=""
-              width={1920}
-              height={960}
-              loading="lazy"
-              className="sgg-globe-map-img"
-            />
-            <div className="sgg-globe-pins">
-              {LOCATIONS.map((loc) => {
-                const { x, y } = project(loc.lat, loc.lng);
-                const isActive = active === loc.name;
+        <div className="sgg-globe-map" aria-label="World map showing Shield Global Group locations">
+          <svg
+            viewBox={`0 0 ${MAP_WIDTH} ${MAP_HEIGHT}`}
+            role="img"
+            aria-hidden="true"
+            className="sgg-globe-svg"
+            preserveAspectRatio="xMidYMid meet"
+          >
+            <defs>
+              <radialGradient id="sgg-map-glow" cx="50%" cy="45%" r="60%">
+                <stop offset="0%" stopColor="rgba(0,188,212,0.14)" />
+                <stop offset="60%" stopColor="rgba(0,188,212,0.03)" />
+                <stop offset="100%" stopColor="rgba(0,188,212,0)" />
+              </radialGradient>
+            </defs>
+            <rect width={MAP_WIDTH} height={MAP_HEIGHT} fill="url(#sgg-map-glow)" />
+            <g className="sgg-globe-countries">
+              {countries.map((d: string, i: number) => (
+                <path key={i} d={d} />
+              ))}
+            </g>
+            <g className="sgg-globe-markers">
+              {points.map((p) => {
+                const isActive = active === p.name;
+                const r =
+                  p.kind === "hq" ? 6 : p.kind === "regional" ? 5.2 : 3.6;
                 return (
-                  <button
-                    key={loc.name}
-                    type="button"
-                    className={`sgg-pin${loc.hub ? " sgg-pin-hub" : ""}${isActive ? " sgg-pin-active" : ""}`}
-                    style={{ left: `${x}%`, top: `${y}%` }}
-                    onMouseEnter={() => setActive(loc.name)}
+                  <g
+                    key={p.name}
+                    className={`sgg-marker sgg-marker-${p.kind}${isActive ? " is-active" : ""}`}
+                    transform={`translate(${p.x} ${p.y})`}
+                    tabIndex={0}
+                    role="button"
+                    aria-label={`${p.name}${p.country ? ` — ${p.country}` : ""}`}
+                    onMouseEnter={() => setActive(p.name)}
                     onMouseLeave={() => setActive(null)}
-                    onFocus={() => setActive(loc.name)}
+                    onFocus={() => setActive(p.name)}
                     onBlur={() => setActive(null)}
-                    aria-label={loc.name}
                   >
-                    <span className="sgg-pin-dot" aria-hidden="true" />
-                    <span className="sgg-pin-label">{loc.name}</span>
-                  </button>
+                    {(p.kind === "hq" || p.kind === "regional") && (
+                      <circle className="sgg-marker-pulse" r={r} />
+                    )}
+                    <circle className="sgg-marker-halo" r={r + 3} />
+                    <circle className="sgg-marker-dot" r={r} />
+                    {p.kind === "hq" && <circle className="sgg-marker-core" r={r - 3} />}
+                  </g>
                 );
               })}
-            </div>
-          </div>
+            </g>
+          </svg>
 
-          <aside className="sgg-globe-side" aria-label="Locations by region">
-            <div className="sgg-globe-stats">
-              <div>
-                <strong>34+</strong>
-                <span>Locations</span>
+          {points.map((p) => {
+            if (active !== p.name) return null;
+            const leftPct = (p.x / MAP_WIDTH) * 100;
+            const topPct = (p.y / MAP_HEIGHT) * 100;
+            return (
+              <div
+                key={`tt-${p.name}`}
+                className="sgg-globe-tooltip"
+                style={{ left: `${leftPct}%`, top: `${topPct}%` }}
+              >
+                <strong>{p.name}</strong>
+                {p.country && <span>{p.country}</span>}
+                <em>
+                  {p.kind === "hq"
+                    ? "Headquarters"
+                    : p.kind === "regional"
+                      ? "Regional Office"
+                      : "Office"}
+                </em>
               </div>
-              <div>
-                <strong>6</strong>
-                <span>Regions</span>
-              </div>
-              <div>
-                <strong>5</strong>
-                <span>Continents</span>
-              </div>
-            </div>
-            <div className="sgg-globe-regions">
-              {REGION_ORDER.map((region) => (
-                <div key={region} className="sgg-globe-region">
+            );
+          })}
+        </div>
+
+        <ul className="sgg-globe-legend" aria-label="Marker legend">
+          <li><span className="sgg-legend-dot sgg-legend-hq" aria-hidden="true" />Headquarters</li>
+          <li><span className="sgg-legend-dot sgg-legend-regional" aria-hidden="true" />Regional Office</li>
+          <li><span className="sgg-legend-dot sgg-legend-office" aria-hidden="true" />Office</li>
+        </ul>
+
+        <div className="sgg-globe-kpis" aria-label="Global presence statistics">
+          <div className="sgg-kpi">
+            <span className="sgg-kpi-value">{total}</span>
+            <span className="sgg-kpi-label">Total Locations</span>
+          </div>
+          <div className="sgg-kpi">
+            <span className="sgg-kpi-value">{REGION_ORDER.length}</span>
+            <span className="sgg-kpi-label">Regions</span>
+          </div>
+          <div className="sgg-kpi">
+            <span className="sgg-kpi-value">4</span>
+            <span className="sgg-kpi-label">Continents</span>
+          </div>
+        </div>
+
+        <div className="sgg-globe-regions" aria-label="Locations by region">
+          {REGION_ORDER.map((region) => {
+            const items = grouped.get(region)!;
+            return (
+              <article key={region} className="sgg-region-card">
+                <header>
                   <h3>{region}</h3>
-                  <ul>
-                    {grouped.get(region)!.map((loc) => (
-                      <li
-                        key={loc.name}
-                        className={`${loc.hub ? "is-hub " : ""}${active === loc.name ? "is-active" : ""}`}
-                        onMouseEnter={() => setActive(loc.name)}
-                        onMouseLeave={() => setActive(null)}
-                      >
-                        <span className="sgg-globe-region-dot" aria-hidden="true" />
-                        {loc.name}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </aside>
+                  <span>{items.length} locations</span>
+                </header>
+                <ul>
+                  {items.map((loc) => (
+                    <li
+                      key={loc.name}
+                      className={`sgg-region-item sgg-region-item-${loc.kind}${active === loc.name ? " is-active" : ""}`}
+                      onMouseEnter={() => setActive(loc.name)}
+                      onMouseLeave={() => setActive(null)}
+                    >
+                      <span className="sgg-region-dot" aria-hidden="true" />
+                      <span>{loc.name}</span>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            );
+          })}
         </div>
       </Container>
     </Section>
