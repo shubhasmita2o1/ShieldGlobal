@@ -1,5 +1,11 @@
 {
+<<<<<<< HEAD
   "name": "tanstack_start_ts",
+=======
+  "name": "shield-global-group",
+  "description": "Official corporate website for Shield Global Group",
+  "version": "0.0.1",
+>>>>>>> 712f36d (Initial Commit)
   "private": true,
   "sideEffects": false,
   "type": "module",

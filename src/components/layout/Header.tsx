@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
+<<<<<<< HEAD
 import logo from "@/assets/logos/shield-global-group-logo.png.asset.json";
+=======
+// import logo from "@/assets/logos/shield-global-group-logo.png.asset.json";
+>>>>>>> 712f36d (Initial Commit)
 
 type NavItem = { label: string; href: string; active?: boolean };
 
@@ -39,10 +43,17 @@ export function Header() {
       <div className="sgg-container mx-auto flex w-full items-center justify-between">
         {/* Logo */}
         <a href="/" className="flex items-center gap-2.5" aria-label="Shield Global Group home">
+<<<<<<< HEAD
           <img
             src={logo.url}
             alt="Shield Global Group"
             className="sgg-logo w-auto"
+=======
+           <img
+            src="/logo.png"
+            alt="Shield Global Group"
+            className="sgg-logo"
+>>>>>>> 712f36d (Initial Commit)
           />
         </a>
 
