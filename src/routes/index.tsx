@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { MainLayout } from "@/layouts/MainLayout";
+import { GlobalPresence } from "@/sections/GlobalPresence";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -24,6 +25,9 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  // Sections will be added in later phases. Header/Navbar only for now.
-  return <MainLayout>{null}</MainLayout>;
+  return (
+    <MainLayout>
+      <GlobalPresence />
+    </MainLayout>
+  );
 }
