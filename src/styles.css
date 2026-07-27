@@ -475,3 +475,214 @@ body.nav-open {
   }
   .sgg-footer-legal { justify-content: center; }
 }
+
+/* ═══════════════════════════════════════════
+   Global Presence / Map section
+   ═══════════════════════════════════════════ */
+
+.sgg-globe {
+  background:
+    radial-gradient(1000px 500px at 80% -10%, rgba(0, 188, 212, 0.08), transparent 60%),
+    linear-gradient(180deg, #0a1420 0%, #0f1c2b 100%);
+  color: #d5dae6;
+  font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif;
+  padding: 96px 0 !important;
+}
+
+.sgg-globe-head { max-width: 760px; margin: 0 auto 56px; text-align: center; }
+.sgg-globe-eyebrow {
+  display: inline-block; color: #00bcd4; font-size: 13px; font-weight: 600;
+  letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 14px;
+}
+.sgg-globe-title {
+  color: #ffffff; font-size: clamp(28px, 3.4vw, 44px); font-weight: 700;
+  line-height: 1.2; margin: 0 0 18px; letter-spacing: -0.01em;
+}
+.sgg-globe-title span { color: #00bcd4; }
+.sgg-globe-lede {
+  color: #9aa3b6; font-size: 15px; line-height: 1.75; margin: 0;
+}
+
+.sgg-globe-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+  gap: 40px;
+  align-items: start;
+}
+
+/* Map canvas */
+.sgg-globe-map {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #0a1420;
+  border: 1px solid rgba(0, 188, 212, 0.14);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.02),
+    0 20px 60px -30px rgba(0, 0, 0, 0.6);
+}
+.sgg-globe-map-img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; display: block; opacity: 0.9;
+}
+.sgg-globe-pins { position: absolute; inset: 0; }
+
+.sgg-pin {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+  color: #ffffff;
+  outline: none;
+  z-index: 1;
+}
+.sgg-pin-dot {
+  display: block;
+  width: 9px; height: 9px;
+  border-radius: 999px;
+  background: #00bcd4;
+  box-shadow:
+    0 0 0 3px rgba(0, 188, 212, 0.22),
+    0 0 12px rgba(0, 188, 212, 0.55);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.sgg-pin-hub .sgg-pin-dot {
+  width: 12px; height: 12px;
+  background: #ffffff;
+  box-shadow:
+    0 0 0 3px rgba(0, 188, 212, 0.35),
+    0 0 0 7px rgba(0, 188, 212, 0.14),
+    0 0 16px rgba(0, 188, 212, 0.7);
+}
+.sgg-pin-hub .sgg-pin-dot::after {
+  content: "";
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 12px; height: 12px;
+  border-radius: 999px;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(0, 188, 212, 0.6);
+  animation: sgg-pin-pulse 2.4s ease-out infinite;
+  pointer-events: none;
+}
+@keyframes sgg-pin-pulse {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 0.9; }
+  100% { transform: translate(-50%, -50%) scale(3.2); opacity: 0; }
+}
+
+.sgg-pin-label {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, calc(-100% - 12px));
+  white-space: nowrap;
+  background: rgba(15, 28, 43, 0.95);
+  color: #ffffff;
+  border: 1px solid rgba(0, 188, 212, 0.4);
+  padding: 4px 8px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  border-radius: 4px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+.sgg-pin:hover .sgg-pin-dot,
+.sgg-pin:focus-visible .sgg-pin-dot,
+.sgg-pin-active .sgg-pin-dot {
+  transform: scale(1.25);
+  box-shadow:
+    0 0 0 4px rgba(0, 188, 212, 0.35),
+    0 0 20px rgba(0, 188, 212, 0.8);
+}
+.sgg-pin:hover .sgg-pin-label,
+.sgg-pin:focus-visible .sgg-pin-label,
+.sgg-pin-active .sgg-pin-label {
+  opacity: 1;
+  transform: translate(-50%, calc(-100% - 16px));
+}
+.sgg-pin:focus-visible .sgg-pin-dot {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+}
+
+/* Side panel */
+.sgg-globe-side {
+  display: flex; flex-direction: column; gap: 24px;
+}
+.sgg-globe-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+}
+.sgg-globe-stats > div {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 4px;
+}
+.sgg-globe-stats strong {
+  color: #ffffff; font-size: 26px; font-weight: 700; line-height: 1;
+}
+.sgg-globe-stats span {
+  color: #8a94a8; font-size: 11px; letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.sgg-globe-regions {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 20px 28px;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  max-height: 520px; overflow-y: auto;
+}
+.sgg-globe-region h3 {
+  color: #ffffff; font-size: 12px; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  margin: 0 0 10px; padding-bottom: 8px;
+  border-bottom: 1px solid rgba(0, 188, 212, 0.25);
+}
+.sgg-globe-region ul {
+  list-style: none; margin: 0; padding: 0;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.sgg-globe-region li {
+  display: flex; align-items: center; gap: 8px;
+  color: #b5bccc; font-size: 13px; line-height: 1.4;
+  cursor: default; transition: color 0.15s ease;
+}
+.sgg-globe-region li:hover,
+.sgg-globe-region li.is-active { color: #ffffff; }
+.sgg-globe-region li.is-hub { color: #e6ecf5; font-weight: 500; }
+.sgg-globe-region-dot {
+  width: 5px; height: 5px; border-radius: 999px;
+  background: #00bcd4; flex-shrink: 0;
+  box-shadow: 0 0 6px rgba(0, 188, 212, 0.6);
+}
+.sgg-globe-region li.is-hub .sgg-globe-region-dot {
+  width: 7px; height: 7px; background: #ffffff;
+  box-shadow: 0 0 0 2px rgba(0, 188, 212, 0.5);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .sgg-globe-grid { grid-template-columns: 1fr; gap: 32px; }
+  .sgg-globe-regions { max-height: none; }
+}
+@media (max-width: 640px) {
+  .sgg-globe { padding: 64px 0 !important; }
+  .sgg-globe-head { margin-bottom: 36px; }
+  .sgg-globe-regions { grid-template-columns: 1fr; padding: 20px; }
+  .sgg-globe-stats { padding: 16px; }
+  .sgg-globe-stats strong { font-size: 22px; }
+  .sgg-pin-label { font-size: 10px; padding: 3px 6px; }
+  .sgg-pin-dot { width: 7px; height: 7px; }
+  .sgg-pin-hub .sgg-pin-dot { width: 9px; height: 9px; }
+}
