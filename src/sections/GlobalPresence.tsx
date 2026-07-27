@@ -89,10 +89,9 @@ export function GlobalPresence() {
   const { countries, points } = useMemo(() => {
     const topo = worldTopo as unknown as TopoWorld;
     const collection = feature(
-      // @ts-expect-error topojson typing across versions
-      topo,
-      topo.objects.countries,
-    ) as FeatureCollection<Geometry>;
+      topo as never,
+      topo.objects.countries as never,
+    ) as unknown as FeatureCollection<Geometry>;
 
     const projection = geoNaturalEarth1().fitExtent(
       [
@@ -156,7 +155,7 @@ export function GlobalPresence() {
             </defs>
             <rect width={MAP_WIDTH} height={MAP_HEIGHT} fill="url(#sgg-map-glow)" />
             <g className="sgg-globe-countries">
-              {countries.map((d, i) => (
+              {countries.map((d: string, i: number) => (
                 <path key={i} d={d} />
               ))}
             </g>
