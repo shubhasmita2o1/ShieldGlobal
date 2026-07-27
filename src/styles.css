@@ -505,20 +505,6 @@ body.nav-open {
 }
 
 /* Map canvas */
-<<<<<<< HEAD
-.sgg-globe-map {
-  position: relative;
-  width: 100%;
-  border-radius: 18px;
-  overflow: hidden;
-  background:
-    radial-gradient(60% 55% at 50% 45%, rgba(0, 188, 212, 0.06), transparent 70%),
-    linear-gradient(180deg, #0b1826 0%, #0a1420 100%);
-  border: 1px solid rgba(0, 188, 212, 0.16);
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.02),
-    0 30px 80px -40px rgba(0, 0, 0, 0.7);
-=======
 .sgg-globe-map{
     position:relative;
     width:100%;
@@ -531,21 +517,12 @@ body.nav-open {
 
     box-shadow:
         0 25px 60px rgba(0,0,0,.35);
->>>>>>> 712f36d (Initial Commit)
 }
 .sgg-globe-svg {
   display: block;
   width: 100%;
   height: auto;
 }
-<<<<<<< HEAD
-.sgg-globe-countries path {
-  fill: rgba(148, 172, 200, 0.10);
-  stroke: rgba(0, 188, 212, 0.22);
-  stroke-width: 0.5;
-  vector-effect: non-scaling-stroke;
-  transition: fill 0.2s ease;
-=======
 .sgg-globe-countries path{
 
     fill:#223447;
@@ -561,7 +538,6 @@ body.nav-open {
 
     fill:#2D4B61;
 
->>>>>>> 712f36d (Initial Commit)
 }
 
 /* Markers */

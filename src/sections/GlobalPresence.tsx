@@ -76,13 +76,8 @@ const REGION_ORDER: Region[] = [
   "North America",
 ];
 
-<<<<<<< HEAD
-const MAP_WIDTH = 900;
-const MAP_HEIGHT = 460;
-=======
 const MAP_WIDTH = 1400;
 const MAP_HEIGHT = 650;
->>>>>>> 712f36d (Initial Commit)
 
 type TopoWorld = typeof worldTopo & {
   objects: { countries: { type: string } };
@@ -151,22 +146,14 @@ export function GlobalPresence() {
             className="sgg-globe-svg"
             preserveAspectRatio="xMidYMid meet"
           >
-<<<<<<< HEAD
-            <defs>
-=======
             {/* <defs>
->>>>>>> 712f36d (Initial Commit)
               <radialGradient id="sgg-map-glow" cx="50%" cy="45%" r="60%">
                 <stop offset="0%" stopColor="rgba(0,188,212,0.14)" />
                 <stop offset="60%" stopColor="rgba(0,188,212,0.03)" />
                 <stop offset="100%" stopColor="rgba(0,188,212,0)" />
               </radialGradient>
             </defs>
-<<<<<<< HEAD
-            <rect width={MAP_WIDTH} height={MAP_HEIGHT} fill="url(#sgg-map-glow)" />
-=======
             <rect width={MAP_WIDTH} height={MAP_HEIGHT} fill="url(#sgg-map-glow)" /> */}
->>>>>>> 712f36d (Initial Commit)
             <g className="sgg-globe-countries">
               {countries.map((d: string, i: number) => (
                 <path key={i} d={d} />
