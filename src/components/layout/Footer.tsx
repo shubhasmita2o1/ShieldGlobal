@@ -18,7 +18,7 @@ import logo from "@/assets/logos/shield-global-group-logo.png.asset.json";
 
 const quickLinks = [
   { label: "Home", href: "/" },
-  { label: "About Us", href: "/about" },
+  { label: "About Us", href: "/about-us" },
   { label: "Services", href: "/services" },
   { label: "Gallery", href: "/gallery" },
   { label: "Blogs", href: "/blogs" },

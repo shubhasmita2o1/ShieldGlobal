@@ -19,7 +19,7 @@ export function FoundersMessage() {
                   src="http://shieldglobal.technoriya.com/Assets/founder.jpg"
                   alt="Founder, Shield Global Group"
                   loading="lazy"
-                  className="aspect-[4/5] w-full object-cover"
+                  className="aspect-[4/5] w-full bg-neutral-100 object-contain"
                 />
               </motion.div>
               <div className="absolute -bottom-6 left-6 rounded-xl bg-white px-5 py-3 shadow-lg ring-1 ring-neutral-200">

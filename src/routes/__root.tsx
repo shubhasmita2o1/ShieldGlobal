@@ -75,30 +75,29 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
     meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
-    ],
-    links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap",
-      },
-    ],
+  { charSet: "utf-8" },
+  { name: "viewport", content: "width=device-width, initial-scale=1" },
+  { title: "Shield Global Group — The Power of One" },
+  { name: "description", content: "Shield Global Group — a diversified conglomerate uniting overseas recruitment, workforce solutions, AI-powered automation and media & entertainment." },
+  { name: "author", content: "Shield Global Group" },
+  { property: "og:title", content: "Shield Global Group — The Power of One" },
+  { property: "og:description", content: "Shield Global Group — a diversified conglomerate uniting overseas recruitment, workforce solutions, AI-powered automation and media & entertainment." },
+  { property: "og:type", content: "website" },
+  { name: "twitter:card", content: "summary_large_image" },
+],
+links: [
+  {
+    rel: "stylesheet",
+    href: appCss,
+  },
+  { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+  { rel: "preconnect", href: "https://fonts.googleapis.com" },
+  { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+  {
+    rel: "stylesheet",
+    href: "https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap",
+  },
+],
   }),
   shellComponent: RootShell,
   component: RootComponent,

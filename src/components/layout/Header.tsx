@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
-// No import needed
+import { Link, useRouterState } from "@tanstack/react-router";
 
-type NavItem = { label: string; href: string; active?: boolean };
+type NavItem = { label: string; href: string };
 
 const NAV_ITEMS: NavItem[] = [
-  { label: "Home", href: "/", active: true },
+  { label: "Home", href: "/" },
   { label: "About Us", href: "/about-us" },
   { label: "Services", href: "/services" },
   { label: "Group of Companies", href: "/group-of-companies" },
@@ -27,6 +27,7 @@ const LANGS: { value: string; label: string }[] = [
  */
 export function Header() {
   const [open, setOpen] = useState(false);
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   useEffect(() => {
     if (typeof document === "undefined") return;
@@ -38,13 +39,13 @@ export function Header() {
     <header className="sgg-navbar w-full bg-white">
       <div className="sgg-container mx-auto flex w-full items-center justify-between">
         {/* Logo */}
-        <a href="/" className="flex items-center gap-2.5" aria-label="Shield Global Group home">
+        <Link to="/" className="flex items-center gap-2.5" aria-label="Shield Global Group home">
           <img
             src="/logo.png"
             alt="Shield Global Group"
             className="sgg-logo"
           />
-          </a>
+        </Link>
 
         {/* Mobile toggle */}
         <button
@@ -74,17 +75,23 @@ export function Header() {
           className={`sgg-menu ${open ? "sgg-menu-open" : ""}`}
         >
           <ul className="sgg-nav">
-            {NAV_ITEMS.map((item) => (
-              <li key={item.label} className="sgg-nav-item">
-                <a
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className={`sgg-nav-link ${item.active ? "sgg-nav-link-active" : ""}`}
-                >
-                  {item.label}
-                </a>
-              </li>
-            ))}
+            {NAV_ITEMS.map((item) => {
+              const isActive =
+                item.href === "/"
+                  ? pathname === "/"
+                  : pathname === item.href || pathname.startsWith(`${item.href}/`);
+              return (
+                <li key={item.label} className="sgg-nav-item">
+                  <Link
+                    to={item.href}
+                    onClick={() => setOpen(false)}
+                    className={`sgg-nav-link ${isActive ? "sgg-nav-link-active" : ""}`}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              );
+            })}
             <li className="sgg-nav-item sgg-lang-item">
               <select
                 aria-label="Language"
