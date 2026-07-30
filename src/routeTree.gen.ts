@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutUsRouteImport } from './routes/about-us'
+import { Route as GroupOfCompaniesRouteImport } from './routes/group-of-companies'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ServicesIndexRouteImport } from './routes/services.index'
 import { Route as ServicesAiPoweredAutomationRouteImport } from './routes/services.ai-powered-automation'
@@ -25,6 +26,11 @@ const IndexRoute = IndexRouteImport.update({
 const AboutUsRoute = AboutUsRouteImport.update({
   id: '/about-us',
   path: '/about-us',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GroupOfCompaniesRoute = GroupOfCompaniesRouteImport.update({
+  id: '/group-of-companies',
+  path: '/group-of-companies',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServicesRoute = ServicesRouteImport.update({
@@ -59,6 +65,7 @@ const ServicesStaffingWorkforceSolutionsRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about-us': typeof AboutUsRoute
+  '/group-of-companies': typeof GroupOfCompaniesRoute
   '/services': typeof ServicesRouteWithChildren
   '/services/ai-powered-automation': typeof ServicesAiPoweredAutomationRoute
   '/services/media-entertainment': typeof ServicesMediaEntertainmentRoute
@@ -68,6 +75,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about-us': typeof AboutUsRoute
+  '/group-of-companies': typeof GroupOfCompaniesRoute
   '/services/ai-powered-automation': typeof ServicesAiPoweredAutomationRoute
   '/services/media-entertainment': typeof ServicesMediaEntertainmentRoute
   '/services/staffing-workforce-solutions': typeof ServicesStaffingWorkforceSolutionsRoute
@@ -77,6 +85,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about-us': typeof AboutUsRoute
+  '/group-of-companies': typeof GroupOfCompaniesRoute
   '/services': typeof ServicesRouteWithChildren
   '/services/ai-powered-automation': typeof ServicesAiPoweredAutomationRoute
   '/services/media-entertainment': typeof ServicesMediaEntertainmentRoute
@@ -88,6 +97,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about-us'
+    | '/group-of-companies'
     | '/services'
     | '/services/ai-powered-automation'
     | '/services/media-entertainment'
@@ -97,6 +107,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about-us'
+    | '/group-of-companies'
     | '/services/ai-powered-automation'
     | '/services/media-entertainment'
     | '/services/staffing-workforce-solutions'
@@ -105,6 +116,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about-us'
+    | '/group-of-companies'
     | '/services'
     | '/services/ai-powered-automation'
     | '/services/media-entertainment'
@@ -115,6 +127,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutUsRoute: typeof AboutUsRoute
+  GroupOfCompaniesRoute: typeof GroupOfCompaniesRoute
   ServicesRoute: typeof ServicesRouteWithChildren
 }
 
@@ -132,6 +145,13 @@ declare module '@tanstack/react-router' {
       path: '/about-us'
       fullPath: '/about-us'
       preLoaderRoute: typeof AboutUsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/group-of-companies': {
+      id: '/group-of-companies'
+      path: '/group-of-companies'
+      fullPath: '/group-of-companies'
+      preLoaderRoute: typeof GroupOfCompaniesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/services': {
@@ -194,6 +214,7 @@ const ServicesRouteWithChildren = ServicesRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutUsRoute: AboutUsRoute,
+  GroupOfCompaniesRoute: GroupOfCompaniesRoute,
   ServicesRoute: ServicesRouteWithChildren,
 }
 export const routeTree = rootRouteImport
