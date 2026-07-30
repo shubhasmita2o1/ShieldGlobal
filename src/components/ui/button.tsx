@@ -5,23 +5,32 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "relative inline-flex items-center justify-center gap-2 whitespace-nowrap overflow-hidden rounded-sgg-md text-sm font-semibold tracking-[0.01em] cursor-pointer transition-all duration-[var(--sgg-dur)] ease-[var(--sgg-ease)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sgg-ink-accent-dark focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground shadow hover:bg-primary/90",
-        destructive: "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
+        /* Primary — blue→cyan gradient, premium shadow, hover lift + light sweep */
+        default:
+          "bg-[image:var(--sgg-g-cta)] text-white shadow-[var(--sgg-e3)] hover:shadow-[var(--sgg-e5)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] before:content-[''] before:absolute before:inset-0 before:-translate-x-full before:bg-[image:var(--sgg-g-sweep)] before:transition-transform before:duration-500 hover:before:translate-x-full",
+        /* Emergency — red only, no gradient, no sweep */
+        destructive:
+          "bg-sgg-status-danger text-white shadow-[var(--sgg-e2)] hover:bg-sgg-status-danger/90 hover:shadow-[var(--sgg-e3)] hover:-translate-y-0.5 active:translate-y-0",
+        /* Secondary — outlined, elegant hover fill */
         outline:
-          "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
-        secondary: "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
+          "border border-sgg-border-strong bg-transparent text-sgg-ink-primary hover:border-sgg-ink-accent hover:bg-sgg-ink-accent hover:text-white hover:shadow-[var(--sgg-e2)]",
+        /* Secondary (filled) kept for surfaces that need a softer secondary CTA */
+        secondary:
+          "bg-sgg-surface-tinted text-sgg-ink-primary border border-sgg-border-default shadow-[var(--sgg-e1)] hover:bg-sgg-surface-sunken hover:border-sgg-border-strong",
+        /* Ghost — minimal, no border, no shadow */
+        ghost:
+          "bg-transparent text-sgg-ink-secondary hover:bg-sgg-surface-tinted hover:text-sgg-ink-primary",
+        link: "text-sgg-ink-accent underline-offset-4 hover:underline",
       },
       size: {
-        default: "h-9 px-4 py-2",
-        sm: "h-8 rounded-md px-3 text-xs",
-        lg: "h-10 rounded-md px-8",
-        icon: "h-9 w-9",
+        default: "h-10 px-5 py-2",
+        sm: "h-9 rounded-sgg-sm px-3.5 text-xs",
+        lg: "h-12 rounded-sgg-md px-8 text-[15px]",
+        icon: "h-10 w-10",
       },
     },
     defaultVariants: {

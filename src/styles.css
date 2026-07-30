@@ -59,10 +59,110 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Premium Enterprise Design System — color utilities
+     e.g. bg-sgg-surface-dark, text-sgg-ink-secondary, border-sgg-border-accent */
+  --color-sgg-surface-canvas: var(--sgg-surface-canvas);
+  --color-sgg-surface-raised: var(--sgg-surface-raised);
+  --color-sgg-surface-sunken: var(--sgg-surface-sunken);
+  --color-sgg-surface-tinted: var(--sgg-surface-tinted);
+  --color-sgg-surface-dark: var(--sgg-surface-dark);
+  --color-sgg-surface-dark-raised: var(--sgg-surface-dark-raised);
+  --color-sgg-surface-footer: var(--sgg-surface-footer);
+  --color-sgg-ink-primary: var(--sgg-ink-primary);
+  --color-sgg-ink-secondary: var(--sgg-ink-secondary);
+  --color-sgg-ink-tertiary: var(--sgg-ink-tertiary);
+  --color-sgg-ink-inverse: var(--sgg-ink-inverse);
+  --color-sgg-ink-accent: var(--sgg-ink-accent);
+  --color-sgg-ink-accent-dark: var(--sgg-ink-accent-dark);
+  --color-sgg-border-hairline: var(--sgg-border-hairline);
+  --color-sgg-border-default: var(--sgg-border-default);
+  --color-sgg-border-strong: var(--sgg-border-strong);
+  --color-sgg-border-dark: var(--sgg-border-dark);
+  --color-sgg-border-accent: var(--sgg-border-accent);
+  --color-sgg-status-danger: var(--sgg-status-danger);
+  --color-sgg-status-ok: var(--sgg-status-ok);
+  --color-sgg-status-warn: var(--sgg-status-warn);
+  --color-sgg-status-info: var(--sgg-status-info);
+  --radius-sgg-sm: var(--sgg-r-sm);
+  --radius-sgg-md: var(--sgg-r-md);
+  --radius-sgg-lg: var(--sgg-r-lg);
 }
 
 :root {
   --radius: 0.625rem;
+  /* ============================================================
+     PREMIUM ENTERPRISE DESIGN SYSTEM — Shield Global Group v1.0
+     Additive token layer. Does not replace the shadcn/ui tokens
+     above; existing --background/--primary/etc. and every class
+     built on them keep working unchanged. These new variables are
+     the ones new work (buttons, cards, section surfaces, navbar,
+     footer) should reference going forward.
+     ============================================================ */
+
+  /* Surface */
+  --sgg-surface-canvas: #f7f9fc;
+  --sgg-surface-raised: #ffffff;
+  --sgg-surface-sunken: #eaeff5;
+  --sgg-surface-tinted: #edf2f8;
+  --sgg-surface-dark: #0a1220;
+  --sgg-surface-dark-raised: #16273d;
+  --sgg-surface-footer: #232a33;
+
+  /* Ink */
+  --sgg-ink-primary: #0a1220;
+  --sgg-ink-secondary: #3f5064;
+  --sgg-ink-tertiary: #7488a0;
+  --sgg-ink-inverse: #f7f9fc;
+  --sgg-ink-inverse-2: rgba(255, 255, 255, 0.68);
+  --sgg-ink-accent: #2e7cf6;
+  --sgg-ink-accent-dark: #2fd3e8;
+
+  /* Border */
+  --sgg-border-hairline: rgba(10, 18, 32, 0.06);
+  --sgg-border-default: #e3e9f1;
+  --sgg-border-strong: #c7d2de;
+  --sgg-border-dark: rgba(255, 255, 255, 0.1);
+  --sgg-border-dark-2: rgba(255, 255, 255, 0.18);
+  --sgg-border-accent: rgba(47, 211, 232, 0.45);
+  --sgg-focus-ring: 0 0 0 2px #2fd3e8;
+
+  /* Gradient */
+  --sgg-g-hero: linear-gradient(160deg, #08111e, #14263f);
+  --sgg-g-cta: linear-gradient(135deg, #2e7cf6, #2fd3e8);
+  --sgg-g-card: linear-gradient(180deg, #ffffff, #f4f7fb);
+  --sgg-g-card-dark: linear-gradient(160deg, #16273d, #0c1727);
+  --sgg-g-charcoal: linear-gradient(180deg, #232a33, #12161c);
+  --sgg-g-sweep: linear-gradient(
+    100deg,
+    transparent,
+    rgba(255, 255, 255, 0.28),
+    transparent
+  );
+
+  /* Elevation — navy-tinted, never pure black */
+  --sgg-e1: 0 1px 2px rgba(10, 18, 32, 0.06);
+  --sgg-e2: 0 4px 12px rgba(10, 18, 32, 0.08);
+  --sgg-e3: 0 10px 28px rgba(10, 18, 32, 0.14);
+  --sgg-e4: 0 20px 48px rgba(10, 18, 32, 0.18);
+  --sgg-e5: 0 24px 64px rgba(46, 124, 246, 0.32);
+  --sgg-glow-cyan: 0 0 60px rgba(47, 211, 232, 0.28);
+
+  /* Status */
+  --sgg-status-danger: #e23a2e;
+  --sgg-status-ok: #1fa97b;
+  --sgg-status-warn: #e8a33d;
+  --sgg-status-info: #2fd3e8;
+
+  /* Shape / motion */
+  --sgg-r-sm: 10px;
+  --sgg-r-md: 14px;
+  --sgg-r-lg: 18px;
+  --sgg-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --sgg-dur-fast: 180ms;
+  --sgg-dur: 220ms;
+  --sgg-dur-slow: 700ms;
+
   --background: oklch(1 0 0);
   --foreground: oklch(0.129 0.042 264.695);
   --card: oklch(1 0 0);
