@@ -11,6 +11,11 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutUsRouteImport } from './routes/about-us'
+import { Route as ServicesRouteImport } from './routes/services'
+import { Route as ServicesIndexRouteImport } from './routes/services.index'
+import { Route as ServicesAiPoweredAutomationRouteImport } from './routes/services.ai-powered-automation'
+import { Route as ServicesMediaEntertainmentRouteImport } from './routes/services.media-entertainment'
+import { Route as ServicesStaffingWorkforceSolutionsRouteImport } from './routes/services.staffing-workforce-solutions'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +27,95 @@ const AboutUsRoute = AboutUsRouteImport.update({
   path: '/about-us',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesRoute = ServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesIndexRoute = ServicesIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ServicesRoute,
+} as any)
+const ServicesAiPoweredAutomationRoute =
+  ServicesAiPoweredAutomationRouteImport.update({
+    id: '/ai-powered-automation',
+    path: '/ai-powered-automation',
+    getParentRoute: () => ServicesRoute,
+  } as any)
+const ServicesMediaEntertainmentRoute =
+  ServicesMediaEntertainmentRouteImport.update({
+    id: '/media-entertainment',
+    path: '/media-entertainment',
+    getParentRoute: () => ServicesRoute,
+  } as any)
+const ServicesStaffingWorkforceSolutionsRoute =
+  ServicesStaffingWorkforceSolutionsRouteImport.update({
+    id: '/staffing-workforce-solutions',
+    path: '/staffing-workforce-solutions',
+    getParentRoute: () => ServicesRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about-us': typeof AboutUsRoute
+  '/services': typeof ServicesRouteWithChildren
+  '/services/ai-powered-automation': typeof ServicesAiPoweredAutomationRoute
+  '/services/media-entertainment': typeof ServicesMediaEntertainmentRoute
+  '/services/staffing-workforce-solutions': typeof ServicesStaffingWorkforceSolutionsRoute
+  '/services/': typeof ServicesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about-us': typeof AboutUsRoute
+  '/services/ai-powered-automation': typeof ServicesAiPoweredAutomationRoute
+  '/services/media-entertainment': typeof ServicesMediaEntertainmentRoute
+  '/services/staffing-workforce-solutions': typeof ServicesStaffingWorkforceSolutionsRoute
+  '/services': typeof ServicesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about-us': typeof AboutUsRoute
+  '/services': typeof ServicesRouteWithChildren
+  '/services/ai-powered-automation': typeof ServicesAiPoweredAutomationRoute
+  '/services/media-entertainment': typeof ServicesMediaEntertainmentRoute
+  '/services/staffing-workforce-solutions': typeof ServicesStaffingWorkforceSolutionsRoute
+  '/services/': typeof ServicesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about-us'
+  fullPaths:
+    | '/'
+    | '/about-us'
+    | '/services'
+    | '/services/ai-powered-automation'
+    | '/services/media-entertainment'
+    | '/services/staffing-workforce-solutions'
+    | '/services/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about-us'
-  id: '__root__' | '/' | '/about-us'
+  to:
+    | '/'
+    | '/about-us'
+    | '/services/ai-powered-automation'
+    | '/services/media-entertainment'
+    | '/services/staffing-workforce-solutions'
+    | '/services'
+  id:
+    | '__root__'
+    | '/'
+    | '/about-us'
+    | '/services'
+    | '/services/ai-powered-automation'
+    | '/services/media-entertainment'
+    | '/services/staffing-workforce-solutions'
+    | '/services/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutUsRoute: typeof AboutUsRoute
+  ServicesRoute: typeof ServicesRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +134,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutUsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services': {
+      id: '/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/': {
+      id: '/services/'
+      path: '/'
+      fullPath: '/services/'
+      preLoaderRoute: typeof ServicesIndexRouteImport
+      parentRoute: typeof ServicesRoute
+    }
+    '/services/ai-powered-automation': {
+      id: '/services/ai-powered-automation'
+      path: '/ai-powered-automation'
+      fullPath: '/services/ai-powered-automation'
+      preLoaderRoute: typeof ServicesAiPoweredAutomationRouteImport
+      parentRoute: typeof ServicesRoute
+    }
+    '/services/media-entertainment': {
+      id: '/services/media-entertainment'
+      path: '/media-entertainment'
+      fullPath: '/services/media-entertainment'
+      preLoaderRoute: typeof ServicesMediaEntertainmentRouteImport
+      parentRoute: typeof ServicesRoute
+    }
+    '/services/staffing-workforce-solutions': {
+      id: '/services/staffing-workforce-solutions'
+      path: '/staffing-workforce-solutions'
+      fullPath: '/services/staffing-workforce-solutions'
+      preLoaderRoute: typeof ServicesStaffingWorkforceSolutionsRouteImport
+      parentRoute: typeof ServicesRoute
+    }
   }
 }
+
+interface ServicesRouteChildren {
+  ServicesAiPoweredAutomationRoute: typeof ServicesAiPoweredAutomationRoute
+  ServicesMediaEntertainmentRoute: typeof ServicesMediaEntertainmentRoute
+  ServicesStaffingWorkforceSolutionsRoute: typeof ServicesStaffingWorkforceSolutionsRoute
+  ServicesIndexRoute: typeof ServicesIndexRoute
+}
+
+const ServicesRouteChildren: ServicesRouteChildren = {
+  ServicesAiPoweredAutomationRoute: ServicesAiPoweredAutomationRoute,
+  ServicesMediaEntertainmentRoute: ServicesMediaEntertainmentRoute,
+  ServicesStaffingWorkforceSolutionsRoute:
+    ServicesStaffingWorkforceSolutionsRoute,
+  ServicesIndexRoute: ServicesIndexRoute,
+}
+
+const ServicesRouteWithChildren = ServicesRoute._addFileChildren(
+  ServicesRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutUsRoute: AboutUsRoute,
+  ServicesRoute: ServicesRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

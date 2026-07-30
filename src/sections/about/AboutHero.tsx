@@ -18,10 +18,10 @@ export function AboutHero() {
         aria-hidden
         className="absolute inset-0 bg-gradient-to-b from-neutral-950/85 via-neutral-950/70 to-neutral-950/95"
       />
-      <div
+      {/* <div
         aria-hidden
         className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-white to-transparent"
-      />
+      /> */}
 
       <div className="relative mx-auto flex min-h-[68vh] w-full max-w-7xl flex-col justify-end px-6 pb-20 pt-32 sm:px-8 lg:min-h-[78vh] lg:pb-28 lg:pt-40">
         <motion.nav
