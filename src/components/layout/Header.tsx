@@ -21,7 +21,13 @@ const NAV_ITEMS: NavItem[] = [
   { label: "Contact", href: "/contact" },
 ];
 
-// ... LANGS stays the same ...
+const LANGS: { value: string; label: string }[] = [
+  { value: "en", label: "English" },
+  { value: "ar", label: "Arabic" },
+  { value: "fr", label: "French" },
+  { value: "hi", label: "Hindi" },
+  { value: "ru", label: "Russian" },
+];
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -51,9 +57,30 @@ export function Header() {
           <img src="/logo.png" alt="Shield Global Group" className="sgg-logo w-auto" />
         </a>
 
-        {/* mobile toggle + backdrop unchanged */}
+        <button
+          type="button"
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
+          onClick={() => setOpen((v) => !v)}
+          className="inline-flex h-10 w-10 items-center justify-center rounded border-0 bg-transparent text-neutral-800 lg:hidden"
+        >
+          {open ? <X size={26} /> : <Menu size={26} />}
+        </button>
 
-        <nav aria-label="Primary" className={`sgg-menu ${open ? "sgg-menu-open" : ""}`}>
+        <button
+          type="button"
+          aria-hidden="true"
+          tabIndex={-1}
+          onClick={closeAll}
+          className={`fixed inset-0 z-40 bg-black/40 transition-opacity lg:hidden ${
+            open ? "opacity-100" : "pointer-events-none opacity-0"
+          }`}
+        />
+
+        <nav
+          aria-label="Primary"
+          className={`sgg-menu ${open ? "sgg-menu-open" : ""}`}
+        >
           <ul className="sgg-nav">
             {NAV_ITEMS.map((item) => {
               const menuOpen = openMenu === item.label;
@@ -65,13 +92,17 @@ export function Header() {
                   className={`sgg-nav-item ${item.children ? "sgg-has-dropdown" : ""} ${
                     menuOpen ? "sgg-dropdown-open" : ""
                   }`}
-                  onMouseLeave={item.children ? () => setOpenMenu(null) : undefined}
+                  onMouseLeave={
+                    item.children ? () => setOpenMenu(null) : undefined
+                  }
                 >
                   {item.children ? (
                     <>
                       <a
                         href={item.href}
-                        className={`sgg-nav-link sgg-nav-toggle ${active ? "sgg-nav-link-active" : ""}`}
+                        className={`sgg-nav-link sgg-nav-toggle ${
+                          active ? "sgg-nav-link-active" : ""
+                        }`}
                         aria-haspopup="true"
                         aria-expanded={menuOpen}
                         onMouseEnter={() => setOpenMenu(item.label)}
@@ -83,7 +114,11 @@ export function Header() {
                         }}
                       >
                         {item.label}
-                        <ChevronDown size={15} aria-hidden="true" className="sgg-nav-caret" />
+                        <ChevronDown
+                          size={15}
+                          aria-hidden="true"
+                          className="sgg-nav-caret"
+                        />
                       </a>
                       <ul className="sgg-dropdown" aria-label={`${item.label} menu`}>
                         {item.children.map((child) => (
@@ -111,7 +146,21 @@ export function Header() {
                 </li>
               );
             })}
-            {/* language select unchanged */}
+
+            <li className="sgg-nav-item sgg-lang-item">
+              <select
+                aria-label="Language"
+                className="sgg-lang notranslate"
+                translate="no"
+                defaultValue="en"
+              >
+                {LANGS.map((l) => (
+                  <option key={l.value} value={l.value}>
+                    {l.label}
+                  </option>
+                ))}
+              </select>
+            </li>
           </ul>
         </nav>
       </div>
