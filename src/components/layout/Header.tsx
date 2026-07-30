@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
-import { useRouterState } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { SERVICES } from "@/sections/services/serviceData";
 
 type NavItem = {
@@ -21,7 +21,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: "Contact", href: "/contact" },
 ];
 
-const LANGS: { value: string; label: string }[] = [
+const LANGS = [
   { value: "en", label: "English" },
   { value: "ar", label: "Arabic" },
   { value: "fr", label: "French" },
@@ -53,10 +53,12 @@ export function Header() {
   return (
     <header className="sgg-navbar w-full bg-white">
       <div className="sgg-container mx-auto flex w-full items-center justify-between">
-        <a href="/" className="flex items-center gap-2.5" aria-label="Shield Global Group home">
+        {/* Logo */}
+        <Link to="/" className="flex items-center gap-2.5" aria-label="Shield Global Group home">
           <img src="/logo.png" alt="Shield Global Group" className="sgg-logo w-auto" />
-        </a>
+        </Link>
 
+        {/* Hamburger — visible only below lg */}
         <button
           type="button"
           aria-label={open ? "Close menu" : "Open menu"}
@@ -67,6 +69,7 @@ export function Header() {
           {open ? <X size={26} /> : <Menu size={26} />}
         </button>
 
+        {/* Mobile backdrop */}
         <button
           type="button"
           aria-hidden="true"
@@ -77,10 +80,8 @@ export function Header() {
           }`}
         />
 
-        <nav
-          aria-label="Primary"
-          className={`sgg-menu ${open ? "sgg-menu-open" : ""}`}
-        >
+        {/* Nav + language */}
+        <nav aria-label="Primary" className={`sgg-menu ${open ? "sgg-menu-open" : ""}`}>
           <ul className="sgg-nav">
             {NAV_ITEMS.map((item) => {
               const menuOpen = openMenu === item.label;
@@ -92,14 +93,12 @@ export function Header() {
                   className={`sgg-nav-item ${item.children ? "sgg-has-dropdown" : ""} ${
                     menuOpen ? "sgg-dropdown-open" : ""
                   }`}
-                  onMouseLeave={
-                    item.children ? () => setOpenMenu(null) : undefined
-                  }
+                  onMouseLeave={item.children ? () => setOpenMenu(null) : undefined}
                 >
                   {item.children ? (
                     <>
-                      <a
-                        href={item.href}
+                      <Link
+                        to={item.href}
                         className={`sgg-nav-link sgg-nav-toggle ${
                           active ? "sgg-nav-link-active" : ""
                         }`}
@@ -110,43 +109,42 @@ export function Header() {
                           if (window.matchMedia("(max-width: 991.98px)").matches) {
                             e.preventDefault();
                             setOpenMenu(menuOpen ? null : item.label);
+                          } else {
+                            setOpen(false);
                           }
                         }}
                       >
                         {item.label}
-                        <ChevronDown
-                          size={15}
-                          aria-hidden="true"
-                          className="sgg-nav-caret"
-                        />
-                      </a>
+                        <ChevronDown size={15} aria-hidden className="sgg-nav-caret" />
+                      </Link>
                       <ul className="sgg-dropdown" aria-label={`${item.label} menu`}>
                         {item.children.map((child) => (
                           <li key={child.href}>
-                            <a
-                              href={child.href}
+                            <Link
+                              to={child.href}
                               className="sgg-dropdown-link"
                               onClick={closeAll}
                             >
                               {child.label}
-                            </a>
+                            </Link>
                           </li>
                         ))}
                       </ul>
                     </>
                   ) : (
-                    <a
-                      href={item.href}
+                    <Link
+                      to={item.href}
                       onClick={closeAll}
                       className={`sgg-nav-link ${active ? "sgg-nav-link-active" : ""}`}
                     >
                       {item.label}
-                    </a>
+                    </Link>
                   )}
                 </li>
               );
             })}
 
+            {/* Language selector */}
             <li className="sgg-nav-item sgg-lang-item">
               <select
                 aria-label="Language"
