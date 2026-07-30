@@ -1,13 +1,17 @@
 import { motion } from "framer-motion";
 import { ShieldCheck, Zap, GraduationCap, HeartHandshake } from "lucide-react";
 import { Reveal, SectionHeading, fadeUp, stagger } from "./shared";
+import ab1 from "@/assets/images/ab1.png";
+import ab2 from "@/assets/images/ab2.png";
+import ab3 from "@/assets/images/ab3.png";
+import ab4 from "@/assets/images/ab4.png";
 
 const ESG_ITEMS = [
   {
     id: "ethical",
     icon: ShieldCheck,
     title: "Ethical Recruitment & Workforce Welfare",
-    image: "http://shieldglobal.technoriya.com/Assets/ab1.png",
+    image: ab1,
     intro:
       "At Shield Global Group, we follow the highest standards of ethical recruitment and workforce welfare across our global network. We ensure fair, transparent, and responsible hiring practices that protect candidates while delivering reliable talent solutions worldwide.",
     groups: [
@@ -39,7 +43,7 @@ const ESG_ITEMS = [
     id: "energy",
     icon: Zap,
     title: "Energy Efficient Automation",
-    image: "http://shieldglobal.technoriya.com/Assets/ab2.png",
+    image: ab2,
     intro:
       "At InfiCorp Technology, part of Shield Global Group, we develop SaaS-based industrial automation software focused on improving energy efficiency and supporting ESG goals. Our solutions help industries optimize operations, reduce energy consumption, and enable sustainable digital transformation.",
     groups: [
@@ -61,7 +65,7 @@ const ESG_ITEMS = [
     id: "community",
     icon: GraduationCap,
     title: "Community Skill Development",
-    image: "http://shieldglobal.technoriya.com/Assets/ab3.png",
+    image: ab3,
     intro:
       "Shield Global Group empowers communities through free technical training and certification programs. We focus on building industry-relevant skills, enhancing employability, and creating pathways for sustainable career growth.",
     groups: [
@@ -92,7 +96,7 @@ const ESG_ITEMS = [
     id: "bal",
     icon: HeartHandshake,
     title: "Bal Samriddhi Yojana",
-    image: "http://shieldglobal.technoriya.com/Assets/ab4.png",
+    image: ab4,
     intro:
       "Starting June 2026, Shield Global Group introduces Bal Samriddhi Yojana, a new initiative aimed at supporting the education and career development of employees' children. This program is designed to encourage long-term growth and provide meaningful assistance for both sons and daughters of our workforce. Under this initiative, eligible employees will receive structured support from the employer towards their child's educational and skill development journey.",
     groups: [

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
-import logo from "@/assets/logos/shield-global-group-logo.png.asset.json";
 import { SERVICES } from "@/sections/services/serviceData";
 
 type NavItem = {
@@ -56,7 +55,7 @@ export function Header() {
         {/* Logo */}
         <a href="/" className="flex items-center gap-2.5" aria-label="Shield Global Group home">
           <img
-            src={logo.url}
+            src="/logo.png"
             alt="Shield Global Group"
             className="sgg-logo w-auto"
           />
@@ -113,7 +112,6 @@ export function Header() {
                         aria-expanded={isOpen}
                         onMouseEnter={() => setOpenMenu(item.label)}
                         onClick={(e) => {
-                          // On touch/mobile the first tap opens the submenu.
                           if (window.matchMedia("(max-width: 991.98px)").matches) {
                             e.preventDefault();
                             setOpenMenu(isOpen ? null : item.label);

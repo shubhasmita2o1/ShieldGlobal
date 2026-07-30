@@ -14,7 +14,6 @@ import {
   Send,
   ChevronRight,
 } from "lucide-react";
-import logo from "@/assets/logos/shield-global-group-logo.png.asset.json";
 
 const quickLinks = [
   { label: "Home", href: "/" },
@@ -60,14 +59,12 @@ export function Footer() {
 
   return (
     <footer className="sgg-footer mt-auto w-full">
-      {/* Top section */}
       <div className="sgg-footer-top">
         <div className="sgg-footer-container">
           <div className="sgg-footer-grid">
-            {/* Company */}
             <div className="sgg-footer-brand">
               <a href="/" aria-label="Shield Global Group home" className="sgg-footer-logo">
-                <img src={logo.url} alt="Shield Global Group" />
+                <img src="/logo.png" alt="Shield Global Group" />
               </a>
               <p className="sgg-footer-desc">
                 Shield Global Group is a diversified corporate house delivering trusted
@@ -93,7 +90,6 @@ export function Footer() {
               </div>
             </div>
 
-            {/* Quick Links */}
             <nav aria-label="Quick links" className="sgg-footer-col">
               <h4 className="sgg-footer-heading">Quick Links</h4>
               <ul>
@@ -108,7 +104,6 @@ export function Footer() {
               </ul>
             </nav>
 
-            {/* Services */}
             <nav aria-label="Services" className="sgg-footer-col">
               <h4 className="sgg-footer-heading">Our Services</h4>
               <ul>
@@ -123,7 +118,6 @@ export function Footer() {
               </ul>
             </nav>
 
-            {/* Contact + Newsletter */}
             <div className="sgg-footer-col">
               <h4 className="sgg-footer-heading">Get in Touch</h4>
               <ul className="sgg-footer-contact">
@@ -194,7 +188,6 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Bottom bar */}
       <div className="sgg-footer-bottom">
         <div className="sgg-footer-container sgg-footer-bottom-inner">
           <p className="sgg-footer-copy">
