@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ShieldCheck, Leaf } from "lucide-react";
 import { Reveal, stagger, fadeUp } from "./shared";
+import governanceImg from "@/assets/images/ab5.jpg";
 
 const GOVERNANCE_COMPANIES = [
   "Shield Global HR Solutions",
@@ -21,7 +22,7 @@ export function CorporateGovernance() {
         }}
       />
       <div className="relative mx-auto max-w-7xl px-6 sm:px-8">
-        <div className="grid gap-14 lg:grid-cols-12">
+        <div className="grid gap-14 lg:grid-cols-12 lg:items-center">
           <Reveal className="lg:col-span-5">
             <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-[#7ed7ee]">
               <span className="h-px w-8 bg-[#7ed7ee]" />
@@ -35,6 +36,17 @@ export function CorporateGovernance() {
             <div className="mt-8 inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/5 px-5 py-3 text-sm text-white/80 backdrop-blur">
               <Leaf size={16} className="text-[#7ed7ee]" />
               Sustainable growth · Long-term stakeholder value
+            </div>
+
+            {/* Single wrapper — same as ESG + aspect 16/9 */}
+            <div className="group relative mt-10 overflow-hidden rounded-3xl bg-neutral-100 shadow-[0_25px_60px_-30px_rgba(15,23,42,0.35)]">
+              <img
+                src={governanceImg}
+                alt="Corporate governance at Shield Global Group"
+                loading="lazy"
+                className="block aspect-[16/9] w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.04]"
+              />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-neutral-950/25 via-transparent to-transparent" />
             </div>
           </Reveal>
 
