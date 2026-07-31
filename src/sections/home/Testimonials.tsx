@@ -82,7 +82,6 @@ export function Testimonials() {
       aria-labelledby="testimonials-title"
       className="relative overflow-hidden bg-sgg-surface-canvas py-20 sm:py-24 lg:py-28"
     >
-      {/* Same soft cyan radial used in Partners */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(900px_400px_at_50%_-20%,rgba(47,211,232,0.08),transparent_60%)]"
@@ -96,7 +95,6 @@ export function Testimonials() {
           viewport={{ once: true, amount: 0.15 }}
           className="grid gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.2fr)] lg:items-center lg:gap-16"
         >
-          {/* Left: eyebrow + heading + arrows */}
           <motion.div variants={fadeUp} className="flex flex-col">
             <SectionEyebrow>Client Voices</SectionEyebrow>
             <h2
@@ -131,7 +129,6 @@ export function Testimonials() {
             </div>
           </motion.div>
 
-          {/* Right: sliding cards — same card language as Partners */}
           <motion.div
             variants={fadeUp}
             onMouseEnter={() => setPaused(true)}
@@ -142,7 +139,6 @@ export function Testimonials() {
             aria-live="polite"
           >
             <div className="relative flex items-stretch gap-5 overflow-hidden">
-              {/* Active card */}
               <div className="relative z-10 w-full max-w-[520px] shrink-0">
                 <AnimatePresence mode="wait" custom={direction}>
                   <motion.article
@@ -157,8 +153,10 @@ export function Testimonials() {
                     <div className="flex items-center gap-4">
                       <span
                         aria-hidden
-                        className={`grid h-14 w-14 shrink-0 place-items-center rounded-full text-base font-semibold ${\n                          AVATAR_STYLES[index % AVATAR_STYLES.length]
-                        }`}
+                        className={
+                          "grid h-14 w-14 shrink-0 place-items-center rounded-full text-base font-semibold " +
+                          AVATAR_STYLES[index % AVATAR_STYLES.length]
+                        }
                       >
                         {initials(active.name)}
                       </span>
@@ -178,7 +176,6 @@ export function Testimonials() {
                 </AnimatePresence>
               </div>
 
-              {/* Peek next card (desktop) */}
               <div
                 aria-hidden
                 className="hidden w-[320px] shrink-0 opacity-50 lg:block"
@@ -186,8 +183,10 @@ export function Testimonials() {
                 <div className="min-h-[280px] rounded-2xl border border-sgg-border-default bg-sgg-surface-raised p-8 shadow-[var(--sgg-e1)] sm:min-h-[300px]">
                   <div className="flex items-center gap-4">
                     <span
-                      className={`grid h-14 w-14 shrink-0 place-items-center rounded-full text-base font-semibold ${\n                        AVATAR_STYLES[(index + 1) % AVATAR_STYLES.length]
-                      }`}
+                      className={
+                        "grid h-14 w-14 shrink-0 place-items-center rounded-full text-base font-semibold " +
+                        AVATAR_STYLES[(index + 1) % AVATAR_STYLES.length]
+                      }
                     >
                       {initials(peek.name)}
                     </span>
@@ -207,7 +206,6 @@ export function Testimonials() {
               </div>
             </div>
 
-            {/* Dots */}
             <div className="mt-7 flex items-center gap-2.5">
               {TESTIMONIALS.map((t, i) => (
                 <button
@@ -216,10 +214,12 @@ export function Testimonials() {
                   aria-label={`Show testimonial from ${t.name}`}
                   aria-current={i === index}
                   onClick={() => go(i, i > index ? 1 : -1)}
-                  className={`h-2 rounded-full transition-all duration-300 ${\n                    i === index
+                  className={
+                    "h-2 rounded-full transition-all duration-300 " +
+                    (i === index
                       ? "w-9 bg-sgg-ink-accent"
-                      : "w-3 bg-sgg-border-strong hover:bg-sgg-ink-tertiary"
-                  }`}
+                      : "w-3 bg-sgg-border-strong hover:bg-sgg-ink-tertiary")
+                  }
                 />
               ))}
             </div>
