@@ -179,9 +179,9 @@ export function HomeHero() {
             whileHover={{
               y: reduceMotion ? 0 : -1,
               boxShadow:
-                "0 10px 28px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.2)",
+                "0 10px 28px rgba(0,0,0,0.28), 0 0 0 1px rgba(255,255,255,0.15)",
             }}
-            className="mt-4 inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-full bg-gradient-to-r from-[rgba(100,220,210,0.96)] to-[rgba(220,215,140,0.96)] px-7 py-2.5 text-[clamp(11px,1.05vw,15px)] font-semibold leading-none tracking-[0.02em] text-neutral-900 shadow-[0_6px_22px_rgba(0,0,0,0.25),0_0_0_1px_rgba(255,255,255,0.14)] sm:mt-5 sm:px-9 sm:py-3"
+            className="mt-5 inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-full bg-gradient-to-r from-[rgba(100,220,210,0.9)] to-[rgba(220,215,140,0.9)] px-7 py-3 text-[clamp(13px,1.2vw,18px)] font-medium leading-none text-neutral-900 shadow-lg shadow-black/20 sm:px-9"
           >
             Connecting talent, technology & entertainment
           </motion.span>
