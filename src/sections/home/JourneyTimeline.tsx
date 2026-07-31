@@ -87,27 +87,39 @@ export function JourneyTimeline() {
   const [active, setActive] = useState(0);
   const [progress, setProgress] = useState(0);
 
-  const onScroll = () => {
+    const onScroll = () => {
     const el = trackRef.current;
     if (!el) return;
+
     const max = el.scrollWidth - el.clientWidth;
-    setProgress(max > 0 ? el.scrollLeft / max : 0);
-    const card = el.querySelector("li");
-    const step = card ? (card as HTMLElement).offsetWidth + 24 : 1;
-    setActive(Math.min(MILESTONES.length - 1, Math.round(el.scrollLeft / step)));
-  };
+    const p = max > 0 ? el.scrollLeft / max : 0;
+    setProgress(p);
+
+    // Map 0→1 scroll to 0→7 index so the last card becomes 08
+    const idx =
+        max <= 0
+        ? 0
+        : Math.min(
+            MILESTONES.length - 1,
+            Math.round(p * (MILESTONES.length - 1)),
+            );
+    setActive(idx);
+    };
 
   useEffect(() => {
     onScroll();
   }, []);
 
   const scrollTo = (i: number) => {
-    const el = trackRef.current;
-    if (!el) return;
-    const card = el.querySelector("li");
-    const step = card ? (card as HTMLElement).offsetWidth + 24 : 0;
-    el.scrollTo({ left: i * step, behavior: "smooth" });
-  };
+  const el = trackRef.current;
+  if (!el) return;
+
+  const max = el.scrollWidth - el.clientWidth;
+  if (max <= 0) return;
+
+  const target = (i / (MILESTONES.length - 1)) * max;
+  el.scrollTo({ left: target, behavior: "smooth" });
+};
 
   const nudge = (dir: -1 | 1) =>
     scrollTo(Math.min(MILESTONES.length - 1, Math.max(0, active + dir)));
