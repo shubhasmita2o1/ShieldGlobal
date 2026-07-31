@@ -12,14 +12,13 @@ const BRANDS = [
 
 export function BrandStrip() {
   return (
-    <section className="relative z-20 bg-[#1a2a3a] pb-6 pt-0">
+    <section className="relative z-30 -mt-10 -mb-10 sm:-mt-12 sm:-mb-12 lg:-mt-14 lg:-mb-14">
       <div
         className="
-          relative z-20 mx-auto
+          relative z-30 mx-auto
           w-[calc(100%-32px)] sm:w-[calc(100%-48px)] lg:w-[calc(100%-120px)]
-          -translate-y-8 sm:-translate-y-9 lg:-translate-y-10
-          rounded-[14px] bg-white px-2 py-1.5
-          shadow-[0_14px_60px_rgba(0,0,0,0.20)]
+          rounded-[16px] bg-white px-2 py-1.5
+          shadow-[0_20px_50px_rgba(0,0,0,0.35)]
         "
       >
         <ul className="grid grid-cols-2 divide-x divide-y divide-black/10 lg:grid-cols-4 lg:divide-y-0">
