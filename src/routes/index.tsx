@@ -43,8 +43,8 @@ function Index() {
       <BrandStrip />
       <HomeAbout />
       <JourneyTimeline />
-      <Testimonials />
       <Achievements />
+      <Testimonials />
       <Partners />
       <GlobalPresence />
     </MainLayout>
