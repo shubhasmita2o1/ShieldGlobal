@@ -1,14 +1,13 @@
 import { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, Quote, Star } from "lucide-react";
-import { fadeUp, stagger, SectionEyebrow } from "@/sections/about/shared";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import { fadeUp, stagger } from "@/sections/about/shared";
 
 type Testimonial = {
   quote: string;
   name: string;
   role: string;
   company: string;
-  rating: number;
 };
 
 const TESTIMONIALS: Testimonial[] = [
@@ -18,7 +17,6 @@ const TESTIMONIALS: Testimonial[] = [
     name: "Rashid Al Mansoori",
     role: "Head of Workforce Planning",
     company: "Gulf Infrastructure Holdings",
-    rating: 5,
   },
   {
     quote:
@@ -26,7 +24,6 @@ const TESTIMONIALS: Testimonial[] = [
     name: "Anita Deshmukh",
     role: "Plant Operations Director",
     company: "Meridian Manufacturing",
-    rating: 5,
   },
   {
     quote:
@@ -34,7 +31,6 @@ const TESTIMONIALS: Testimonial[] = [
     name: "Daniel Osei",
     role: "Chief Marketing Officer",
     company: "Northbridge Consumer",
-    rating: 5,
   },
   {
     quote:
@@ -42,11 +38,10 @@ const TESTIMONIALS: Testimonial[] = [
     name: "Sofia Lindqvist",
     role: "Group Procurement Lead",
     company: "Vantera Energy",
-    rating: 5,
   },
 ];
 
-const AUTOPLAY_MS = 7000;
+const AUTOPLAY_MS = 6000;
 
 function initials(name: string) {
   return name
@@ -56,25 +51,12 @@ function initials(name: string) {
     .join("");
 }
 
-function Rating({ value }: { value: number }) {
-  return (
-    <div
-      className="flex items-center gap-1"
-      role="img"
-      aria-label={`Rated ${value} out of 5`}
-    >
-      {Array.from({ length: 5 }).map((_, i) => (
-        <Star
-          key={i}
-          aria-hidden="true"
-          size={14}
-          strokeWidth={1.5}
-          className={i < value ? "fill-[#0a8fb8] text-[#0a8fb8]" : "text-white/25"}
-        />
-      ))}
-    </div>
-  );
-}
+const AVATAR_STYLES = [
+  "bg-[#e8f4fc] text-[#0a6e9c]",
+  "bg-[#fce8f0] text-[#9c0a5a]",
+  "bg-[#e8fcec] text-[#0a7a3c]",
+  "bg-[#f5e8fc] text-[#5a0a9c]",
+];
 
 export function Testimonials() {
   const [index, setIndex] = useState(0);
@@ -88,197 +70,180 @@ export function Testimonials() {
 
   useEffect(() => {
     if (paused) return;
-    const id = window.setInterval(
-      () => go(index + 1, 1),
-      AUTOPLAY_MS,
-    );
+    const id = window.setInterval(() => go(index + 1, 1), AUTOPLAY_MS);
     return () => window.clearInterval(id);
   }, [index, paused, go]);
 
   const active = TESTIMONIALS[index];
+  const peek = TESTIMONIALS[(index + 1) % TESTIMONIALS.length];
 
   return (
     <section
       aria-labelledby="testimonials-title"
-      className="relative overflow-hidden bg-[#0f1a28] py-20 sm:py-24 lg:py-28"
+      className="relative overflow-hidden bg-sgg-surface-canvas py-16 sm:py-20 lg:py-24"
     >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(900px_420px_at_85%_-10%,rgba(10,143,184,0.14),transparent_55%),radial-gradient(700px_380px_at_0%_105%,rgba(10,143,184,0.06),transparent_50%)]"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent"
-      />
+      <div className="relative mx-auto w-full max-w-[1200px] px-5 sm:px-8 lg:px-10">
+        <div className="rounded-[28px] bg-[#f0f2f5] p-6 sm:p-8 lg:p-10">
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.15 }}
+            className="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.2fr)] lg:items-start lg:gap-12"
+          >
+            <motion.div variants={fadeUp} className="flex flex-col">
+              <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-sgg-ink-tertiary">
+                Clients
+              </span>
+              <h2
+                id="testimonials-title"
+                className="mt-3 max-w-[280px] font-[Fraunces,serif] text-[1.85rem] font-semibold leading-[1.15] tracking-tight text-sgg-ink-primary sm:text-[2.15rem] lg:text-[2.4rem]"
+              >
+                What people say about us?
+              </h2>
 
-      <div className="relative mx-auto w-full max-w-[1440px] px-6 sm:px-8 lg:px-12">
-        <motion.div
-          variants={stagger}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.2 }}
-        >
-          <motion.div variants={fadeUp} className="max-w-2xl">
-            <SectionEyebrow>Client Voices</SectionEyebrow>
-            <h2
-              id="testimonials-title"
-              className="mt-4 font-[Fraunces,serif] text-3xl font-semibold leading-[1.08] tracking-tight text-white sm:text-4xl lg:text-[2.75rem]"
+              <div className="mt-8 flex items-center gap-3">
+                <button
+                  type="button"
+                  aria-label="Previous testimonial"
+                  onClick={() => go(index - 1, -1)}
+                  className="grid h-10 w-10 place-items-center rounded-full border border-sgg-border-default bg-white text-sgg-ink-secondary shadow-sm transition-all duration-200 hover:border-sgg-ink-accent hover:text-sgg-ink-accent"
+                >
+                  <ArrowLeft size={16} strokeWidth={2} />
+                </button>
+                <button
+                  type="button"
+                  aria-label="Next testimonial"
+                  onClick={() => go(index + 1, 1)}
+                  className="grid h-10 w-10 place-items-center rounded-full border border-sgg-border-default bg-white text-sgg-ink-secondary shadow-sm transition-all duration-200 hover:border-sgg-ink-accent hover:text-sgg-ink-accent"
+                >
+                  <ArrowRight size={16} strokeWidth={2} />
+                </button>
+              </div>
+            </motion.div>
+
+            <motion.div
+              variants={fadeUp}
+              onMouseEnter={() => setPaused(true)}
+              onMouseLeave={() => setPaused(false)}
+              onFocusCapture={() => setPaused(true)}
+              onBlurCapture={() => setPaused(false)}
+              className="relative min-w-0"
+              aria-live="polite"
             >
-              Trusted by teams who{" "}
-              <span className="text-white/40">cannot afford delay</span>
-            </h2>
-            <p className="mt-5 max-w-xl text-[15px] leading-[1.85] text-[#c2c8d6]">
-              Partners across infrastructure, manufacturing, energy and consumer
-              brands on what working with Shield Global Group looks like.
-            </p>
+              <div className="relative flex items-stretch gap-4 overflow-hidden">
+                <div className="relative z-10 w-full max-w-[420px] shrink-0">
+                  <AnimatePresence mode="wait" custom={direction}>
+                    <motion.article
+                      key={active.name}
+                      custom={direction}
+                      initial={{ opacity: 0, x: direction * 48 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: direction * -48 }}
+                      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                      className="rounded-2xl border border-white/80 bg-white p-6 shadow-[0_8px_30px_rgba(10,18,32,0.08)] sm:p-7"
+                    >
+                      <div className="flex items-center gap-3">
+                        <span
+                          aria-hidden
+                          className={`grid h-11 w-11 shrink-0 place-items-center rounded-full text-sm font-semibold ${
+                            AVATAR_STYLES[index % AVATAR_STYLES.length]
+                          }`}
+                        >
+                          {initials(active.name)}
+                        </span>
+                        <div className="min-w-0">
+                          <p className="truncate text-[15px] font-semibold text-sgg-ink-primary">
+                            {active.name}
+                          </p>
+                          <p className="truncate text-[12.5px] text-sgg-ink-tertiary">
+                            {active.role} at {active.company}
+                          </p>
+                        </div>
+                      </div>
+                      <blockquote className="mt-5 text-[14.5px] leading-[1.7] text-sgg-ink-secondary">
+                        {active.quote}
+                      </blockquote>
+                    </motion.article>
+                  </AnimatePresence>
+                </div>
+
+                <div
+                  aria-hidden
+                  className="hidden w-[280px] shrink-0 opacity-50 lg:block"
+                >
+                  <div className="rounded-2xl border border-white/60 bg-white/90 p-6 shadow-[0_4px_16px_rgba(10,18,32,0.05)]">
+                    <div className="flex items-center gap-3">
+                      <span
+                        className={`grid h-11 w-11 shrink-0 place-items-center rounded-full text-sm font-semibold ${
+                          AVATAR_STYLES[(index + 1) % AVATAR_STYLES.length]
+                        }`}
+                      >
+                        {initials(peek.name)}
+                      </span>
+                      <div className="min-w-0">
+                        <p className="truncate text-[15px] font-semibold text-sgg-ink-primary">
+                          {peek.name}
+                        </p>
+                        <p className="truncate text-[12.5px] text-sgg-ink-tertiary">
+                          {peek.role}
+                        </p>
+                      </div>
+                    </div>
+                    <p className="mt-5 line-clamp-4 text-[14.5px] leading-[1.7] text-sgg-ink-secondary">
+                      {peek.quote}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-5 flex items-center gap-2">
+                {TESTIMONIALS.map((t, i) => (
+                  <button
+                    key={t.name}
+                    type="button"
+                    aria-label={`Show testimonial from ${t.name}`}
+                    aria-current={i === index}
+                    onClick={() => go(i, i > index ? 1 : -1)}
+                    className={`h-1.5 rounded-full transition-all duration-300 ${
+                      i === index
+                        ? "w-7 bg-sgg-ink-accent"
+                        : "w-2.5 bg-sgg-border-strong hover:bg-sgg-ink-tertiary"
+                    }`}
+                  />
+                ))}
+              </div>
+            </motion.div>
           </motion.div>
 
           <motion.div
             variants={fadeUp}
-            onMouseEnter={() => setPaused(true)}
-            onMouseLeave={() => setPaused(false)}
-            onFocusCapture={() => setPaused(true)}
-            onBlurCapture={() => setPaused(false)}
-            className="mt-12 grid gap-6 lg:mt-16 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.85fr)] lg:gap-8"
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+            className="mt-10 border-t border-sgg-border-hairline pt-8"
           >
-            {/* Interactive stage */}
-            <div
-              className="relative min-w-0 overflow-hidden rounded-3xl border border-white/[0.12] bg-white/[0.05] p-7 backdrop-blur-sm sm:p-9 lg:p-10"
-              aria-live="polite"
-            >
-              <div
-                aria-hidden
-                className="pointer-events-none absolute -right-6 -top-8 text-[#0a8fb8]/15"
-              >
-                <Quote size={160} strokeWidth={1} />
-              </div>
-
-              <div className="relative min-h-[300px] sm:min-h-[320px]">
-                <AnimatePresence mode="wait" custom={direction}>
-                  <motion.figure
-                    key={active.name}
-                    custom={direction}
-                    initial={{ opacity: 0, x: direction * 40 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: direction * -40 }}
-                    transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                    className="flex h-full min-w-0 flex-col justify-between"
-                  >
-                    <div className="min-w-0">
-                      <Rating value={active.rating} />
-                      <blockquote className="mt-6 font-[Fraunces,serif] text-[21px] font-medium leading-[1.5] tracking-tight text-white sm:text-[25px] lg:text-[27px]">
-                        “{active.quote}”
-                      </blockquote>
-                    </div>
-
-                    <figcaption className="mt-9 flex items-center gap-4 border-t border-white/10 pt-6">
-                      <span
-                        aria-hidden
-                        className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-[#0a8fb8]/15 font-[Fraunces,serif] text-base font-semibold text-[#7ed7ee]"
-                      >
-                        {initials(active.name)}
-                      </span>
-                      <span className="min-w-0">
-                        <span className="block truncate text-[15px] font-semibold text-white">
-                          {active.name}
-                        </span>
-                        <span className="block truncate text-[13px] text-[#9aa3b6]">
-                          {active.role} · {active.company}
-                        </span>
-                      </span>
-                    </figcaption>
-                  </motion.figure>
-                </AnimatePresence>
-              </div>
-
-              {/* Controls */}
-              <div className="relative mt-8 flex items-center justify-between gap-4">
-                <div className="flex items-center gap-2">
-                  <button
-                    type="button"
-                    aria-label="Previous testimonial"
-                    onClick={() => go(index - 1, -1)}
-                    className="grid h-10 w-10 place-items-center rounded-full border border-white/15 text-white/70 transition-colors duration-300 hover:border-[#0a8fb8]/60 hover:text-white"
-                  >
-                    <ArrowLeft size={16} />
-                  </button>
-                  <button
-                    type="button"
-                    aria-label="Next testimonial"
-                    onClick={() => go(index + 1, 1)}
-                    className="grid h-10 w-10 place-items-center rounded-full border border-white/15 text-white/70 transition-colors duration-300 hover:border-[#0a8fb8]/60 hover:text-white"
-                  >
-                    <ArrowRight size={16} />
-                  </button>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  {TESTIMONIALS.map((t, i) => (
-                    <button
-                      key={t.name}
-                      type="button"
-                      aria-label={`Show testimonial from ${t.name}`}
-                      aria-current={i === index}
-                      onClick={() => go(i, i > index ? 1 : -1)}
-                      className={`h-1.5 rounded-full transition-all duration-300 ${
-                        i === index
-                          ? "w-8 bg-[#0a8fb8]"
-                          : "w-3 bg-white/20 hover:bg-white/40"
-                      }`}
-                    />
-                  ))}
-                </div>
-              </div>
+            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-5 sm:justify-between sm:gap-x-6">
+              {[
+                "Gulf Infrastructure",
+                "Meridian Mfg",
+                "Vantera Energy",
+                "Northbridge",
+                "Altura",
+                "Sable Logistics",
+                "Helion Systems",
+                "Orient Marine",
+              ].map((name) => (
+                <span
+                  key={name}
+                  className="text-[13px] font-semibold tracking-wide text-sgg-ink-tertiary/80 transition-colors duration-200 hover:text-sgg-ink-secondary"
+                >
+                  {name}
+                </span>
+              ))}
             </div>
-
-            {/* Selectable client list */}
-            <ul className="grid min-w-0 gap-3 self-start">
-              {TESTIMONIALS.map((t, i) => {
-                const isActive = i === index;
-                return (
-                  <li key={t.name} className="min-w-0">
-                    <button
-                      type="button"
-                      onClick={() => go(i, i > index ? 1 : -1)}
-                      aria-pressed={isActive}
-                      className={`group flex w-full min-w-0 items-center gap-4 rounded-2xl border px-5 py-4 text-left transition-all duration-300 ${
-                        isActive
-                          ? "border-[#0a8fb8]/45 bg-white/[0.08]"
-                          : "border-white/[0.09] bg-white/[0.03] hover:border-white/20 hover:bg-white/[0.06]"
-                      }`}
-                    >
-                      <span
-                        aria-hidden
-                        className={`grid h-11 w-11 shrink-0 place-items-center rounded-full font-[Fraunces,serif] text-sm font-semibold transition-colors duration-300 ${
-                          isActive
-                            ? "bg-[#0a8fb8]/20 text-[#7ed7ee]"
-                            : "bg-white/[0.06] text-white/50"
-                        }`}
-                      >
-                        {initials(t.name)}
-                      </span>
-                      <span className="min-w-0 flex-1">
-                        <span className="block truncate text-[14px] font-semibold text-white">
-                          {t.name}
-                        </span>
-                        <span className="block truncate text-[12.5px] text-[#9aa3b6]">
-                          {t.company}
-                        </span>
-                      </span>
-                      {isActive && (
-                        <motion.span
-                          layoutId="testimonial-active-bar"
-                          aria-hidden
-                          className="h-8 w-1 shrink-0 rounded-full bg-[#0a8fb8]"
-                        />
-                      )}
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
           </motion.div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
