@@ -86,44 +86,66 @@ export function JourneyTimeline() {
   const trackRef = useRef<HTMLOListElement>(null);
   const [active, setActive] = useState(0);
   const [progress, setProgress] = useState(0);
+  const isClicking = useRef(false);
 
-    const onScroll = () => {
+  const scrollTo = (i: number) => {
+    const el = trackRef.current;
+    if (!el) return;
+
+    const clamped = Math.min(MILESTONES.length - 1, Math.max(0, i));
+    isClicking.current = true;
+    setActive(clamped);
+
+    const card = el.children[clamped] as HTMLElement | undefined;
+    if (card) {
+      card.scrollIntoView({
+        behavior: "smooth",
+        inline: "start",
+        block: "nearest",
+      });
+    }
+
+    // Allow scroll-sync again after smooth scroll finishes
+    window.setTimeout(() => {
+      isClicking.current = false;
+    }, 450);
+  };
+
+  const onScroll = () => {
     const el = trackRef.current;
     if (!el) return;
 
     const max = el.scrollWidth - el.clientWidth;
-    const p = max > 0 ? el.scrollLeft / max : 0;
-    setProgress(p);
+    setProgress(max > 0 ? el.scrollLeft / max : 0);
 
-    // Map 0→1 scroll to 0→7 index so the last card becomes 08
-    const idx =
-        max <= 0
-        ? 0
-        : Math.min(
-            MILESTONES.length - 1,
-            Math.round(p * (MILESTONES.length - 1)),
-            );
-    setActive(idx);
-    };
+    // Don't override while a button/dot is animating
+    if (isClicking.current) return;
+
+    const cards = Array.from(el.children) as HTMLElement[];
+    if (!cards.length) return;
+
+    const trackLeft = el.getBoundingClientRect().left;
+    const pad = parseFloat(getComputedStyle(el).paddingLeft) || 0;
+    const origin = trackLeft + pad;
+
+    let best = 0;
+    let bestDist = Infinity;
+    cards.forEach((card, i) => {
+      const dist = Math.abs(card.getBoundingClientRect().left - origin);
+      if (dist < bestDist) {
+        bestDist = dist;
+        best = i;
+      }
+    });
+
+    setActive(best);
+  };
 
   useEffect(() => {
     onScroll();
   }, []);
 
-  const scrollTo = (i: number) => {
-  const el = trackRef.current;
-  if (!el) return;
-
-  const max = el.scrollWidth - el.clientWidth;
-  if (max <= 0) return;
-
-  const target = (i / (MILESTONES.length - 1)) * max;
-  el.scrollTo({ left: target, behavior: "smooth" });
-};
-
-  const nudge = (dir: -1 | 1) =>
-    scrollTo(Math.min(MILESTONES.length - 1, Math.max(0, active + dir)));
-
+  const nudge = (dir: -1 | 1) => scrollTo(active + dir);
   return (
     <section
       id="journey"
