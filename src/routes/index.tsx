@@ -5,6 +5,9 @@ import { BrandStrip } from "@/sections/home/BrandStrip";
 import { HomeAbout } from "@/sections/home/HomeAbout";
 import { JourneyTimeline } from "@/sections/home/JourneyTimeline";
 import { GlobalPresence } from "@/sections/GlobalPresence";
+import { Testimonials } from "@/sections/home/Testimonials";
+import { Achievements } from "@/sections/home/Achievements";
+import { Partners } from "@/sections/home/Partners";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -40,6 +43,9 @@ function Index() {
       <BrandStrip />
       <HomeAbout />
       <JourneyTimeline />
+      <Testimonials />
+      <Achievements />
+      <Partners />
       <GlobalPresence />
     </MainLayout>
   );
