@@ -80,48 +80,50 @@ export function Testimonials() {
   return (
     <section
       aria-labelledby="testimonials-title"
-      className="relative overflow-hidden bg-sgg-surface-canvas py-16 sm:py-20 lg:py-24"
+      className="relative overflow-hidden bg-sgg-surface-canvas py-20 sm:py-24 lg:py-28"
     >
-      <div className="relative mx-auto w-full max-w-[1200px] px-5 sm:px-8 lg:px-10">
-        <div className="rounded-[28px] bg-[#f0f2f5] p-6 sm:p-8 lg:p-10">
+      <div className="relative mx-auto w-full max-w-[1400px] px-6 sm:px-8 lg:px-12">
+        <div className="rounded-[32px] bg-[#f0f2f5] p-8 sm:p-10 lg:p-14">
           <motion.div
             variants={stagger}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.15 }}
-            className="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.2fr)] lg:items-start lg:gap-12"
+            className="grid gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.25fr)] lg:items-center lg:gap-16"
           >
+            {/* Left: label + heading + arrows */}
             <motion.div variants={fadeUp} className="flex flex-col">
-              <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-sgg-ink-tertiary">
+              <span className="text-[12px] font-semibold uppercase tracking-[0.22em] text-sgg-ink-tertiary">
                 Clients
               </span>
               <h2
                 id="testimonials-title"
-                className="mt-3 max-w-[280px] font-[Fraunces,serif] text-[1.85rem] font-semibold leading-[1.15] tracking-tight text-sgg-ink-primary sm:text-[2.15rem] lg:text-[2.4rem]"
+                className="mt-4 max-w-[360px] font-[Fraunces,serif] text-[2.25rem] font-semibold leading-[1.12] tracking-tight text-sgg-ink-primary sm:text-[2.75rem] lg:text-[3.25rem]"
               >
                 What people say about us?
               </h2>
 
-              <div className="mt-8 flex items-center gap-3">
+              <div className="mt-10 flex items-center gap-3">
                 <button
                   type="button"
                   aria-label="Previous testimonial"
                   onClick={() => go(index - 1, -1)}
-                  className="grid h-10 w-10 place-items-center rounded-full border border-sgg-border-default bg-white text-sgg-ink-secondary shadow-sm transition-all duration-200 hover:border-sgg-ink-accent hover:text-sgg-ink-accent"
+                  className="grid h-12 w-12 place-items-center rounded-full border border-sgg-border-default bg-white text-sgg-ink-secondary shadow-sm transition-all duration-200 hover:border-sgg-ink-accent hover:text-sgg-ink-accent"
                 >
-                  <ArrowLeft size={16} strokeWidth={2} />
+                  <ArrowLeft size={18} strokeWidth={2} />
                 </button>
                 <button
                   type="button"
                   aria-label="Next testimonial"
                   onClick={() => go(index + 1, 1)}
-                  className="grid h-10 w-10 place-items-center rounded-full border border-sgg-border-default bg-white text-sgg-ink-secondary shadow-sm transition-all duration-200 hover:border-sgg-ink-accent hover:text-sgg-ink-accent"
+                  className="grid h-12 w-12 place-items-center rounded-full border border-sgg-border-default bg-white text-sgg-ink-secondary shadow-sm transition-all duration-200 hover:border-sgg-ink-accent hover:text-sgg-ink-accent"
                 >
-                  <ArrowRight size={16} strokeWidth={2} />
+                  <ArrowRight size={18} strokeWidth={2} />
                 </button>
               </div>
             </motion.div>
 
+            {/* Right: sliding cards */}
             <motion.div
               variants={fadeUp}
               onMouseEnter={() => setPaused(true)}
@@ -131,8 +133,9 @@ export function Testimonials() {
               className="relative min-w-0"
               aria-live="polite"
             >
-              <div className="relative flex items-stretch gap-4 overflow-hidden">
-                <div className="relative z-10 w-full max-w-[420px] shrink-0">
+              <div className="relative flex items-stretch gap-5 overflow-hidden">
+                {/* Active card */}
+                <div className="relative z-10 w-full max-w-[520px] shrink-0">
                   <AnimatePresence mode="wait" custom={direction}>
                     <motion.article
                       key={active.name}
@@ -141,63 +144,63 @@ export function Testimonials() {
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: direction * -48 }}
                       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                      className="rounded-2xl border border-white/80 bg-white p-6 shadow-[0_8px_30px_rgba(10,18,32,0.08)] sm:p-7"
+                      className="min-h-[280px] rounded-3xl border border-white/80 bg-white p-8 shadow-[0_12px_40px_rgba(10,18,32,0.1)] sm:min-h-[300px] sm:p-9 lg:p-10"
                     >
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-4">
                         <span
                           aria-hidden
-                          className={`grid h-11 w-11 shrink-0 place-items-center rounded-full text-sm font-semibold ${
-                            AVATAR_STYLES[index % AVATAR_STYLES.length]
+                          className={`grid h-14 w-14 shrink-0 place-items-center rounded-full text-base font-semibold ${\n                            AVATAR_STYLES[index % AVATAR_STYLES.length]
                           }`}
                         >
                           {initials(active.name)}
                         </span>
                         <div className="min-w-0">
-                          <p className="truncate text-[15px] font-semibold text-sgg-ink-primary">
+                          <p className="truncate text-[17px] font-semibold text-sgg-ink-primary">
                             {active.name}
                           </p>
-                          <p className="truncate text-[12.5px] text-sgg-ink-tertiary">
+                          <p className="truncate text-[14px] text-sgg-ink-tertiary">
                             {active.role} at {active.company}
                           </p>
                         </div>
                       </div>
-                      <blockquote className="mt-5 text-[14.5px] leading-[1.7] text-sgg-ink-secondary">
+                      <blockquote className="mt-7 text-[16px] leading-[1.75] text-sgg-ink-secondary sm:text-[17px]">
                         {active.quote}
                       </blockquote>
                     </motion.article>
                   </AnimatePresence>
                 </div>
 
+                {/* Peek next card (desktop) */}
                 <div
                   aria-hidden
-                  className="hidden w-[280px] shrink-0 opacity-50 lg:block"
+                  className="hidden w-[340px] shrink-0 opacity-55 lg:block"
                 >
-                  <div className="rounded-2xl border border-white/60 bg-white/90 p-6 shadow-[0_4px_16px_rgba(10,18,32,0.05)]">
-                    <div className="flex items-center gap-3">
+                  <div className="min-h-[280px] rounded-3xl border border-white/60 bg-white/90 p-8 shadow-[0_6px_20px_rgba(10,18,32,0.06)] sm:min-h-[300px]">
+                    <div className="flex items-center gap-4">
                       <span
-                        className={`grid h-11 w-11 shrink-0 place-items-center rounded-full text-sm font-semibold ${
-                          AVATAR_STYLES[(index + 1) % AVATAR_STYLES.length]
+                        className={`grid h-14 w-14 shrink-0 place-items-center rounded-full text-base font-semibold ${\n                          AVATAR_STYLES[(index + 1) % AVATAR_STYLES.length]
                         }`}
                       >
                         {initials(peek.name)}
                       </span>
                       <div className="min-w-0">
-                        <p className="truncate text-[15px] font-semibold text-sgg-ink-primary">
+                        <p className="truncate text-[17px] font-semibold text-sgg-ink-primary">
                           {peek.name}
                         </p>
-                        <p className="truncate text-[12.5px] text-sgg-ink-tertiary">
+                        <p className="truncate text-[14px] text-sgg-ink-tertiary">
                           {peek.role}
                         </p>
                       </div>
                     </div>
-                    <p className="mt-5 line-clamp-4 text-[14.5px] leading-[1.7] text-sgg-ink-secondary">
+                    <p className="mt-7 line-clamp-5 text-[16px] leading-[1.75] text-sgg-ink-secondary sm:text-[17px]">
                       {peek.quote}
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-5 flex items-center gap-2">
+              {/* Dots */}
+              <div className="mt-7 flex items-center gap-2.5">
                 {TESTIMONIALS.map((t, i) => (
                   <button
                     key={t.name}
@@ -205,10 +208,9 @@ export function Testimonials() {
                     aria-label={`Show testimonial from ${t.name}`}
                     aria-current={i === index}
                     onClick={() => go(i, i > index ? 1 : -1)}
-                    className={`h-1.5 rounded-full transition-all duration-300 ${
-                      i === index
-                        ? "w-7 bg-sgg-ink-accent"
-                        : "w-2.5 bg-sgg-border-strong hover:bg-sgg-ink-tertiary"
+                    className={`h-2 rounded-full transition-all duration-300 ${\n                      i === index
+                        ? "w-9 bg-sgg-ink-accent"
+                        : "w-3 bg-sgg-border-strong hover:bg-sgg-ink-tertiary"
                     }`}
                   />
                 ))}
