@@ -120,6 +120,22 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="en">
       <head>
         <HeadContent />
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+              html, body {
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+              }
+              html::-webkit-scrollbar,
+              body::-webkit-scrollbar {
+                display: none;
+                width: 0;
+                height: 0;
+              }
+            `,
+          }}
+        />
       </head>
       <body>
         {children}
