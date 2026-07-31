@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import type { ServiceDetail } from "./serviceData";
 
 export function ServiceHero({ service }: { service: ServiceDetail }) {
+  const hasWebsite = Boolean(service.websiteUrl);
+
   return (
     <section className="relative flex min-h-[52vh] items-end overflow-hidden bg-sgg-surface-dark sm:min-h-[62vh] lg:min-h-[70vh]">
       <motion.img
@@ -71,19 +73,25 @@ export function ServiceHero({ service }: { service: ServiceDetail }) {
           {service.company}
         </motion.p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.55 }}
-          className="mt-8"
-        >
-          <Button asChild size="lg">
-            <a href="#">
-              Click here to Visit main website
-              <ArrowUpRight size={16} aria-hidden="true" />
-            </a>
-          </Button>
-        </motion.div>
+        {hasWebsite && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.55 }}
+            className="mt-8"
+          >
+            <Button asChild size="lg">
+              <a
+                href={service.websiteUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Click here to Visit main website
+                <ArrowUpRight size={16} aria-hidden="true" />
+              </a>
+            </Button>
+          </motion.div>
+        )}
       </div>
     </section>
   );
