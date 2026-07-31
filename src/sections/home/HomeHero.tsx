@@ -98,12 +98,12 @@ export function HomeHero() {
 
       {/* ── Slide 1: centred brand intro ── */}
       {slide.kind === "intro" ? (
-        <div className="relative z-10 flex h-full flex-col items-center justify-center gap-1 px-6 pt-2 text-center">
+        <div className="relative z-10 flex h-full flex-col items-center justify-center gap-0.5 px-6 pt-2 text-center">
           <motion.p
             initial={{ opacity: 0, y: 70 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1, ease: EASE }}
-            className="font-[Fraunces,serif] text-[clamp(20px,2.4vw,52px)] font-semibold tracking-[0.08em] text-white"
+            className="font-[Fraunces,serif] text-[clamp(17px,2vw,36px)] font-semibold leading-[1.25] tracking-[0.1em] text-white/95"
           >
             Welcome to
           </motion.p>
@@ -111,7 +111,7 @@ export function HomeHero() {
             initial={{ opacity: 0, y: 70 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3, ease: EASE }}
-            className="font-['Cormorant_Garamond',serif] text-[clamp(52px,9vw,120px)] font-medium leading-[1.02] tracking-[0.01em] text-white"
+            className="font-['Cormorant_Garamond',serif] text-[clamp(44px,7.6vw,104px)] font-semibold leading-[1.08] tracking-[-0.01em] text-white"
           >
             Shield Global
           </motion.h1>
@@ -119,7 +119,7 @@ export function HomeHero() {
             initial={{ opacity: 0, y: 70 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.5, ease: EASE }}
-            className="font-['Cormorant_Garamond',serif] text-[clamp(16px,2vw,28px)] tracking-[0.5em] text-white"
+            className="font-['Cormorant_Garamond',serif] text-[clamp(14px,1.6vw,22px)] font-semibold leading-[1.3] tracking-[0.42em] text-white/90"
           >
             GROUP
           </motion.p>
@@ -127,14 +127,14 @@ export function HomeHero() {
             initial={{ opacity: 0, y: 70 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.7, ease: EASE }}
-            className="mt-4 rounded-full bg-gradient-to-r from-[rgba(100,220,210,0.9)] to-[rgba(220,215,140,0.9)] px-7 py-2.5 text-[clamp(13px,1.2vw,18px)] font-medium text-neutral-900 shadow-lg shadow-black/20 sm:px-9 sm:py-3"
+            className="mt-3.5 rounded-full bg-gradient-to-r from-[rgba(100,220,210,0.9)] to-[rgba(220,215,140,0.9)] px-7 py-2.5 text-[clamp(12px,1.1vw,16px)] font-semibold leading-none tracking-[0.02em] text-neutral-900 shadow-lg shadow-black/20 sm:px-9 sm:py-3"
           >
             Connecting talent, technology & entertainment
           </motion.p>
         </div>
       ) : (
         <>
-          {/* ── Slides 2–5: glass label card ── */}
+          {/* ── slides 2–5: glass label card ── */}
           <motion.div
             key={`label-${index}`}
             initial={{ opacity: 0, x: slide.align === "left" ? -120 : 120 }}
@@ -146,10 +146,10 @@ export function HomeHero() {
                 : "right-5 text-left sm:right-10 sm:text-right lg:right-[60px]"
             }`}
           >
-            <h2 className="text-[clamp(26px,3vw,38px)] font-bold leading-tight text-white">
+            <h2 className="text-[clamp(22px,2.55vw,34px)] font-semibold leading-[1.18] tracking-[-0.01em] text-white">
               {slide.title}
             </h2>
-            <p className="mt-1.5 text-[clamp(15px,1.5vw,22px)] font-light leading-relaxed text-[#00e5ff]">
+            <p className="mt-1 text-[clamp(13px,1.25vw,17px)] font-normal leading-[1.55] tracking-[0.01em] text-[#7aefff]">
               {slide.subtitle}
             </p>
           </motion.div>
@@ -171,7 +171,7 @@ export function HomeHero() {
                       type="button"
                       onClick={() => setIndex(tab.slide)}
                       aria-current={active ? "true" : undefined}
-                      className={`h-full w-full cursor-pointer border-0 px-4 py-3.5 text-center text-[clamp(13px,1.4vw,22px)] font-semibold leading-snug text-white transition-colors duration-300 hover:bg-white/12 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-white/70 sm:py-5 lg:px-5 lg:py-6 ${
+                      className={`h-full w-full cursor-pointer border-0 px-4 py-3.5 text-center text-[clamp(12px,1.25vw,18px)] font-semibold leading-[1.35] tracking-[0.01em] text-white transition-colors duration-300 hover:bg-white/12 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-white/70 sm:py-5 lg:px-5 lg:py-6 ${
                         active ? "bg-white/[0.18]" : "bg-transparent"
                       }`}
                     >
