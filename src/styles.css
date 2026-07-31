@@ -1427,3 +1427,50 @@ body.nav-open {
     justify-content: center;
   }
 }
+
+/* ---------------------------- Marquee (partners) --------------------------- */
+@keyframes sgg-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.sgg-marquee {
+  display: flex;
+  width: max-content;
+  animation: sgg-marquee var(--sgg-marquee-duration, 40s) linear infinite;
+}
+
+.sgg-marquee-reverse {
+  animation-direction: reverse;
+}
+
+.sgg-marquee-track:hover .sgg-marquee {
+  animation-play-state: paused;
+}
+
+.sgg-marquee-mask {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sgg-marquee {
+    animation: none;
+  }
+}
