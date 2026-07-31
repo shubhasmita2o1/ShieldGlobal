@@ -87,13 +87,24 @@ export function HomeHero() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.8, ease: "easeInOut" }}
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover brightness-[0.88] contrast-[1.06] saturate-[0.92]"
         />
       </AnimatePresence>
 
+      {/* Uniform dark base — equalizes brightness across all slides */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-b from-neutral-950/45 via-neutral-950/25 to-neutral-950/70"
+        className="absolute inset-0 bg-neutral-950/32"
+      />
+      {/* Vertical depth gradient — readable top text + grounded bottom tabs */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-gradient-to-b from-neutral-950/55 via-neutral-950/15 to-neutral-950/72"
+      />
+      {/* Soft vignette — focuses the frame without crushing detail */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_42%,rgba(10,18,32,0.42)_100%)]"
       />
 
       {/* ── Slide 1: centred brand intro ── */}
