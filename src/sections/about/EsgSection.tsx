@@ -194,7 +194,7 @@ function EsgBlock({
 
 export function EsgSection() {
   return (
-    <section className="relative bg-white py-24 sm:py-28 lg:py-32">
+    <section className="relative bg-sgg-surface-sunken py-24 sm:py-28 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 sm:px-8">
         <Reveal className="flex flex-col items-center text-center">
           <SectionHeading

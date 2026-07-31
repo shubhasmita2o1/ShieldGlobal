@@ -4,7 +4,7 @@ import { Reveal, SectionEyebrow } from "./shared";
 
 export function FoundersMessage() {
   return (
-    <section className="relative bg-neutral-50 py-24 sm:py-28 lg:py-32">
+    <section className="relative bg-sgg-surface-raised py-24 sm:py-28 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 sm:px-8">
         <div className="grid items-center gap-14 lg:grid-cols-12">
           <Reveal className="lg:col-span-5">

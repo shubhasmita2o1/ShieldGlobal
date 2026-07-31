@@ -4,7 +4,7 @@ export function AboutHero() {
   return (
     <section
       aria-label="About Shield Global Group"
-      className="relative isolate overflow-hidden bg-neutral-900 text-white"
+      className="relative isolate overflow-hidden bg-sgg-surface-dark text-sgg-ink-inverse"
     >
       <div
         aria-hidden
@@ -16,7 +16,11 @@ export function AboutHero() {
       />
       <div
         aria-hidden
-        className="absolute inset-0 bg-gradient-to-b from-neutral-950/85 via-neutral-950/70 to-neutral-950/95"
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(to bottom, rgba(10,18,32,0.85), rgba(10,18,32,0.70), rgba(10,18,32,0.95))",
+        }}
       />
       {/* <div
         aria-hidden
@@ -45,7 +49,7 @@ export function AboutHero() {
           className="mt-6 max-w-4xl font-[Fraunces,serif] text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl lg:text-7xl"
         >
           Shield Global Group
-          <span className="mt-3 block font-[Cormorant_Garamond,serif] text-2xl italic text-[#7ed7ee] sm:text-3xl lg:text-4xl">
+          <span className="mt-3 block font-[Cormorant_Garamond,serif] text-2xl italic text-sgg-ink-accent-dark sm:text-3xl lg:text-4xl">
             The Power of One
           </span>
         </motion.h1>

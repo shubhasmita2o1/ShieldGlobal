@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import type { ServiceDetail } from "./serviceData";
 
 export function ServiceHero({ service }: { service: ServiceDetail }) {
   return (
-    <section className="relative flex min-h-[52vh] items-end overflow-hidden sm:min-h-[62vh] lg:min-h-[70vh]">
+    <section className="relative flex min-h-[52vh] items-end overflow-hidden bg-sgg-surface-dark sm:min-h-[62vh] lg:min-h-[70vh]">
       <motion.img
         src={service.heroImage}
         alt={`${service.title} — ${service.company}`}
@@ -16,7 +17,11 @@ export function ServiceHero({ service }: { service: ServiceDetail }) {
       />
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-t from-neutral-950/92 via-neutral-950/70 to-neutral-950/45"
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(to bottom, rgba(10,18,32,0.85), rgba(10,18,32,0.70), rgba(10,18,32,0.95))",
+        }}
       />
       <div className="relative mx-auto w-full max-w-7xl px-5 pb-14 pt-24 sm:px-8 sm:pb-20 lg:pb-24">
         <motion.nav
@@ -42,14 +47,14 @@ export function ServiceHero({ service }: { service: ServiceDetail }) {
             <li aria-hidden="true" className="text-white/40">
               /
             </li>
-            <li aria-current="page" className="text-[#4fd0f0]">
+            <li aria-current="page" className="text-sgg-ink-accent-dark">
               {service.navLabel}
             </li>
           </ol>
         </motion.nav>
 
         <motion.h1
-          className="mt-6 max-w-4xl font-[Fraunces,serif] text-4xl font-semibold leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl"
+          className="mt-6 max-w-4xl font-[Fraunces,serif] text-4xl font-semibold leading-[1.05] tracking-tight text-sgg-ink-inverse sm:text-5xl lg:text-6xl"
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
@@ -58,7 +63,7 @@ export function ServiceHero({ service }: { service: ServiceDetail }) {
         </motion.h1>
 
         <motion.p
-          className="mt-5 text-sm font-semibold uppercase tracking-[0.28em] text-[#4fd0f0] sm:text-base"
+          className="mt-5 text-sm font-semibold uppercase tracking-[0.28em] text-sgg-ink-accent-dark sm:text-base"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
@@ -70,14 +75,14 @@ export function ServiceHero({ service }: { service: ServiceDetail }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.55 }}
+          className="mt-8"
         >
-          <a
-            href="#"
-            className="mt-8 inline-flex items-center gap-2 rounded-full bg-[#0a8fb8] px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-[#0a8fb8]/25 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0b7ea3] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-900"
-          >
-            Click here to Visit main website
-            <ArrowUpRight size={16} aria-hidden="true" />
-          </a>
+          <Button asChild size="lg">
+            <a href="#">
+              Click here to Visit main website
+              <ArrowUpRight size={16} aria-hidden="true" />
+            </a>
+          </Button>
         </motion.div>
       </div>
     </section>

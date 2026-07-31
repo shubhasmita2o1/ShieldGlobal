@@ -17,11 +17,11 @@ export function BrandStrip() {
         className="
           relative z-30 mx-auto
           w-[calc(100%-32px)] sm:w-[calc(100%-48px)] lg:w-[calc(100%-120px)]
-          rounded-[16px] bg-white px-2 py-1.5
-          shadow-[0_20px_50px_rgba(0,0,0,0.35)]
+          rounded-[16px] bg-sgg-surface-raised px-2 py-1.5
+          shadow-[var(--sgg-e4)]
         "
       >
-        <ul className="grid grid-cols-2 divide-x divide-y divide-black/10 lg:grid-cols-4 lg:divide-y-0">
+        <ul className="grid grid-cols-2 divide-x divide-y divide-sgg-border-default lg:grid-cols-4 lg:divide-y-0">
           {BRANDS.map((brand) => (
             <li
               key={brand.name}

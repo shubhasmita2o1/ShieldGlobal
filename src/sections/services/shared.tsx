@@ -50,8 +50,10 @@ export function SectionEyebrow({
   children: ReactNode;
   tone?: "light" | "dark";
 }) {
-  const color = tone === "dark" ? "text-[#4fd0f0]" : "text-[#0a8fb8]";
-  const bar = tone === "dark" ? "bg-[#4fd0f0]" : "bg-[#0a8fb8]";
+  const color =
+    tone === "dark" ? "text-sgg-ink-accent-dark" : "text-sgg-ink-accent";
+  const bar =
+    tone === "dark" ? "bg-sgg-ink-accent-dark" : "bg-sgg-ink-accent";
   return (
     <span
       className={`inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] ${color}`}
@@ -74,7 +76,7 @@ export function BlockHeading({
       <SectionEyebrow tone={tone}>{block.eyebrow}</SectionEyebrow>
       <h2
         className={`mt-4 font-[Fraunces,serif] text-2xl font-semibold tracking-tight sm:text-3xl ${
-          tone === "dark" ? "text-white" : "text-neutral-900"
+          tone === "dark" ? "text-sgg-ink-inverse" : "text-sgg-ink-primary"
         }`}
       >
         {block.heading}
@@ -82,7 +84,7 @@ export function BlockHeading({
       {block.subheading && (
         <p
           className={`mt-4 text-base font-medium sm:text-lg ${
-            tone === "dark" ? "text-white/80" : "text-neutral-700"
+            tone === "dark" ? "text-sgg-ink-inverse-2" : "text-sgg-ink-secondary"
           }`}
         >
           {block.subheading}
