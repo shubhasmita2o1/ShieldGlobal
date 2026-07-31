@@ -177,18 +177,17 @@ export function HomeHero() {
               ease: EASE,
             }}
             whileHover={{
-              y: reduceMotion ? 0 : -1,
-              boxShadow:
-                "0 10px 28px rgba(0,0,0,0.28), 0 0 0 1px rgba(255,255,255,0.15)",
-            }}
-            className="mt-5 inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-full bg-gradient-to-r from-[rgba(100,220,210,0.9)] to-[rgba(220,215,140,0.9)] px-7 py-3 text-[clamp(13px,1.2vw,18px)] font-medium leading-none text-neutral-900 shadow-lg shadow-black/20 sm:px-9"
-          >
-            Connecting talent, technology & entertainment
-          </motion.span>
+  y: reduceMotion ? 0 : -1,
+  boxShadow:
+    "0 10px 28px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.2)",
+}}
+className="mt-5 inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-full bg-gradient-to-r from-[rgba(100,220,210,0.9)] to-[rgba(220,215,140,0.9)] px-7 py-3 text-[clamp(13px,1.2vw,18px)] font-medium leading-none text-neutral-900 shadow-lg shadow-black/20 sm:px-9"
+>
+  Connecting talent, technology &amp; entertainment
+</motion.span>
         </div>
       ) : (
-        <>
-          {/* ── Slides 2–5: premium glass label card ── */}
+        <>{/* ── Slides 2–5: premium glass label card ── */}
           <motion.div
             key={`label-${index}`}
             initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 16 }}
