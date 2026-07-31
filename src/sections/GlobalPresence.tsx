@@ -5,6 +5,7 @@ import type { Feature, FeatureCollection, Geometry } from "geojson";
 import worldTopo from "@/assets/data/world-countries-110m.json";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
+import { SectionEyebrow } from "@/sections/about/shared";
 
 type Region =
   | "South Asia"
@@ -137,12 +138,18 @@ export function GlobalPresence() {
       }}
     >
       <Container>
-        <header className="sgg-globe-head">
-          <span className="sgg-globe-eyebrow">Global Presence</span>
-          <h2 id="global-presence-title" className="sgg-globe-title">
-            Delivering across <span>{total}+ locations</span> worldwide
+        <header className="mx-auto mb-12 max-w-2xl text-center sm:mb-14">
+          <div className="flex justify-center">
+            <SectionEyebrow>Global Presence</SectionEyebrow>
+          </div>
+          <h2
+            id="global-presence-title"
+            className="mt-4 font-[Fraunces,serif] text-3xl font-semibold leading-[1.08] tracking-tight text-white sm:text-4xl lg:text-[2.75rem]"
+          >
+            Delivering across{" "}
+            <span className="text-white/40">{total}+ locations</span> worldwide
           </h2>
-          <p className="sgg-globe-lede">
+          <p className="mx-auto mt-5 max-w-xl text-[15px] leading-[1.85] text-[#c2c8d6]">
             From regional headquarters to on-ground operations, Shield Global Group
             connects talent, technology and enterprise across Asia, the Middle East,
             Africa, Europe and North America.
@@ -233,42 +240,65 @@ export function GlobalPresence() {
           })}
         </div>
 
-        <div className="sgg-globe-kpis" aria-label="Global presence statistics">
-          <div className="sgg-kpi">
-            <span className="sgg-kpi-value">{total}</span>
-            <span className="sgg-kpi-label">Total Locations</span>
-          </div>
-          <div className="sgg-kpi">
-            <span className="sgg-kpi-value">{REGION_ORDER.length}</span>
-            <span className="sgg-kpi-label">Regions</span>
-          </div>
-          <div className="sgg-kpi">
-            <span className="sgg-kpi-value">4</span>
-            <span className="sgg-kpi-label">Continents</span>
-          </div>
+        <div
+          className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-5 lg:mt-14"
+          aria-label="Global presence statistics"
+        >
+          {[
+            { value: total, label: "Total Locations" },
+            { value: REGION_ORDER.length, label: "Regions" },
+            { value: 4, label: "Continents" },
+          ].map((kpi) => (
+            <div
+              key={kpi.label}
+              className="rounded-2xl border border-white/[0.1] bg-white/[0.04] px-7 py-7 transition-colors duration-300 hover:border-[#0a8fb8]/40 hover:bg-white/[0.06]"
+            >
+              <p className="font-[Fraunces,serif] text-[36px] font-semibold leading-none tracking-tight text-white tabular-nums sm:text-[40px]">
+                {kpi.value}
+              </p>
+              <p className="mt-3 text-[12px] font-semibold uppercase tracking-[0.16em] text-[#0a8fb8]">
+                {kpi.label}
+              </p>
+            </div>
+          ))}
         </div>
 
-        <div className="sgg-globe-regions" aria-label="Locations by region">
+        <div
+          className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:mt-12 lg:grid-cols-3 lg:gap-5"
+          aria-label="Locations by region"
+        >
           {REGION_ORDER.map((region) => {
             const items = grouped.get(region)!;
             return (
-              <article key={region} className="sgg-region-card">
-                <header>
-                  <h3>{region}</h3>
-                  <span>{items.length} locations</span>
+              <article
+                key={region}
+                className="rounded-2xl border border-white/[0.09] bg-white/[0.03] p-6 transition-colors duration-300 hover:border-[#0a8fb8]/35 hover:bg-white/[0.05]"
+              >
+                <header className="mb-4 flex items-baseline justify-between gap-3 border-b border-[#0a8fb8]/25 pb-3">
+                  <h3 className="font-[Fraunces,serif] text-[15px] font-semibold tracking-tight text-white">
+                    {region}
+                  </h3>
+                  <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#0a8fb8]">
+                    {items.length} locations
+                  </span>
                 </header>
 
-                <ul>
+                <ul className="grid grid-cols-2 gap-x-4 gap-y-2">
                   {items.map((loc) => (
                     <li
                       key={loc.name}
-                      className={`sgg-region-item sgg-region-item-${loc.kind}${
-                        active === loc.name ? " is-active" : ""
+                      className={`flex items-center gap-2 text-[13px] leading-snug transition-colors duration-150 ${
+                        active === loc.name
+                          ? "text-white"
+                          : "text-[#b5bccc] hover:text-white"
                       }`}
                       onMouseEnter={() => setActive(loc.name)}
                       onMouseLeave={() => setActive(null)}
                     >
-                      <span className="sgg-region-dot" aria-hidden="true" />
+                      <span
+                        className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#0a8fb8] shadow-[0_0_6px_rgba(10,143,184,0.55)]"
+                        aria-hidden
+                      />
                       <span>{loc.name}</span>
                     </li>
                   ))}
