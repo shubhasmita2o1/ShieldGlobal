@@ -17,6 +17,46 @@ const PARTNERS: Partner[] = [
   { name: "Orient Marine", sector: "Maritime" },
 ];
 
+const ROW_ONE = PARTNERS.slice(0, 4);
+const ROW_TWO = PARTNERS.slice(4);
+
+function PartnerCard({ partner }: { partner: Partner }) {
+  return (
+    <div className="mx-3 flex h-full min-h-[104px] w-[240px] shrink-0 flex-col items-center justify-center gap-1.5 rounded-2xl border border-sgg-border-default bg-sgg-surface-canvas px-5 py-5 text-center shadow-[var(--sgg-e1)] transition-all duration-300 hover:border-sgg-border-accent hover:bg-white hover:shadow-[var(--sgg-e2)] sm:w-[260px]">
+      <span className="font-[Fraunces,serif] text-[16px] font-semibold leading-tight tracking-tight text-sgg-ink-primary sm:text-[17px]">
+        {partner.name}
+      </span>
+      <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-sgg-ink-tertiary">
+        {partner.sector}
+      </span>
+    </div>
+  );
+}
+
+function MarqueeRow({
+  items,
+  duration,
+  reverse = false,
+}: {
+  items: Partner[];
+  duration: string;
+  reverse?: boolean;
+}) {
+  const loop = [...items, ...items, ...items, ...items];
+  return (
+    <div className="sgg-marquee-track sgg-marquee-mask overflow-hidden py-2">
+      <div
+        className={`sgg-marquee ${reverse ? "sgg-marquee-reverse" : ""}`}
+        style={{ ["--sgg-marquee-duration" as string]: duration }}
+      >
+        {loop.map((partner, i) => (
+          <PartnerCard key={`${partner.name}-${i}`} partner={partner} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function Partners() {
   return (
     <section
@@ -46,32 +86,30 @@ export function Partners() {
               group collaborates with across its markets.
             </p>
           </motion.div>
-
-          <motion.ul
-            variants={fadeUp}
-            className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 lg:gap-5"
-          >
-            {PARTNERS.map((partner) => (
-              <li key={partner.name}>
-                <div className="flex h-full min-h-[100px] flex-col items-center justify-center gap-1.5 rounded-2xl border border-sgg-border-default bg-sgg-surface-canvas px-4 py-6 text-center transition-all duration-300 hover:border-sgg-border-accent hover:bg-white hover:shadow-[var(--sgg-e2)]">
-                  <span className="font-[Fraunces,serif] text-[15px] font-semibold leading-tight tracking-tight text-sgg-ink-primary sm:text-[16px]">
-                    {partner.name}
-                  </span>
-                  <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-sgg-ink-tertiary">
-                    {partner.sector}
-                  </span>
-                </div>
-              </li>
-            ))}
-          </motion.ul>
-
-          <motion.p
-            variants={fadeUp}
-            className="mt-10 text-center text-[12px] font-semibold uppercase tracking-[0.18em] text-sgg-ink-accent"
-          >
-            Global reach &nbsp;·&nbsp; Long-term partnerships
-          </motion.p>
         </motion.div>
+      </div>
+
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.15 }}
+        className="relative mt-12 space-y-3 lg:mt-14"
+      >
+        <MarqueeRow items={ROW_ONE} duration="38s" />
+        <MarqueeRow items={ROW_TWO} duration="46s" reverse />
+      </motion.div>
+
+      <div className="relative mx-auto w-full max-w-[1200px] px-5 sm:px-8 lg:px-10">
+        <motion.p
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.4 }}
+          className="mt-10 text-center text-[12px] font-semibold uppercase tracking-[0.18em] text-sgg-ink-accent"
+        >
+          Global reach &nbsp;·&nbsp; Long-term partnerships
+        </motion.p>
       </div>
     </section>
   );
