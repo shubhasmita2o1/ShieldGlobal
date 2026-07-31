@@ -176,30 +176,28 @@ export function GlobalPresence() {
               </filter>
             </defs>
 
-            {/* Country fills only — no border strokes, not interactive */}
-            <g className="sgg-globe-countries" pointerEvents="none">
+            {/* No className here so CSS stroke rules cannot re-apply borders */}
+            <g pointerEvents="none">
               {countries.map((d: string, i: number) => (
                 <path
                   key={i}
                   d={d}
-                  fill="#223447"
-                  stroke="none"
-                  strokeWidth={0}
+                  style={{ fill: "#223447", stroke: "none", strokeWidth: 0 }}
                 />
               ))}
             </g>
 
-            {/* Location markers remain interactive */}
             <g className="sgg-globe-markers">
               {points.map((p) => {
-                const isActive = active === p.name;
                 const scale =
                   p.kind === "hq" ? 0.55 : p.kind === "regional" ? 0.48 : 0.42;
 
                 return (
                   <g
                     key={p.name}
-                    className={`sgg-marker sgg-marker-${p.kind}${isActive ? " is-active" : ""}`}
+                    className={`sgg-marker sgg-marker-${p.kind}${
+                      active === p.name ? " is-active" : ""
+                    }`}
                     transform={`translate(${p.x} ${p.y}) scale(${scale})`}
                     tabIndex={0}
                     role="button"
@@ -249,8 +247,13 @@ export function GlobalPresence() {
           })}
         </div>
 
+        {/* Caption between map and KPIs */}
+        <p className="mt-8 text-center text-[12px] font-semibold uppercase tracking-[0.18em] text-[#0a8fb8]">
+          Hover a pin or region list to explore our network&nbsp;·&nbsp;HQ · Regional · Office
+        </p>
+
         <div
-          className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-5 lg:mt-14"
+          className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-5 lg:mt-10"
           aria-label="Global presence statistics"
         >
           {[
