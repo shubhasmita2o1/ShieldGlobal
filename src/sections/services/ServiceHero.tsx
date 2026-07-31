@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import type { ServiceDetail } from "./serviceData";
 
 export function ServiceHero({ service }: { service: ServiceDetail }) {
-  const websiteUrl = service.websiteUrl;
+  const href = service.websiteUrl ?? "#";
+  const isExternal = Boolean(service.websiteUrl);
 
   return (
     <section className="relative flex min-h-[52vh] items-end overflow-hidden bg-sgg-surface-dark sm:min-h-[62vh] lg:min-h-[70vh]">
@@ -74,24 +74,24 @@ export function ServiceHero({ service }: { service: ServiceDetail }) {
           {service.company}
         </motion.p>
 
-        {websiteUrl ? (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.55 }}
-            className="mt-8"
-          >
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.55 }}
+          className="mt-8"
+        >
+          <Button asChild size="lg">
             <a
-              href={websiteUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={cn(buttonVariants({ size: "lg" }), "relative z-10")}
+              href={href}
+              {...(isExternal
+                ? { target: "_blank", rel: "noopener noreferrer" }
+                : {})}
             >
               Click here to Visit main website
               <ArrowUpRight size={16} aria-hidden="true" />
             </a>
-          </motion.div>
-        ) : null}
+          </Button>
+        </motion.div>
       </div>
     </section>
   );
