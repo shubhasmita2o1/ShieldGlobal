@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { MainLayout } from "@/layouts/MainLayout";
 import { HomeHero } from "@/sections/home/HomeHero";
 import { BrandStrip } from "@/sections/home/BrandStrip";
+import { JourneyTimeline } from "@/sections/home/JourneyTimeline";
 import { GlobalPresence } from "@/sections/GlobalPresence";
 
 export const Route = createFileRoute("/")({
@@ -36,6 +37,7 @@ function Index() {
     <MainLayout>
       <HomeHero />
       <BrandStrip />
+      <JourneyTimeline />
       <GlobalPresence />
     </MainLayout>
   );
