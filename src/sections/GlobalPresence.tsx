@@ -79,13 +79,12 @@ const REGION_ORDER: Region[] = [
 const MAP_WIDTH = 1400;
 const MAP_HEIGHT = 650;
 
-/**
- * Classic Google Maps pin.
- * Tip sits at (0, 0) so it lands exactly on the projected coordinate.
- * Head centered around y = -20.
- */
-const PIN_BODY =
-  "M0 0 C-2 -4 -10 -14 -10 -22 A10 10 0 1 1 10 -22 C10 -14 2 -4 0 0 Z";
+/** Same pin asset used on shieldglobal.technoriya.com / SGG repo */
+const PIN_SRC = "/pin.png";
+
+/** Pin image size in SVG units (matches live site proportion) */
+const PIN_W = 22;
+const PIN_H = 28;
 
 type TopoWorld = typeof worldTopo & {
   objects: { countries: { type: string } };
@@ -154,18 +153,6 @@ export function GlobalPresence() {
             className="sgg-globe-svg"
             preserveAspectRatio="xMidYMid meet"
           >
-            <defs>
-              <filter id="sgg-pin-shadow" x="-60%" y="-40%" width="220%" height="220%">
-                <feDropShadow
-                  dx="0"
-                  dy="2"
-                  stdDeviation="1.6"
-                  floodColor="#000000"
-                  floodOpacity="0.4"
-                />
-              </filter>
-            </defs>
-
             <g className="sgg-globe-countries">
               {countries.map((d: string, i: number) => (
                 <path key={i} d={d} />
@@ -175,15 +162,16 @@ export function GlobalPresence() {
             <g className="sgg-globe-markers">
               {points.map((p) => {
                 const isActive = active === p.name;
-                // Size hierarchy: HQ > regional > office
+                // Same hierarchy as live site: HQ slightly larger
                 const scale =
-                  p.kind === "hq" ? 1.25 : p.kind === "regional" ? 1.1 : 0.92;
+                  p.kind === "hq" ? 1.25 : p.kind === "regional" ? 1.1 : 1;
+                const w = PIN_W * scale;
+                const h = PIN_H * scale;
 
                 return (
                   <g
                     key={p.name}
                     className={`sgg-marker sgg-marker-${p.kind}${isActive ? " is-active" : ""}`}
-                    transform={`translate(${p.x} ${p.y}) scale(${scale})`}
                     tabIndex={0}
                     role="button"
                     aria-label={`${p.name}${p.country ? ` — ${p.country}` : ""}`}
@@ -191,22 +179,21 @@ export function GlobalPresence() {
                     onMouseLeave={() => setActive(null)}
                     onFocus={() => setActive(p.name)}
                     onBlur={() => setActive(null)}
+                    style={{ cursor: "pointer" }}
                   >
-                    {/* Red pin body — tip at (0,0) */}
-                    <path
-                      d={PIN_BODY}
-                      fill="#EA4335"
-                      stroke="#B31412"
-                      strokeWidth={0.6}
-                      filter="url(#sgg-pin-shadow)"
-                    />
-                    {/* White center disc (classic Google pin) */}
-                    <circle
-                      cx={0}
-                      cy={-22}
-                      r={4.2}
-                      fill="#FFFFFF"
-                      stroke="none"
+                    {/*
+                      Same technique as SGG live site:
+                      pin.png + tip anchored on coordinate via translate(-50%, -100%)
+                      → x centered, y so tip sits on the lat/lng point
+                    */}
+                    <image
+                      href={PIN_SRC}
+                      x={p.x - w / 2}
+                      y={p.y - h}
+                      width={w}
+                      height={h}
+                      preserveAspectRatio="xMidYMax meet"
+                      className="sgg-marker-img"
                     />
                   </g>
                 );
