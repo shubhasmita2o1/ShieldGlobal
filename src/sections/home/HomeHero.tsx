@@ -225,7 +225,8 @@ className="mt-5 inline-flex shrink-0 items-center justify-center whitespace-nowr
             }}
             // was: bottom-5 ... sm:bottom-8 ... lg:bottom-12
            // bottom nav className — raise from bottom
-            className="absolute bottom-14 left-1/2 z-10 w-[calc(100%-32px)] -translate-x-1/2 ... sm:bottom-16 sm:w-[calc(100%-48px)] lg:bottom-[4.5rem] lg:w-[calc(100%-120px)]"
+            className="absolute bottom-14 left-1/2 z-10 w-[calc(100%-32px)] -translate-x-1/2 overflow-hidden rounded-[14px] border border-white/[0.14] bg-white/[0.055] shadow-[0_8px_32px_rgba(0,0,0,0.3)] backdrop-blur-xl sm:bottom-16 sm:w-[calc(100%-48px)] lg:bottom-[4.5rem] lg:w-[calc(100%-120px)]"
+
           >
             <ul className="grid grid-cols-2 divide-x divide-y divide-white/[0.08] lg:flex lg:divide-y-0">
               {TABS.map((tab) => {
