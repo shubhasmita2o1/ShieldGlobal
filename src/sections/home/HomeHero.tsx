@@ -56,6 +56,8 @@ export function HomeHero() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const slide = SLIDES[index];
   const reduceMotion = useReducedMotion();
+  /** Overlays only on the 5th video (index 4) */
+  const showOverlay = index === 4;
 
   const next = useCallback(() => {
     setIndex((i) => (i + 1) % SLIDES.length);
@@ -107,21 +109,25 @@ export function HomeHero() {
         />
       </AnimatePresence>
 
-      {/* Uniform dark base — equalizes brightness across all slides */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 bg-neutral-950/34"
-      />
-      {/* Vertical depth gradient — readable top text + grounded bottom tabs */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-b from-neutral-950/58 via-neutral-950/18 to-neutral-950/74"
-      />
-      {/* Soft vignette — focuses the frame without crushing detail */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_44%,rgba(10,18,32,0.4)_100%)]"
-      />
+      {showOverlay && (
+        <>
+          {/* Uniform dark base */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-neutral-950/34"
+          />
+          {/* Vertical depth gradient */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-gradient-to-b from-neutral-950/58 via-neutral-950/18 to-neutral-950/74"
+          />
+          {/* Soft vignette */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_44%,rgba(10,18,32,0.4)_100%)]"
+          />
+        </>
+      )}
 
       {/* ── Slide 1: centred brand intro ── */}
       {slide.kind === "intro" ? (
