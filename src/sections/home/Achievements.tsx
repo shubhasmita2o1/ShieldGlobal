@@ -124,26 +124,27 @@ export function Achievements() {
             </p>
           </motion.div>
 
+          {/* Single horizontal row — scrollable on smaller screens */}
           <motion.ul
             variants={stagger}
-            className="mt-12 grid gap-px overflow-hidden rounded-3xl border border-white/[0.1] bg-white/[0.08] sm:grid-cols-2 lg:mt-16 lg:grid-cols-3"
+            className="mt-12 flex gap-px overflow-x-auto rounded-3xl border border-white/[0.1] bg-white/[0.08] scrollbar-thin lg:mt-16 lg:overflow-visible"
           >
             {STATS.map(({ icon: Icon, value, suffix, label, detail }) => (
               <motion.li
                 key={label}
                 variants={fadeUp}
-                className="group min-w-0 bg-[#0d1725] p-7 transition-colors duration-300 hover:bg-[#101f31] sm:p-8 lg:p-9"
+                className="group min-w-[200px] flex-1 bg-[#0d1725] p-6 transition-colors duration-300 hover:bg-[#101f31] sm:min-w-[220px] sm:p-7 lg:min-w-0 lg:p-8"
               >
-                <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#0a8fb8]/15 text-[#7ed7ee] transition-colors group-hover:bg-[#0a8fb8] group-hover:text-white">
-                  <Icon size={20} strokeWidth={1.75} aria-hidden />
+                <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#0a8fb8]/15 text-[#7ed7ee] transition-colors group-hover:bg-[#0a8fb8] group-hover:text-white">
+                  <Icon size={18} strokeWidth={1.75} aria-hidden />
                 </span>
-                <p className="mt-6 font-[Fraunces,serif] text-[42px] font-semibold leading-none tracking-tight text-white tabular-nums sm:text-[48px]">
+                <p className="mt-5 font-[Fraunces,serif] text-[32px] font-semibold leading-none tracking-tight text-white tabular-nums sm:text-[36px] lg:text-[40px]">
                   <CountUp value={value} suffix={suffix} />
                 </p>
-                <h3 className="mt-3 text-[13px] font-semibold uppercase tracking-[0.16em] text-[#0a8fb8]">
+                <h3 className="mt-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#0a8fb8] sm:text-[12px]">
                   {label}
                 </h3>
-                <p className="mt-3 text-[13.5px] leading-relaxed text-[#9aa3b6]">
+                <p className="mt-2 text-[12.5px] leading-relaxed text-[#9aa3b6] sm:text-[13px]">
                   {detail}
                 </p>
               </motion.li>
