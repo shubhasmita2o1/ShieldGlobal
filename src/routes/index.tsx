@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { MainLayout } from "@/layouts/MainLayout";
 import { HomeHero } from "@/sections/home/HomeHero";
+import { BrandStrip } from "@/sections/home/BrandStrip";
 import { GlobalPresence } from "@/sections/GlobalPresence";
 
 export const Route = createFileRoute("/")({
@@ -34,6 +35,7 @@ function Index() {
   return (
     <MainLayout>
       <HomeHero />
+      <BrandStrip />
       <GlobalPresence />
     </MainLayout>
   );
