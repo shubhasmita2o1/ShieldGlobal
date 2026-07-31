@@ -70,7 +70,7 @@ export function HomeHero() {
   return (
     <section
       aria-label="Shield Global Group introduction"
-      className="relative isolate h-[calc(100svh-84px)] min-h-[520px] w-full overflow-hidden bg-neutral-950"
+      className="relative isolate h-[86svh] min-h-[480px] w-full overflow-hidden bg-neutral-950"
     >
       <AnimatePresence mode="sync">
         <motion.video
@@ -98,7 +98,7 @@ export function HomeHero() {
 
       {/* ── Slide 1: centred brand intro ── */}
       {slide.kind === "intro" ? (
-        <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center">
+        <div className="relative z-10 flex h-full flex-col items-center justify-center gap-1 px-6 pt-2 text-center">
           <motion.p
             initial={{ opacity: 0, y: 70 }}
             animate={{ opacity: 1, y: 0 }}
@@ -111,7 +111,7 @@ export function HomeHero() {
             initial={{ opacity: 0, y: 70 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3, ease: EASE }}
-            className="font-[\'Cormorant_Garamond\',serif] text-[clamp(52px,9vw,120px)] font-medium leading-[1.02] tracking-[0.01em] text-white"
+            className="font-['Cormorant_Garamond',serif] text-[clamp(52px,9vw,120px)] font-medium leading-[1.02] tracking-[0.01em] text-white"
           >
             Shield Global
           </motion.h1>
@@ -119,7 +119,7 @@ export function HomeHero() {
             initial={{ opacity: 0, y: 70 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.5, ease: EASE }}
-            className="font-[\'Cormorant_Garamond\',serif] text-[clamp(16px,2vw,28px)] tracking-[0.5em] text-white"
+            className="font-['Cormorant_Garamond',serif] text-[clamp(16px,2vw,28px)] tracking-[0.5em] text-white"
           >
             GROUP
           </motion.p>
@@ -127,9 +127,9 @@ export function HomeHero() {
             initial={{ opacity: 0, y: 70 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.7, ease: EASE }}
-            className="mt-5 rounded-full bg-gradient-to-r from-[rgba(100,220,210,0.9)] to-[rgba(220,215,140,0.9)] px-7 py-3 text-[clamp(13px,1.2vw,18px)] font-medium text-neutral-900 shadow-lg shadow-black/20 sm:px-9"
+            className="mt-4 rounded-full bg-gradient-to-r from-[rgba(100,220,210,0.9)] to-[rgba(220,215,140,0.9)] px-7 py-2.5 text-[clamp(13px,1.2vw,18px)] font-medium text-neutral-900 shadow-lg shadow-black/20 sm:px-9 sm:py-3"
           >
-            Connecting talent, technology &amp; entertainment
+            Connecting talent, technology & entertainment
           </motion.p>
         </div>
       ) : (
@@ -140,7 +140,7 @@ export function HomeHero() {
             initial={{ opacity: 0, x: slide.align === "left" ? -120 : 120 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.25, ease: EASE }}
-            className={`absolute top-[38%] z-10 w-[calc(100%-40px)] max-w-[650px] -translate-y-1/2 rounded-xl border border-white/15 bg-white/10 px-6 py-6 shadow-[0_8px_32px_rgba(0,0,0,0.25)] backdrop-blur-xl sm:px-10 sm:py-7 lg:px-14 ${
+            className={`absolute top-[36%] z-10 w-[calc(100%-40px)] max-w-[650px] -translate-y-1/2 rounded-xl border border-white/15 bg-white/10 px-6 py-5 shadow-[0_8px_32px_rgba(0,0,0,0.25)] backdrop-blur-xl sm:px-10 sm:py-6 lg:px-14 ${
               slide.align === "left"
                 ? "left-5 text-left sm:left-10 lg:left-[60px]"
                 : "right-5 text-left sm:right-10 sm:text-right lg:right-[60px]"
@@ -149,7 +149,7 @@ export function HomeHero() {
             <h2 className="text-[clamp(26px,3vw,38px)] font-bold leading-tight text-white">
               {slide.title}
             </h2>
-            <p className="mt-2 text-[clamp(15px,1.5vw,22px)] font-light leading-relaxed text-[#00e5ff]">
+            <p className="mt-1.5 text-[clamp(15px,1.5vw,22px)] font-light leading-relaxed text-[#00e5ff]">
               {slide.subtitle}
             </p>
           </motion.div>
@@ -160,7 +160,7 @@ export function HomeHero() {
             initial={{ opacity: 0, y: 120 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.15, ease: EASE }}
-            className="absolute bottom-6 left-1/2 z-10 w-[calc(100%-40px)] -translate-x-1/2 overflow-hidden rounded-2xl border border-white/12 bg-white/[0.06] shadow-[0_10px_40px_rgba(0,0,0,0.3)] backdrop-blur-xl sm:bottom-10 lg:bottom-[72px] lg:w-[calc(100%-120px)]"
+            className="absolute bottom-5 left-1/2 z-10 w-[calc(100%-40px)] -translate-x-1/2 overflow-hidden rounded-2xl border border-white/12 bg-white/[0.06] shadow-[0_10px_40px_rgba(0,0,0,0.3)] backdrop-blur-xl sm:bottom-8 lg:bottom-12 lg:w-[calc(100%-120px)]"
           >
             <ul className="grid grid-cols-2 lg:flex">
               {TABS.map((tab) => {
@@ -171,7 +171,7 @@ export function HomeHero() {
                       type="button"
                       onClick={() => setIndex(tab.slide)}
                       aria-current={active ? "true" : undefined}
-                      className={`h-full w-full cursor-pointer border-0 px-4 py-4 text-center text-[clamp(13px,1.4vw,22px)] font-semibold leading-snug text-white transition-colors duration-300 hover:bg-white/12 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-white/70 sm:py-6 lg:px-5 lg:py-7 ${
+                      className={`h-full w-full cursor-pointer border-0 px-4 py-3.5 text-center text-[clamp(13px,1.4vw,22px)] font-semibold leading-snug text-white transition-colors duration-300 hover:bg-white/12 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-white/70 sm:py-5 lg:px-5 lg:py-6 ${
                         active ? "bg-white/[0.18]" : "bg-transparent"
                       }`}
                     >
