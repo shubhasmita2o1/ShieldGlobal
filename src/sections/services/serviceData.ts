@@ -37,6 +37,8 @@ export type ServiceDetail = {
   commitment: string[];
   tagline?: string;
   seoDescription: string;
+  /** External company website — used by the hero CTA button */
+  websiteUrl?: string;
 };
 
 export const SERVICES: ServiceDetail[] = [
@@ -45,6 +47,7 @@ export const SERVICES: ServiceDetail[] = [
     navLabel: "Global Manpower Recruitment",
     title: "Global Manpower Recruitment",
     company: "SHIELD GLOBAL HR SOLUTIONS",
+    websiteUrl: "https://www.shieldglobal.in/",
     heroImage:
       "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=2000&q=80",
     intro:
@@ -210,6 +213,7 @@ export const SERVICES: ServiceDetail[] = [
     navLabel: "AI Powered Automation",
     title: "AI Powered Automation",
     company: "INFICORP TECHNOLOGY",
+    websiteUrl: "https://www.inficorpgroup.com/",
     heroImage:
       "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=2000&q=80",
     intro:
