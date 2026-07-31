@@ -176,11 +176,20 @@ export function GlobalPresence() {
               </filter>
             </defs>
 
-            <g className="sgg-globe-countries">
+            {/* Country fills only — no border strokes, not interactive */}
+            <g className="sgg-globe-countries" pointerEvents="none">
               {countries.map((d: string, i: number) => (
-                <path key={i} d={d} />
+                <path
+                  key={i}
+                  d={d}
+                  fill="#223447"
+                  stroke="none"
+                  strokeWidth={0}
+                />
               ))}
             </g>
+
+            {/* Location markers remain interactive */}
             <g className="sgg-globe-markers">
               {points.map((p) => {
                 const isActive = active === p.name;
