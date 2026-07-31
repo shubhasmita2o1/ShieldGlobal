@@ -79,9 +79,13 @@ const REGION_ORDER: Region[] = [
 const MAP_WIDTH = 1400;
 const MAP_HEIGHT = 650;
 
-/** Google Maps–style pin: tip at (0,0), head above. Scale applied via transform. */
-const PIN_PATH =
-  "M0,0 C-1.2,-3.2 -7,-10.5 -7,-16.2 A7,7 0 1 1 7,-16.2 C7,-10.5 1.2,-3.2 0,0 Z";
+/**
+ * Classic Google Maps pin.
+ * Tip sits at (0, 0) so it lands exactly on the projected coordinate.
+ * Head centered around y = -20.
+ */
+const PIN_BODY =
+  "M0 0 C-2 -4 -10 -14 -10 -22 A10 10 0 1 1 10 -22 C10 -14 2 -4 0 0 Z";
 
 type TopoWorld = typeof worldTopo & {
   objects: { countries: { type: string } };
@@ -151,20 +155,30 @@ export function GlobalPresence() {
             preserveAspectRatio="xMidYMid meet"
           >
             <defs>
-              <filter id="sgg-pin-shadow" x="-50%" y="-50%" width="200%" height="200%">
-                <feDropShadow dx="0" dy="1.5" stdDeviation="1.4" floodColor="#000" floodOpacity="0.35" />
+              <filter id="sgg-pin-shadow" x="-60%" y="-40%" width="220%" height="220%">
+                <feDropShadow
+                  dx="0"
+                  dy="2"
+                  stdDeviation="1.6"
+                  floodColor="#000000"
+                  floodOpacity="0.4"
+                />
               </filter>
             </defs>
+
             <g className="sgg-globe-countries">
               {countries.map((d: string, i: number) => (
                 <path key={i} d={d} />
               ))}
             </g>
+
             <g className="sgg-globe-markers">
               {points.map((p) => {
                 const isActive = active === p.name;
+                // Size hierarchy: HQ > regional > office
                 const scale =
-                  p.kind === "hq" ? 1.35 : p.kind === "regional" ? 1.15 : 0.95;
+                  p.kind === "hq" ? 1.25 : p.kind === "regional" ? 1.1 : 0.92;
+
                 return (
                   <g
                     key={p.name}
@@ -178,14 +192,22 @@ export function GlobalPresence() {
                     onFocus={() => setActive(p.name)}
                     onBlur={() => setActive(null)}
                   >
-                    {/* Red Google-style pin — tip sits on the coordinate */}
+                    {/* Red pin body — tip at (0,0) */}
                     <path
-                      className="sgg-marker-pin"
-                      d={PIN_PATH}
+                      d={PIN_BODY}
+                      fill="#EA4335"
+                      stroke="#B31412"
+                      strokeWidth={0.6}
                       filter="url(#sgg-pin-shadow)"
                     />
-                    {/* White center disc */}
-                    <circle className="sgg-marker-pin-core" cx={0} cy={-16.2} r={3.1} />
+                    {/* White center disc (classic Google pin) */}
+                    <circle
+                      cx={0}
+                      cy={-22}
+                      r={4.2}
+                      fill="#FFFFFF"
+                      stroke="none"
+                    />
                   </g>
                 );
               })}
@@ -217,9 +239,18 @@ export function GlobalPresence() {
         </div>
 
         <ul className="sgg-globe-legend" aria-label="Marker legend">
-          <li><span className="sgg-legend-dot sgg-legend-hq" aria-hidden="true" />Headquarters</li>
-          <li><span className="sgg-legend-dot sgg-legend-regional" aria-hidden="true" />Regional Office</li>
-          <li><span className="sgg-legend-dot sgg-legend-office" aria-hidden="true" />Office</li>
+          <li>
+            <span className="sgg-legend-dot sgg-legend-hq" aria-hidden="true" />
+            Headquarters
+          </li>
+          <li>
+            <span className="sgg-legend-dot sgg-legend-regional" aria-hidden="true" />
+            Regional Office
+          </li>
+          <li>
+            <span className="sgg-legend-dot sgg-legend-office" aria-hidden="true" />
+            Office
+          </li>
         </ul>
 
         <div className="sgg-globe-kpis" aria-label="Global presence statistics">
