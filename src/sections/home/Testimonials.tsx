@@ -215,34 +215,6 @@ export function Testimonials() {
               </div>
             </motion.div>
           </motion.div>
-
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.3 }}
-            className="mt-10 border-t border-sgg-border-hairline pt-8"
-          >
-            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-5 sm:justify-between sm:gap-x-6">
-              {[
-                "Gulf Infrastructure",
-                "Meridian Mfg",
-                "Vantera Energy",
-                "Northbridge",
-                "Altura",
-                "Sable Logistics",
-                "Helion Systems",
-                "Orient Marine",
-              ].map((name) => (
-                <span
-                  key={name}
-                  className="text-[13px] font-semibold tracking-wide text-sgg-ink-tertiary/80 transition-colors duration-200 hover:text-sgg-ink-secondary"
-                >
-                  {name}
-                </span>
-              ))}
-            </div>
-          </motion.div>
         </div>
       </div>
     </section>
