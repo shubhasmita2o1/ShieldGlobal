@@ -79,11 +79,6 @@ const REGION_ORDER: Region[] = [
 const MAP_WIDTH = 1400;
 const MAP_HEIGHT = 650;
 
-/**
- * Classic Google Maps location pin as pure SVG.
- * Tip sits at (0, 0) so it lands exactly on the projected coordinate.
- * Outer teardrop + inner hole (evenodd fill).
- */
 const PIN_PATH =
   "M0 0 C-2.5 -6 -12 -16 -12 -26 A12 12 0 1 1 12 -26 C12 -16 2.5 -6 0 0 Z M0 -26 A5.5 5.5 0 1 0 0 -15 A5.5 5.5 0 1 0 0 -26 Z";
 
@@ -132,7 +127,15 @@ export function GlobalPresence() {
   const total = LOCATIONS.length;
 
   return (
-    <Section className="sgg-globe" as="section" aria-labelledby="global-presence-title">
+    <Section
+      className="sgg-globe"
+      as="section"
+      aria-labelledby="global-presence-title"
+      style={{
+        background:
+          "radial-gradient(1000px 460px at 50% -15%, rgba(10,143,184,0.16), transparent 60%), #0a1220",
+      }}
+    >
       <Container>
         <header className="sgg-globe-head">
           <span className="sgg-globe-eyebrow">Global Presence</span>
@@ -156,13 +159,13 @@ export function GlobalPresence() {
           >
             <defs>
               <filter id="sgg-pin-shadow" x="-50%" y="-20%" width="200%" height="160%">
-             <feDropShadow
-                dx="0"
-                dy="1"
-                stdDeviation="0.8"
-                floodColor="#000000"
-                floodOpacity="0.35"
-              />
+                <feDropShadow
+                  dx="0"
+                  dy="1"
+                  stdDeviation="0.8"
+                  floodColor="#000000"
+                  floodOpacity="0.35"
+                />
               </filter>
             </defs>
 
@@ -175,7 +178,7 @@ export function GlobalPresence() {
               {points.map((p) => {
                 const isActive = active === p.name;
                 const scale =
-                    p.kind === "hq" ? 0.55 : p.kind === "regional" ? 0.48 : 0.42;
+                  p.kind === "hq" ? 0.55 : p.kind === "regional" ? 0.48 : 0.42;
 
                 return (
                   <g
@@ -190,7 +193,6 @@ export function GlobalPresence() {
                     onFocus={() => setActive(p.name)}
                     onBlur={() => setActive(null)}
                   >
-                    {/* Pure SVG Google-style pin — tip at (0,0) */}
                     <path
                       d={PIN_PATH}
                       fill="#EA4335"
@@ -230,21 +232,6 @@ export function GlobalPresence() {
             );
           })}
         </div>
-
-        {/* <ul className="sgg-globe-legend" aria-label="Marker legend">
-          <li>
-            <span className="sgg-legend-dot sgg-legend-hq" aria-hidden="true" />
-            Headquarters
-          </li>
-          <li>
-            <span className="sgg-legend-dot sgg-legend-regional" aria-hidden="true" />
-            Regional Office
-          </li>
-          <li>
-            <span className="sgg-legend-dot sgg-legend-office" aria-hidden="true" />
-            Office
-          </li>
-        </ul> */}
 
         <div className="sgg-globe-kpis" aria-label="Global presence statistics">
           <div className="sgg-kpi">
