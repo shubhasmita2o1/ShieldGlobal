@@ -171,7 +171,6 @@ export function GlobalPresence() {
                 <path key={i} d={d} />
               ))}
             </g>
-
             <g className="sgg-globe-markers">
               {points.map((p) => {
                 const isActive = active === p.name;
@@ -211,6 +210,7 @@ export function GlobalPresence() {
             if (active !== p.name) return null;
             const leftPct = (p.x / MAP_WIDTH) * 100;
             const topPct = (p.y / MAP_HEIGHT) * 100;
+
             return (
               <div
                 key={`tt-${p.name}`}
@@ -270,11 +270,14 @@ export function GlobalPresence() {
                   <h3>{region}</h3>
                   <span>{items.length} locations</span>
                 </header>
+
                 <ul>
                   {items.map((loc) => (
                     <li
                       key={loc.name}
-                      className={`sgg-region-item sgg-region-item-${loc.kind}${active === loc.name ? " is-active" : ""}`}
+                      className={`sgg-region-item sgg-region-item-${loc.kind}${
+                        active === loc.name ? " is-active" : ""
+                      }`}
                       onMouseEnter={() => setActive(loc.name)}
                       onMouseLeave={() => setActive(null)}
                     >
