@@ -143,14 +143,18 @@ export function HomeHero() {
           >
             GROUP
           </motion.p>
-          <motion.p
+          <motion.span
             key={`cta-${index}`}
             {...fadeUp}
             transition={{ duration: 0.85, delay: 0.55, ease: EASE }}
-            className="mt-3.5 rounded-full bg-gradient-to-r from-[rgba(100,220,210,0.9)] to-[rgba(220,215,140,0.9)] px-7 py-2.5 text-[clamp(12px,1.1vw,16px)] font-semibold leading-none tracking-[0.02em] text-neutral-900 shadow-lg shadow-black/20 sm:px-9 sm:py-3"
+            whileHover={{
+              y: -1,
+              boxShadow: "0 10px 28px rgba(0,0,0,0.28), 0 0 0 1px rgba(255,255,255,0.18)",
+            }}
+            className="mt-4 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-[rgba(100,220,210,0.95)] to-[rgba(220,215,140,0.95)] px-8 py-2.5 text-[clamp(12px,1.05vw,15px)] font-semibold leading-none tracking-[0.03em] text-neutral-900 shadow-[0_6px_20px_rgba(0,0,0,0.22),0_0_0_1px_rgba(255,255,255,0.12)] sm:mt-5 sm:px-10 sm:py-3"
           >
             Connecting talent, technology & entertainment
-          </motion.p>
+          </motion.span>
         </div>
       ) : (
         <>
@@ -181,27 +185,40 @@ export function HomeHero() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.35, ease: EASE }}
-            className="absolute bottom-5 left-1/2 z-10 w-[calc(100%-40px)] -translate-x-1/2 overflow-hidden rounded-2xl border border-white/12 bg-white/[0.06] shadow-[0_10px_40px_rgba(0,0,0,0.3)] backdrop-blur-xl sm:bottom-8 lg:bottom-12 lg:w-[calc(100%-120px)]"
+            className="absolute bottom-5 left-1/2 z-10 w-[calc(100%-40px)] -translate-x-1/2 overflow-hidden rounded-[14px] border border-white/[0.14] bg-white/[0.055] shadow-[0_8px_32px_rgba(0,0,0,0.28)] backdrop-blur-xl sm:bottom-8 lg:bottom-12 lg:w-[calc(100%-120px)]"
           >
-            <ul className="grid grid-cols-2 lg:flex">
+            <ul className="grid grid-cols-2 divide-x divide-y divide-white/[0.08] lg:flex lg:divide-y-0">
               {TABS.map((tab) => {
                 const active = index === tab.slide;
                 return (
-                  <li key={tab.line1} className="flex-1">
+                  <li key={tab.line1} className="relative flex-1">
                     <motion.button
                       type="button"
                       onClick={() => setIndex(tab.slide)}
                       aria-current={active ? "true" : undefined}
-                      whileHover={{ backgroundColor: "rgba(255,255,255,0.12)" }}
-                      whileTap={{ scale: 0.985 }}
-                      transition={{ duration: 0.25, ease: EASE }}
-                      className={`h-full w-full cursor-pointer border-0 px-4 py-3.5 text-center text-[clamp(12px,1.25vw,18px)] font-semibold leading-[1.35] tracking-[0.01em] text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-white/70 sm:py-5 lg:px-5 lg:py-6 ${
-                        active ? "bg-white/[0.18]" : "bg-transparent"
+                      whileHover={{
+                        backgroundColor: active
+                          ? "rgba(255,255,255,0.16)"
+                          : "rgba(255,255,255,0.08)",
+                      }}
+                      whileTap={{ scale: 0.988 }}
+                      transition={{ duration: 0.22, ease: EASE }}
+                      className={`relative h-full w-full cursor-pointer border-0 px-3 py-2.5 text-center text-[clamp(11px,1.15vw,16px)] font-semibold leading-[1.3] tracking-[0.015em] text-white transition-[background-color,color] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-white/70 sm:px-4 sm:py-3.5 lg:px-5 lg:py-4 ${
+                        active
+                          ? "bg-white/[0.14] text-white"
+                          : "bg-transparent text-white/85"
                       }`}
                     >
                       {tab.line1}
                       <br />
                       {tab.line2}
+                      {/* Active accent indicator */}
+                      <span
+                        aria-hidden="true"
+                        className={`pointer-events-none absolute inset-x-3 bottom-0 h-[2px] rounded-full bg-[#00e5ff] transition-opacity duration-300 sm:inset-x-5 ${
+                          active ? "opacity-100" : "opacity-0"
+                        }`}
+                      />
                     </motion.button>
                   </li>
                 );
