@@ -79,6 +79,10 @@ const REGION_ORDER: Region[] = [
 const MAP_WIDTH = 1400;
 const MAP_HEIGHT = 650;
 
+/** Google Maps–style pin: tip at (0,0), head above. Scale applied via transform. */
+const PIN_PATH =
+  "M0,0 C-1.2,-3.2 -7,-10.5 -7,-16.2 A7,7 0 1 1 7,-16.2 C7,-10.5 1.2,-3.2 0,0 Z";
+
 type TopoWorld = typeof worldTopo & {
   objects: { countries: { type: string } };
 };
@@ -146,14 +150,11 @@ export function GlobalPresence() {
             className="sgg-globe-svg"
             preserveAspectRatio="xMidYMid meet"
           >
-            {/* <defs>
-              <radialGradient id="sgg-map-glow" cx="50%" cy="45%" r="60%">
-                <stop offset="0%" stopColor="rgba(0,188,212,0.14)" />
-                <stop offset="60%" stopColor="rgba(0,188,212,0.03)" />
-                <stop offset="100%" stopColor="rgba(0,188,212,0)" />
-              </radialGradient>
+            <defs>
+              <filter id="sgg-pin-shadow" x="-50%" y="-50%" width="200%" height="200%">
+                <feDropShadow dx="0" dy="1.5" stdDeviation="1.4" floodColor="#000" floodOpacity="0.35" />
+              </filter>
             </defs>
-            <rect width={MAP_WIDTH} height={MAP_HEIGHT} fill="url(#sgg-map-glow)" /> */}
             <g className="sgg-globe-countries">
               {countries.map((d: string, i: number) => (
                 <path key={i} d={d} />
@@ -162,13 +163,13 @@ export function GlobalPresence() {
             <g className="sgg-globe-markers">
               {points.map((p) => {
                 const isActive = active === p.name;
-                const r =
-                  p.kind === "hq" ? 6 : p.kind === "regional" ? 5.2 : 3.6;
+                const scale =
+                  p.kind === "hq" ? 1.35 : p.kind === "regional" ? 1.15 : 0.95;
                 return (
                   <g
                     key={p.name}
                     className={`sgg-marker sgg-marker-${p.kind}${isActive ? " is-active" : ""}`}
-                    transform={`translate(${p.x} ${p.y})`}
+                    transform={`translate(${p.x} ${p.y}) scale(${scale})`}
                     tabIndex={0}
                     role="button"
                     aria-label={`${p.name}${p.country ? ` — ${p.country}` : ""}`}
@@ -177,12 +178,14 @@ export function GlobalPresence() {
                     onFocus={() => setActive(p.name)}
                     onBlur={() => setActive(null)}
                   >
-                    {(p.kind === "hq" || p.kind === "regional") && (
-                      <circle className="sgg-marker-pulse" r={r} />
-                    )}
-                    <circle className="sgg-marker-halo" r={r + 3} />
-                    <circle className="sgg-marker-dot" r={r} />
-                    {p.kind === "hq" && <circle className="sgg-marker-core" r={r - 3} />}
+                    {/* Red Google-style pin — tip sits on the coordinate */}
+                    <path
+                      className="sgg-marker-pin"
+                      d={PIN_PATH}
+                      filter="url(#sgg-pin-shadow)"
+                    />
+                    {/* White center disc */}
+                    <circle className="sgg-marker-pin-core" cx={0} cy={-16.2} r={3.1} />
                   </g>
                 );
               })}
