@@ -1,17 +1,18 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import type { ServiceDetail } from "./serviceData";
 
 export function ServiceHero({ service }: { service: ServiceDetail }) {
-  const hasWebsite = Boolean(service.websiteUrl);
+  const websiteUrl = service.websiteUrl;
 
   return (
     <section className="relative flex min-h-[52vh] items-end overflow-hidden bg-sgg-surface-dark sm:min-h-[62vh] lg:min-h-[70vh]">
       <motion.img
         src={service.heroImage}
         alt={`${service.title} — ${service.company}`}
-        className="absolute inset-0 h-full w-full object-cover"
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover"
         initial={{ scale: 1.08, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
@@ -19,13 +20,13 @@ export function ServiceHero({ service }: { service: ServiceDetail }) {
       />
       <div
         aria-hidden="true"
-        className="absolute inset-0"
+        className="pointer-events-none absolute inset-0"
         style={{
           background:
             "linear-gradient(to bottom, rgba(10,18,32,0.85), rgba(10,18,32,0.70), rgba(10,18,32,0.95))",
         }}
       />
-      <div className="relative mx-auto w-full max-w-7xl px-5 pb-14 pt-24 sm:px-8 sm:pb-20 lg:pb-24">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-5 pb-14 pt-24 sm:px-8 sm:pb-20 lg:pb-24">
         <motion.nav
           aria-label="Breadcrumb"
           initial={{ opacity: 0, y: 12 }}
@@ -73,25 +74,24 @@ export function ServiceHero({ service }: { service: ServiceDetail }) {
           {service.company}
         </motion.p>
 
-        {hasWebsite && (
+        {websiteUrl ? (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.55 }}
             className="mt-8"
           >
-            <Button asChild size="lg">
-              <a
-                href={service.websiteUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Click here to Visit main website
-                <ArrowUpRight size={16} aria-hidden="true" />
-              </a>
-            </Button>
+            <a
+              href={websiteUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn(buttonVariants({ size: "lg" }), "relative z-10")}
+            >
+              Click here to Visit main website
+              <ArrowUpRight size={16} aria-hidden="true" />
+            </a>
           </motion.div>
-        )}
+        ) : null}
       </div>
     </section>
   );
