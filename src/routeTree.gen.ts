@@ -9,7 +9,6 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutUsRouteImport } from './routes/about-us'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as GroupOfCompaniesRouteImport } from './routes/group-of-companies'
@@ -19,11 +18,6 @@ import { Route as ServicesAiPoweredAutomationRouteImport } from './routes/servic
 import { Route as ServicesMediaEntertainmentRouteImport } from './routes/services.media-entertainment'
 import { Route as ServicesStaffingWorkforceSolutionsRouteImport } from './routes/services.staffing-workforce-solutions'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AboutUsRoute = AboutUsRouteImport.update({
   id: '/about-us',
   path: '/about-us',
@@ -69,7 +63,6 @@ const ServicesStaffingWorkforceSolutionsRoute =
   } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
   '/about-us': typeof AboutUsRoute
   '/contact': typeof ContactRoute
   '/group-of-companies': typeof GroupOfCompaniesRoute
@@ -80,7 +73,6 @@ export interface FileRoutesByFullPath {
   '/services/': typeof ServicesIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
   '/about-us': typeof AboutUsRoute
   '/contact': typeof ContactRoute
   '/group-of-companies': typeof GroupOfCompaniesRoute
@@ -91,7 +83,6 @@ export interface FileRoutesByTo {
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
   '/about-us': typeof AboutUsRoute
   '/contact': typeof ContactRoute
   '/group-of-companies': typeof GroupOfCompaniesRoute
@@ -104,7 +95,6 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
     | '/about-us'
     | '/contact'
     | '/group-of-companies'
@@ -115,7 +105,6 @@ export interface FileRouteTypes {
     | '/services/'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
     | '/about-us'
     | '/contact'
     | '/group-of-companies'
@@ -125,7 +114,6 @@ export interface FileRouteTypes {
     | '/services'
   id:
     | '__root__'
-    | '/'
     | '/about-us'
     | '/contact'
     | '/group-of-companies'
@@ -137,7 +125,6 @@ export interface FileRouteTypes {
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
   AboutUsRoute: typeof AboutUsRoute
   ContactRoute: typeof ContactRoute
   GroupOfCompaniesRoute: typeof GroupOfCompaniesRoute
@@ -146,13 +133,6 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/about-us': {
       id: '/about-us'
       path: '/about-us'
@@ -232,7 +212,6 @@ const ServicesRouteWithChildren = ServicesRoute._addFileChildren(
 )
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
   AboutUsRoute: AboutUsRoute,
   ContactRoute: ContactRoute,
   GroupOfCompaniesRoute: GroupOfCompaniesRoute,
