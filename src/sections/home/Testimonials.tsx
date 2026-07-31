@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { fadeUp, stagger } from "@/sections/about/shared";
+import { fadeUp, stagger, SectionEyebrow } from "@/sections/about/shared";
 
 type Testimonial = {
   quote: string;
@@ -82,142 +82,149 @@ export function Testimonials() {
       aria-labelledby="testimonials-title"
       className="relative overflow-hidden bg-sgg-surface-canvas py-20 sm:py-24 lg:py-28"
     >
-      <div className="relative mx-auto w-full max-w-[1400px] px-6 sm:px-8 lg:px-12">
-        <div className="rounded-[32px] bg-[#f0f2f5] p-8 sm:p-10 lg:p-14">
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.15 }}
-            className="grid gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.25fr)] lg:items-center lg:gap-16"
-          >
-            {/* Left: label + heading + arrows */}
-            <motion.div variants={fadeUp} className="flex flex-col">
-              <span className="text-[12px] font-semibold uppercase tracking-[0.22em] text-sgg-ink-tertiary">
-                Clients
-              </span>
-              <h2
-                id="testimonials-title"
-                className="mt-4 max-w-[360px] font-[Fraunces,serif] text-[2.25rem] font-semibold leading-[1.12] tracking-tight text-sgg-ink-primary sm:text-[2.75rem] lg:text-[3.25rem]"
-              >
-                What people say about us?
-              </h2>
+      {/* Same soft cyan radial used in Partners */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(900px_400px_at_50%_-20%,rgba(47,211,232,0.08),transparent_60%)]"
+      />
 
-              <div className="mt-10 flex items-center gap-3">
-                <button
-                  type="button"
-                  aria-label="Previous testimonial"
-                  onClick={() => go(index - 1, -1)}
-                  className="grid h-12 w-12 place-items-center rounded-full border border-sgg-border-default bg-white text-sgg-ink-secondary shadow-sm transition-all duration-200 hover:border-sgg-ink-accent hover:text-sgg-ink-accent"
-                >
-                  <ArrowLeft size={18} strokeWidth={2} />
-                </button>
-                <button
-                  type="button"
-                  aria-label="Next testimonial"
-                  onClick={() => go(index + 1, 1)}
-                  className="grid h-12 w-12 place-items-center rounded-full border border-sgg-border-default bg-white text-sgg-ink-secondary shadow-sm transition-all duration-200 hover:border-sgg-ink-accent hover:text-sgg-ink-accent"
-                >
-                  <ArrowRight size={18} strokeWidth={2} />
-                </button>
-              </div>
-            </motion.div>
-
-            {/* Right: sliding cards */}
-            <motion.div
-              variants={fadeUp}
-              onMouseEnter={() => setPaused(true)}
-              onMouseLeave={() => setPaused(false)}
-              onFocusCapture={() => setPaused(true)}
-              onBlurCapture={() => setPaused(false)}
-              className="relative min-w-0"
-              aria-live="polite"
+      <div className="relative mx-auto w-full max-w-[1440px] px-6 sm:px-8 lg:px-12">
+        <motion.div
+          variants={stagger}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.15 }}
+          className="grid gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.2fr)] lg:items-center lg:gap-16"
+        >
+          {/* Left: eyebrow + heading + arrows */}
+          <motion.div variants={fadeUp} className="flex flex-col">
+            <SectionEyebrow>Client Voices</SectionEyebrow>
+            <h2
+              id="testimonials-title"
+              className="mt-4 max-w-[420px] font-[Fraunces,serif] text-3xl font-semibold leading-[1.08] tracking-tight text-sgg-ink-primary sm:text-4xl lg:text-[2.75rem]"
             >
-              <div className="relative flex items-stretch gap-5 overflow-hidden">
-                {/* Active card */}
-                <div className="relative z-10 w-full max-w-[520px] shrink-0">
-                  <AnimatePresence mode="wait" custom={direction}>
-                    <motion.article
-                      key={active.name}
-                      custom={direction}
-                      initial={{ opacity: 0, x: direction * 48 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: direction * -48 }}
-                      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                      className="min-h-[280px] rounded-3xl border border-white/80 bg-white p-8 shadow-[0_12px_40px_rgba(10,18,32,0.1)] sm:min-h-[300px] sm:p-9 lg:p-10"
-                    >
-                      <div className="flex items-center gap-4">
-                        <span
-                          aria-hidden
-                          className={`grid h-14 w-14 shrink-0 place-items-center rounded-full text-base font-semibold ${\n                            AVATAR_STYLES[index % AVATAR_STYLES.length]
-                          }`}
-                        >
-                          {initials(active.name)}
-                        </span>
-                        <div className="min-w-0">
-                          <p className="truncate text-[17px] font-semibold text-sgg-ink-primary">
-                            {active.name}
-                          </p>
-                          <p className="truncate text-[14px] text-sgg-ink-tertiary">
-                            {active.role} at {active.company}
-                          </p>
-                        </div>
-                      </div>
-                      <blockquote className="mt-7 text-[16px] leading-[1.75] text-sgg-ink-secondary sm:text-[17px]">
-                        {active.quote}
-                      </blockquote>
-                    </motion.article>
-                  </AnimatePresence>
-                </div>
+              What people say{" "}
+              <span className="text-sgg-ink-tertiary">about us</span>
+            </h2>
+            <p className="mt-5 max-w-md text-[15px] leading-[1.85] text-sgg-ink-secondary">
+              Partners across infrastructure, manufacturing, energy and consumer
+              brands on what working with Shield Global Group looks like.
+            </p>
 
-                {/* Peek next card (desktop) */}
-                <div
-                  aria-hidden
-                  className="hidden w-[340px] shrink-0 opacity-55 lg:block"
-                >
-                  <div className="min-h-[280px] rounded-3xl border border-white/60 bg-white/90 p-8 shadow-[0_6px_20px_rgba(10,18,32,0.06)] sm:min-h-[300px]">
+            <div className="mt-10 flex items-center gap-3">
+              <button
+                type="button"
+                aria-label="Previous testimonial"
+                onClick={() => go(index - 1, -1)}
+                className="grid h-12 w-12 place-items-center rounded-full border border-sgg-border-default bg-sgg-surface-raised text-sgg-ink-secondary shadow-[var(--sgg-e1)] transition-all duration-300 hover:border-sgg-border-accent hover:text-sgg-ink-accent hover:shadow-[var(--sgg-e3)]"
+              >
+                <ArrowLeft size={18} strokeWidth={2} />
+              </button>
+              <button
+                type="button"
+                aria-label="Next testimonial"
+                onClick={() => go(index + 1, 1)}
+                className="grid h-12 w-12 place-items-center rounded-full border border-sgg-border-default bg-sgg-surface-raised text-sgg-ink-secondary shadow-[var(--sgg-e1)] transition-all duration-300 hover:border-sgg-border-accent hover:text-sgg-ink-accent hover:shadow-[var(--sgg-e3)]"
+              >
+                <ArrowRight size={18} strokeWidth={2} />
+              </button>
+            </div>
+          </motion.div>
+
+          {/* Right: sliding cards — same card language as Partners */}
+          <motion.div
+            variants={fadeUp}
+            onMouseEnter={() => setPaused(true)}
+            onMouseLeave={() => setPaused(false)}
+            onFocusCapture={() => setPaused(true)}
+            onBlurCapture={() => setPaused(false)}
+            className="relative min-w-0"
+            aria-live="polite"
+          >
+            <div className="relative flex items-stretch gap-5 overflow-hidden">
+              {/* Active card */}
+              <div className="relative z-10 w-full max-w-[520px] shrink-0">
+                <AnimatePresence mode="wait" custom={direction}>
+                  <motion.article
+                    key={active.name}
+                    custom={direction}
+                    initial={{ opacity: 0, x: direction * 48 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: direction * -48 }}
+                    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                    className="min-h-[280px] rounded-2xl border border-sgg-border-default bg-sgg-surface-raised p-8 shadow-[var(--sgg-e1)] transition-shadow duration-300 sm:min-h-[300px] sm:p-9 lg:p-10"
+                  >
                     <div className="flex items-center gap-4">
                       <span
-                        className={`grid h-14 w-14 shrink-0 place-items-center rounded-full text-base font-semibold ${\n                          AVATAR_STYLES[(index + 1) % AVATAR_STYLES.length]
+                        aria-hidden
+                        className={`grid h-14 w-14 shrink-0 place-items-center rounded-full text-base font-semibold ${\n                          AVATAR_STYLES[index % AVATAR_STYLES.length]
                         }`}
                       >
-                        {initials(peek.name)}
+                        {initials(active.name)}
                       </span>
                       <div className="min-w-0">
-                        <p className="truncate text-[17px] font-semibold text-sgg-ink-primary">
-                          {peek.name}
+                        <p className="truncate font-[Fraunces,serif] text-[17px] font-semibold text-sgg-ink-primary sm:text-[18px]">
+                          {active.name}
                         </p>
-                        <p className="truncate text-[14px] text-sgg-ink-tertiary">
-                          {peek.role}
+                        <p className="truncate text-[13px] text-sgg-ink-tertiary">
+                          {active.role} · {active.company}
                         </p>
                       </div>
                     </div>
-                    <p className="mt-7 line-clamp-5 text-[16px] leading-[1.75] text-sgg-ink-secondary sm:text-[17px]">
-                      {peek.quote}
-                    </p>
-                  </div>
-                </div>
+                    <blockquote className="mt-7 text-[15px] leading-[1.85] text-sgg-ink-secondary sm:text-[16px]">
+                      {active.quote}
+                    </blockquote>
+                  </motion.article>
+                </AnimatePresence>
               </div>
 
-              {/* Dots */}
-              <div className="mt-7 flex items-center gap-2.5">
-                {TESTIMONIALS.map((t, i) => (
-                  <button
-                    key={t.name}
-                    type="button"
-                    aria-label={`Show testimonial from ${t.name}`}
-                    aria-current={i === index}
-                    onClick={() => go(i, i > index ? 1 : -1)}
-                    className={`h-2 rounded-full transition-all duration-300 ${\n                      i === index
-                        ? "w-9 bg-sgg-ink-accent"
-                        : "w-3 bg-sgg-border-strong hover:bg-sgg-ink-tertiary"
-                    }`}
-                  />
-                ))}
+              {/* Peek next card (desktop) */}
+              <div
+                aria-hidden
+                className="hidden w-[320px] shrink-0 opacity-50 lg:block"
+              >
+                <div className="min-h-[280px] rounded-2xl border border-sgg-border-default bg-sgg-surface-raised p-8 shadow-[var(--sgg-e1)] sm:min-h-[300px]">
+                  <div className="flex items-center gap-4">
+                    <span
+                      className={`grid h-14 w-14 shrink-0 place-items-center rounded-full text-base font-semibold ${\n                        AVATAR_STYLES[(index + 1) % AVATAR_STYLES.length]
+                      }`}
+                    >
+                      {initials(peek.name)}
+                    </span>
+                    <div className="min-w-0">
+                      <p className="truncate font-[Fraunces,serif] text-[17px] font-semibold text-sgg-ink-primary sm:text-[18px]">
+                        {peek.name}
+                      </p>
+                      <p className="truncate text-[13px] text-sgg-ink-tertiary">
+                        {peek.role}
+                      </p>
+                    </div>
+                  </div>
+                  <p className="mt-7 line-clamp-5 text-[15px] leading-[1.85] text-sgg-ink-secondary sm:text-[16px]">
+                    {peek.quote}
+                  </p>
+                </div>
               </div>
-            </motion.div>
+            </div>
+
+            {/* Dots */}
+            <div className="mt-7 flex items-center gap-2.5">
+              {TESTIMONIALS.map((t, i) => (
+                <button
+                  key={t.name}
+                  type="button"
+                  aria-label={`Show testimonial from ${t.name}`}
+                  aria-current={i === index}
+                  onClick={() => go(i, i > index ? 1 : -1)}
+                  className={`h-2 rounded-full transition-all duration-300 ${\n                    i === index
+                      ? "w-9 bg-sgg-ink-accent"
+                      : "w-3 bg-sgg-border-strong hover:bg-sgg-ink-tertiary"
+                  }`}
+                />
+              ))}
+            </div>
           </motion.div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
