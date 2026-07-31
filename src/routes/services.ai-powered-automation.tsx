@@ -4,7 +4,7 @@ import { ServicesPage } from "@/pages/ServicesPage";
 import { getService } from "@/sections/services/serviceData";
 import { serviceHead } from "@/lib/service-head";
 
-const service = getService("/services/media-entertainment");
+const service = getService("/services/ai-powered-automation");
 
 export const Route = createFileRoute("/services/ai-powered-automation")({
   component: () => (
