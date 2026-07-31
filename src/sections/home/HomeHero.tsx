@@ -134,13 +134,13 @@ export function HomeHero() {
         </div>
       ) : (
         <>
-          {/* ── slides 2–5: glass label card ── */}
+          {/* ── Slides 2–5: premium glass label card ── */}
           <motion.div
             key={`label-${index}`}
             initial={{ opacity: 0, x: slide.align === "left" ? -120 : 120 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.25, ease: EASE }}
-            className={`absolute top-[36%] z-10 w-[calc(100%-40px)] max-w-[650px] -translate-y-1/2 rounded-xl border border-white/15 bg-white/10 px-6 py-5 shadow-[0_8px_32px_rgba(0,0,0,0.25)] backdrop-blur-xl sm:px-10 sm:py-6 lg:px-14 ${
+            className={`absolute top-[36%] z-10 w-[calc(100%-48px)] max-w-[552px] -translate-y-1/2 rounded-[17px] border border-white/[0.12] bg-white/[0.07] px-5 py-4 shadow-[0_4px_6px_rgba(0,0,0,0.12),0_16px_40px_rgba(0,0,0,0.28)] backdrop-blur-[20px] sm:px-7 sm:py-5 lg:px-9 ${
               slide.align === "left"
                 ? "left-5 text-left sm:left-10 lg:left-[60px]"
                 : "right-5 text-left sm:right-10 sm:text-right lg:right-[60px]"
