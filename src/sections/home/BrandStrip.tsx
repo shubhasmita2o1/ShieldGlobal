@@ -117,4 +117,5 @@ export function BrandStrip() {
       </div>
     </section>
   );
+
 }

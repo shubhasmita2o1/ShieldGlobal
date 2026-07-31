@@ -156,13 +156,13 @@ export function GlobalPresence() {
           >
             <defs>
               <filter id="sgg-pin-shadow" x="-50%" y="-20%" width="200%" height="160%">
-                <feDropShadow
-                  dx="0"
-                  dy="1.5"
-                  stdDeviation="1.2"
-                  floodColor="#000000"
-                  floodOpacity="0.4"
-                />
+             <feDropShadow
+                dx="0"
+                dy="1"
+                stdDeviation="0.8"
+                floodColor="#000000"
+                floodOpacity="0.35"
+              />
               </filter>
             </defs>
 
@@ -175,7 +175,7 @@ export function GlobalPresence() {
               {points.map((p) => {
                 const isActive = active === p.name;
                 const scale =
-                  p.kind === "hq" ? 1.2 : p.kind === "regional" ? 1.08 : 0.95;
+                    p.kind === "hq" ? 0.55 : p.kind === "regional" ? 0.48 : 0.42;
 
                 return (
                   <g
@@ -196,7 +196,7 @@ export function GlobalPresence() {
                       fill="#EA4335"
                       fillRule="evenodd"
                       stroke="#B31412"
-                      strokeWidth={0.6}
+                      strokeWidth={0.9}
                       filter="url(#sgg-pin-shadow)"
                       className="sgg-marker-pin"
                     />
@@ -231,7 +231,7 @@ export function GlobalPresence() {
           })}
         </div>
 
-        <ul className="sgg-globe-legend" aria-label="Marker legend">
+        {/* <ul className="sgg-globe-legend" aria-label="Marker legend">
           <li>
             <span className="sgg-legend-dot sgg-legend-hq" aria-hidden="true" />
             Headquarters
@@ -244,7 +244,7 @@ export function GlobalPresence() {
             <span className="sgg-legend-dot sgg-legend-office" aria-hidden="true" />
             Office
           </li>
-        </ul>
+        </ul> */}
 
         <div className="sgg-globe-kpis" aria-label="Global presence statistics">
           <div className="sgg-kpi">

@@ -853,7 +853,7 @@ body.nav-open {
   width: 10px;
   height: 10px;
   border-radius: 999px;
-  background: #00bcd4;
+  background: #d40000;
   box-shadow: 0 0 8px rgba(0, 188, 212, 0.6);
 }
 
@@ -862,14 +862,14 @@ body.nav-open {
 }
 
 .sgg-legend-hq {
-  background: #ffffff;
+  background: #690202;
   box-shadow:
-    0 0 0 2px rgba(0, 188, 212, 0.5),
-    0 0 10px rgba(0, 188, 212, 0.8);
+    0 0 0 2px rgba(212, 0, 0, 0.5),
+    0 0 10px rgba(212, 0, 0, 0.8);
 }
 
 .sgg-legend-office {
-  background: #00bcd4;
+  background: #d40000;
 }
 
 .sgg-globe-kpis {
@@ -1074,6 +1074,7 @@ body.nav-open {
     grid-template-columns: 1fr;
   }
 }
+
 
 /* ═══════════════════════════════════════════
    Footer (SGG)
