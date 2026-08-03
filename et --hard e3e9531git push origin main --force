@@ -1,0 +1,15 @@
+[33me541b05[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Restore full styles.css + mobile footer and overflow fixes
+[33mdfda064[m Restore full styles.css + mobile footer and overflow fixes
+[33m8d622e7[m Restore full styles.css with mobile responsive fixes
+[33m6d6a27a[m Restore styles.css with mobile responsive fixes (footer, overflow-x, nav breakpoints)
+[33m449e717[m Restore JourneyTimeline.tsx with mobile layout fixes
+[33mb0a6813[m Restore HomeHero.tsx with mobile fixes
+[33mc83428d[m Fix mobile responsiveness: footer, overflow, hero, timeline
+[33m187e323[m Restore Header.tsx with mobile breakpoint fixes
+[33maa75254[m Fix mobile responsiveness across site
+[33me3e9531[m Fix TS types: allow @types/react by not restricting types to only vite/client
+[33mae05dc1[m Hide page scrollbar while keeping scroll functionality
+[33m3eabb8a[m Improve language selector: custom dropdown matching navbar design system
+[33m817062b[m Restore CTA Button on all service pages; link to external website
+[33madde1a2[m Fix AI Powered Automation route loading wrong service data (was media-entertainment)
+[33mac500e1[m Fix service website CTA: use plain anchor with button styles for reliable external navigation
