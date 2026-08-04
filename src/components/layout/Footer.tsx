@@ -67,13 +67,19 @@ export function Footer() {
       <div className="sgg-footer-top">
         <div className="sgg-footer-container">
           <div className="sgg-footer-grid">
+            {/* Brand */}
             <div className="sgg-footer-brand">
-              <a href="/" aria-label="Shield Global Group home" className="sgg-footer-logo">
+              <a
+                href="/"
+                aria-label="Shield Global Group home"
+                className="sgg-footer-logo"
+              >
                 <img src="/logo.png" alt="Shield Global Group" />
               </a>
               <p className="sgg-footer-desc">
-                Shield Global Group is a diversified corporate house delivering trusted
-                HR, workforce, and consulting services to enterprises worldwide.
+                Shield Global Group is a diversified corporate house delivering
+                trusted HR, workforce, and consulting services to enterprises
+                worldwide.
               </p>
               <p className="sgg-footer-mission">
                 <span>Our Mission:</span> To empower organizations with reliable
@@ -95,6 +101,7 @@ export function Footer() {
               </div>
             </div>
 
+            {/* Quick Links */}
             <nav aria-label="Quick links" className="sgg-footer-col">
               <h4 className="sgg-footer-heading">Quick Links</h4>
               <ul>
@@ -109,6 +116,7 @@ export function Footer() {
               </ul>
             </nav>
 
+            {/* Services */}
             <nav aria-label="Services" className="sgg-footer-col">
               <h4 className="sgg-footer-heading">Our Services</h4>
               <ul>
@@ -123,7 +131,8 @@ export function Footer() {
               </ul>
             </nav>
 
-                        <div className="sgg-footer-col">
+            {/* Get in Touch + Newsletter */}
+            <div className="sgg-footer-col">
               <h4 className="sgg-footer-heading">Get in Touch</h4>
               <ul className="sgg-footer-contact">
                 <li>
@@ -161,6 +170,36 @@ export function Footer() {
                   </a>
                 </li>
               </ul>
+
+              <h4 className="sgg-footer-heading sgg-footer-heading-sm">
+                Newsletter
+              </h4>
+              <form
+                className="sgg-footer-newsletter"
+                onSubmit={onSubscribe}
+                noValidate
+              >
+                <label htmlFor="sgg-newsletter-email" className="sr-only">
+                  Email address
+                </label>
+                <input
+                  id="sgg-newsletter-email"
+                  type="email"
+                  required
+                  placeholder="Your email address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <button type="submit" aria-label="Subscribe to newsletter">
+                  <Send size={16} aria-hidden="true" />
+                  <span>Subscribe</span>
+                </button>
+              </form>
+              {submitted && (
+                <p className="sgg-footer-newsletter-success" role="status">
+                  Thanks — you’re subscribed.
+                </p>
+              )}
             </div>
           </div>
         </div>
@@ -169,7 +208,8 @@ export function Footer() {
       <div className="sgg-footer-bottom">
         <div className="sgg-footer-container sgg-footer-bottom-inner">
           <p className="sgg-footer-copy">
-            &copy; {new Date().getFullYear()} Shield Global Group. All Rights Reserved.
+            &copy; {new Date().getFullYear()} Shield Global Group. All Rights
+            Reserved.
           </p>
           <ul className="sgg-footer-legal" aria-label="Legal">
             <li>
