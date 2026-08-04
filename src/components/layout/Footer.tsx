@@ -14,6 +14,11 @@ import {
   Send,
   ChevronRight,
 } from "lucide-react";
+import {
+  HQ_ADDRESS_LINES,
+  MAP_LINK,
+  CONTACT_CHANNELS,
+} from "@/sections/contact/contactData";
 
 const quickLinks = [
   { label: "Home", href: "/" },
@@ -118,34 +123,37 @@ export function Footer() {
               </ul>
             </nav>
 
-            <div className="sgg-footer-col">
+                        <div className="sgg-footer-col">
               <h4 className="sgg-footer-heading">Get in Touch</h4>
               <ul className="sgg-footer-contact">
                 <li>
                   <MapPin size={16} aria-hidden="true" />
                   <span>
-                    123 Corporate Avenue, Business District,
-                    <br /> Mumbai, Maharashtra 400001, India
+                    {HQ_ADDRESS_LINES[0]}
+                    <br />
+                    {HQ_ADDRESS_LINES[1]}
                   </span>
                 </li>
                 <li>
                   <Phone size={16} aria-hidden="true" />
-                  <a href="tel:+911234567890">+91 12345 67890</a>
+                  <a href={CONTACT_CHANNELS[1].href}>
+                    {CONTACT_CHANNELS[1].lines[0]}
+                  </a>
                 </li>
                 <li>
                   <Mail size={16} aria-hidden="true" />
-                  <a href="mailto:info@shieldglobalgroup.com">
-                    info@shieldglobalgroup.com
+                  <a href={CONTACT_CHANNELS[2].href}>
+                    {CONTACT_CHANNELS[2].lines[0]}
                   </a>
                 </li>
                 <li>
                   <Clock size={16} aria-hidden="true" />
-                  <span>Mon – Sat: 9:00 AM – 6:00 PM</span>
+                  <span>Mon – Sat: 9:00 AM – 6:00 PM IST</span>
                 </li>
                 <li>
                   <ExternalLink size={16} aria-hidden="true" />
                   <a
-                    href="https://maps.google.com"
+                    href={MAP_LINK}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -153,36 +161,6 @@ export function Footer() {
                   </a>
                 </li>
               </ul>
-
-              <h4 className="sgg-footer-heading sgg-footer-heading-sm">
-                Newsletter
-              </h4>
-              <form
-                className="sgg-footer-newsletter"
-                onSubmit={onSubscribe}
-                noValidate
-              >
-                <label htmlFor="sgg-newsletter-email" className="sr-only">
-                  Email address
-                </label>
-                <input
-                  id="sgg-newsletter-email"
-                  type="email"
-                  required
-                  placeholder="Your email address"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <button type="submit" aria-label="Subscribe to newsletter">
-                  <Send size={16} aria-hidden="true" />
-                  <span>Subscribe</span>
-                </button>
-              </form>
-              {submitted && (
-                <p className="sgg-footer-newsletter-ok" role="status">
-                  Thanks for subscribing!
-                </p>
-              )}
             </div>
           </div>
         </div>
