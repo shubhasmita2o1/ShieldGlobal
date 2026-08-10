@@ -78,7 +78,8 @@ export function Testimonials() {
   const peek = TESTIMONIALS[(index + 1) % TESTIMONIALS.length];
 
   return (
-    <section
+   <section
+      id="testimonials"
       aria-labelledby="testimonials-title"
       className="relative overflow-hidden bg-sgg-surface-canvas py-20 sm:py-24 lg:py-28"
     >

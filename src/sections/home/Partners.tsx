@@ -127,7 +127,7 @@ function MarqueeRow({
 }) {
   const loop = [...items, ...items];
   return (
-    <div className="sgg-marquee-track sgg-marquee-mask overflow-hidden py-2">
+    <div className="sgg-marquee-track overflow-hidden py-2">
       <div
         className={`sgg-marquee ${reverse ? "sgg-marquee-reverse" : ""}`}
         style={{ ["--sgg-marquee-duration" as string]: duration }}
@@ -182,6 +182,17 @@ export function Partners() {
         viewport={{ once: true, amount: 0.15 }}
         className="relative mt-12 space-y-3 lg:mt-16"
       >
+        {/* Left dark fade */}
+        {/* <div
+          aria-hidden
+          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 sm:w-24 lg:w-32 bg-gradient-to-r from-[#0a0f1a] via-[#0a0f1a]/60 to-transparent"
+        /> */}
+        {/* Right dark fade */}
+        {/* <div
+          aria-hidden
+          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 sm:w-24 lg:w-32 bg-gradient-to-l from-[#0a0f1a] via-[#0a0f1a]/60 to-transparent"
+        /> */}
+
         <MarqueeRow items={ROW_ONE} duration="52s" />
         <MarqueeRow items={ROW_TWO} duration="60s" reverse />
       </motion.div>

@@ -15,7 +15,7 @@ type Region =
   | "Europe"
   | "North America";
 
-type Kind = "hq" | "regional" | "office";
+type Kind = "office" | "local-recruitment" | "recruitment-associate";
 
 type Location = {
   name: string;
@@ -27,45 +27,46 @@ type Location = {
 };
 
 const LOCATIONS: Location[] = [
-  { name: "Mumbai", country: "India", lat: 19.076, lng: 72.877, region: "South Asia", kind: "hq" },
+  // Offices
+  { name: "Mumbai", country: "India", lat: 19.076, lng: 72.877, region: "South Asia", kind: "office" },
   { name: "Kolkata", country: "India", lat: 22.572, lng: 88.363, region: "South Asia", kind: "office" },
   { name: "Bangalore", country: "India", lat: 12.972, lng: 77.594, region: "South Asia", kind: "office" },
-  { name: "Bangladesh", country: "Dhaka", lat: 23.810, lng: 90.412, region: "South Asia", kind: "office" },
   { name: "Nepal", country: "Kathmandu", lat: 27.717, lng: 85.324, region: "South Asia", kind: "office" },
-  { name: "Sri Lanka", country: "Colombo", lat: 6.927, lng: 79.861, region: "South Asia", kind: "office" },
-
-  { name: "Singapore", lat: 1.352, lng: 103.820, region: "Southeast Asia", kind: "regional" },
-  { name: "Malaysia", country: "Kuala Lumpur", lat: 3.139, lng: 101.687, region: "Southeast Asia", kind: "office" },
-  { name: "Indonesia", country: "Jakarta", lat: -6.208, lng: 106.846, region: "Southeast Asia", kind: "office" },
-  { name: "Vietnam", country: "Hanoi", lat: 21.028, lng: 105.804, region: "Southeast Asia", kind: "office" },
-  { name: "Myanmar", country: "Yangon", lat: 16.866, lng: 96.195, region: "Southeast Asia", kind: "office" },
-  { name: "Thailand", country: "Bangkok", lat: 13.756, lng: 100.501, region: "Southeast Asia", kind: "office" },
-
-  { name: "UAE", country: "Dubai", lat: 25.205, lng: 55.271, region: "Middle East", kind: "regional" },
+  { name: "UAE", country: "Dubai", lat: 25.205, lng: 55.271, region: "Middle East", kind: "office" },
   { name: "Qatar", country: "Doha", lat: 25.286, lng: 51.531, region: "Middle East", kind: "office" },
-  { name: "Kuwait", country: "Kuwait City", lat: 29.376, lng: 47.978, region: "Middle East", kind: "office" },
-  { name: "Saudi Arabia", country: "Riyadh", lat: 24.713, lng: 46.675, region: "Middle East", kind: "office" },
-  { name: "Oman", country: "Muscat", lat: 23.588, lng: 58.408, region: "Middle East", kind: "office" },
-  { name: "Bahrain", country: "Manama", lat: 26.228, lng: 50.586, region: "Middle East", kind: "office" },
 
-  { name: "Egypt", country: "Cairo", lat: 30.044, lng: 31.235, region: "Africa", kind: "office" },
-  { name: "Tunisia", country: "Tunis", lat: 36.806, lng: 10.181, region: "Africa", kind: "office" },
-  { name: "Morocco", country: "Rabat", lat: 34.020, lng: -6.841, region: "Africa", kind: "office" },
-  { name: "Sudan", country: "Khartoum", lat: 15.500, lng: 32.559, region: "Africa", kind: "office" },
-  { name: "Kenya", country: "Nairobi", lat: -1.292, lng: 36.822, region: "Africa", kind: "office" },
-  { name: "Uganda", country: "Kampala", lat: 0.347, lng: 32.583, region: "Africa", kind: "office" },
-  { name: "Ghana", country: "Accra", lat: 5.603, lng: -0.187, region: "Africa", kind: "office" },
-  { name: "Ethiopia", country: "Addis Ababa", lat: 9.030, lng: 38.740, region: "Africa", kind: "office" },
-  { name: "Nigeria", country: "Abuja", lat: 9.076, lng: 7.398, region: "Africa", kind: "office" },
-  { name: "South Africa", country: "Johannesburg", lat: -26.204, lng: 28.047, region: "Africa", kind: "office" },
+  // Local Recruitment
+  { name: "Kuwait", country: "Kuwait City", lat: 29.376, lng: 47.978, region: "Middle East", kind: "local-recruitment" },
+  { name: "Oman", country: "Muscat", lat: 23.588, lng: 58.408, region: "Middle East", kind: "local-recruitment" },
+  { name: "Bahrain", country: "Manama", lat: 26.228, lng: 50.586, region: "Middle East", kind: "local-recruitment" },
+  { name: "Saudi Arabia", country: "Riyadh", lat: 24.713, lng: 46.675, region: "Middle East", kind: "local-recruitment" },
 
-  { name: "Greece", country: "Athens", lat: 37.983, lng: 23.727, region: "Europe", kind: "office" },
-  { name: "Turkey", country: "Ankara", lat: 39.933, lng: 32.859, region: "Europe", kind: "office" },
-  { name: "United Kingdom", country: "London", lat: 51.507, lng: -0.127, region: "Europe", kind: "regional" },
-  { name: "Poland", country: "Warsaw", lat: 52.229, lng: 21.012, region: "Europe", kind: "office" },
-  { name: "Russia", country: "Moscow", lat: 55.755, lng: 37.617, region: "Europe", kind: "office" },
-
-  { name: "Canada", country: "Ottawa", lat: 45.421, lng: -75.697, region: "North America", kind: "office" },
+  // Recruitment Associate (all remaining)
+  { name: "Bangladesh", country: "Dhaka", lat: 23.810, lng: 90.412, region: "South Asia", kind: "recruitment-associate" },
+  { name: "Sri Lanka", country: "Colombo", lat: 6.927, lng: 79.861, region: "South Asia", kind: "recruitment-associate" },
+  { name: "Singapore", lat: 1.352, lng: 103.820, region: "Southeast Asia", kind: "recruitment-associate" },
+  { name: "Malaysia", country: "Kuala Lumpur", lat: 3.139, lng: 101.687, region: "Southeast Asia", kind: "recruitment-associate" },
+  { name: "Indonesia", country: "Jakarta", lat: -6.208, lng: 106.846, region: "Southeast Asia", kind: "recruitment-associate" },
+  { name: "Vietnam", country: "Hanoi", lat: 21.028, lng: 105.804, region: "Southeast Asia", kind: "recruitment-associate" },
+  { name: "Myanmar", country: "Yangon", lat: 16.866, lng: 96.195, region: "Southeast Asia", kind: "recruitment-associate" },
+  { name: "Thailand", country: "Bangkok", lat: 13.756, lng: 100.501, region: "Southeast Asia", kind: "recruitment-associate" },
+  { name: "Egypt", country: "Cairo", lat: 30.044, lng: 31.235, region: "Africa", kind: "recruitment-associate" },
+  { name: "Tunisia", country: "Tunis", lat: 36.806, lng: 10.181, region: "Africa", kind: "recruitment-associate" },
+  { name: "Morocco", country: "Rabat", lat: 34.020, lng: -6.841, region: "Africa", kind: "recruitment-associate" },
+  // { name: "Sudan", country: "Khartoum", lat: 15.500, lng: 32.559, region: "Africa", kind: "recruitment-associate" },
+  { name: "Kenya", country: "Nairobi", lat: -1.292, lng: 36.822, region: "Africa", kind: "recruitment-associate" },
+  { name: "Uganda", country: "Kampala", lat: 0.347, lng: 32.583, region: "Africa", kind: "recruitment-associate" },
+  { name: "Ghana", country: "Accra", lat: 5.603, lng: -0.187, region: "Africa", kind: "recruitment-associate" },
+  // { name: "Ethiopia", country: "Addis Ababa", lat: 9.030, lng: 38.740, region: "Africa", kind: "recruitment-associate" },
+  { name: "Nigeria", country: "Abuja", lat: 9.076, lng: 7.398, region: "Africa", kind: "recruitment-associate" },
+  // { name: "South Africa", country: "Johannesburg", lat: -26.204, lng: 28.047, region: "Africa", kind: "recruitment-associate" },
+  { name: "Greece", country: "Athens", lat: 37.983, lng: 23.727, region: "Europe", kind: "recruitment-associate" },
+  { name: "Turkey", country: "Ankara", lat: 39.933, lng: 32.859, region: "Europe", kind: "recruitment-associate" },
+  { name: "United Kingdom", country: "London", lat: 51.507, lng: -0.127, region: "Europe", kind: "recruitment-associate" },
+  // { name: "Poland", country: "Warsaw", lat: 52.229, lng: 21.012, region: "Europe", kind: "recruitment-associate" },
+  { name: "Germany", country: "Berlin", lat: 52.520, lng: 13.405, region: "Europe", kind: "recruitment-associate" },
+  { name: "Russia", country: "Moscow", lat: 55.755, lng: 37.617, region: "Europe", kind: "recruitment-associate" },
+  { name: "Canada", country: "Ottawa", lat: 45.421, lng: -75.697, region: "North America", kind: "recruitment-associate" },
 ];
 
 const REGION_ORDER: Region[] = [
@@ -189,9 +190,8 @@ export function GlobalPresence() {
 
             <g className="sgg-globe-markers">
               {points.map((p) => {
-                const scale =
-                  p.kind === "hq" ? 0.55 : p.kind === "regional" ? 0.48 : 0.42;
-
+              const scale =
+                    p.kind === "office" ? 0.38 : p.kind === "local-recruitment" ? 0.32 : 0.28;
                 return (
                   <g
                     key={p.name}
@@ -235,13 +235,13 @@ export function GlobalPresence() {
               >
                 <strong>{p.name}</strong>
                 {p.country && <span>{p.country}</span>}
-                <em>
-                  {p.kind === "hq"
-                    ? "Headquarters"
-                    : p.kind === "regional"
-                      ? "Regional Office"
-                      : "Office"}
-                </em>
+              <em>
+                {p.kind === "office"
+                  ? "Office"
+                  : p.kind === "local-recruitment"
+                    ? "Local Recruitment"
+                    : "Recruitment Associate"}
+              </em>
               </div>
             );
           })}

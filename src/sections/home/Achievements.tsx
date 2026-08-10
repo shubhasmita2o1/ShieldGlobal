@@ -27,14 +27,14 @@ const STATS: Stat[] = [
   },
   {
     icon: Briefcase,
-    value: 1200,
+    value: 12000,
     suffix: "+",
     label: "Mandates delivered",
     detail: "Workforce, automation and production programmes completed.",
   },
   {
     icon: Globe2,
-    value: 24,
+    value: 31,
     label: "Countries served",
     detail: "Across Asia, Africa, the Middle East and Europe.",
   },
@@ -53,7 +53,7 @@ const STATS: Stat[] = [
   },
   {
     icon: Building2,
-    value: 3,
+    value: 4,
     label: "Business verticals",
     detail: "Human capital, technology and entertainment under one group.",
   },

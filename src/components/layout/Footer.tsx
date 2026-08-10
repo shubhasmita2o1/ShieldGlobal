@@ -24,30 +24,28 @@ const quickLinks = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about-us" },
   { label: "Services", href: "/services" },
-  { label: "Gallery", href: "/gallery" },
-  { label: "Blogs", href: "/blogs" },
-  { label: "Testimonials", href: "/testimonials" },
+  // { label: "Gallery", href: "/gallery" },
+  // { label: "Blogs", href: "/blogs" },
+  { label: "Testimonials", href: "/#testimonials" },
   { label: "Contact", href: "/contact" },
   { label: "Privacy Policy", href: "/privacy" },
   { label: "Terms & Conditions", href: "/terms" },
 ];
 
 const services = [
-  { label: "HR Solutions", href: "#" },
-  { label: "Workforce Management", href: "#" },
-  { label: "Corporate Consulting", href: "#" },
-  { label: "Talent Acquisition", href: "#" },
-  { label: "Payroll Services", href: "#" },
-  { label: "Compliance & Advisory", href: "#" },
+  { label: "Global Manpower Recruitment", href: "/services" },
+  { label: "Staffing & Workforce Solutions", href: "/services/staffing-workforce-solutions" },
+  { label: "AI Powered Automation", href: "/services/ai-powered-automation" },
+  { label: "Media & Entertainment", href: "/services/media-entertainment" },
 ];
 
 const socials = [
   { label: "Facebook", href: "https://facebook.com", Icon: Facebook },
   { label: "Instagram", href: "https://instagram.com", Icon: Instagram },
   { label: "LinkedIn", href: "https://linkedin.com", Icon: Linkedin },
-  { label: "X (Twitter)", href: "https://twitter.com", Icon: Twitter },
+  // { label: "X (Twitter)", href: "https://twitter.com", Icon: Twitter },
   { label: "YouTube", href: "https://youtube.com", Icon: Youtube },
-  { label: "WhatsApp", href: "https://wa.me/", Icon: MessageCircle },
+  // { label: "WhatsApp", href: "https://wa.me/", Icon: MessageCircle },
 ];
 
 export function Footer() {
