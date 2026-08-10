@@ -1,0 +1,31 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "companies": "Group of Companies",
+    "contact": "Contact",
+    "globalPresence": "Global Presence"
+  },
+  "home": {
+    "hero": {
+      "title": "Shield Global Group",
+      "subtitle": "A diversified global business group delivering integrated solutions across Human Resources, Technology, and Media & Entertainment."
+    },
+    "journey": {
+      "eyebrow": "Our Journey",
+      "title": "From 2009 to today",
+      "description": "Seventeen years of deliberate expansion — one training desk in Visakhapatnam grown into a diversified group spanning human capital, technology and entertainment across four continents."
+    }
+  },
+  "globalPresence": {
+    "eyebrow": "Global Presence",
+    "title": "Delivering across {{count}}+ locations worldwide",
+    "description": "From regional headquarters to on-ground operations, Shield Global Group connects talent, technology and enterprise across Asia, the Middle East, Africa, Europe and North America."
+  },
+  "common": {
+    "learnMore": "Learn More",
+    "contactUs": "Contact Us",
+    "readMore": "Read More"
+  }
+}
