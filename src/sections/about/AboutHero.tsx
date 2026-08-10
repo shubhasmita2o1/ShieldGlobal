@@ -6,26 +6,30 @@ export function AboutHero() {
       aria-label="About Shield Global Group"
       className="relative isolate overflow-hidden bg-sgg-surface-dark text-sgg-ink-inverse"
     >
-      <div
+      {/* Video background — Tom Fisk / Pexels */}
+      <video
         aria-hidden
-        className="absolute inset-0 bg-cover bg-center opacity-60"
-        style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=2400&q=80')",
-        }}
-      />
+        className="absolute inset-0 h-full w-full object-cover opacity-50"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+      >
+        <source
+          src="https://videos.pexels.com/video-files/10407687/10407687-hd_2560_1440_30fps.mp4"
+          type="video/mp4"
+        />
+      </video>
+
       <div
         aria-hidden
         className="absolute inset-0"
         style={{
-          background:
-            "linear-gradient(to bottom, rgba(10,18,32,0.85), rgba(10,18,32,0.70), rgba(10,18,32,0.95))",
+         background:
+           "linear-gradient(to bottom, rgba(10,18,32,0.55), rgba(10,18,32,0.40), rgba(10,18,32,0.70))",
         }}
       />
-      {/* <div
-        aria-hidden
-        className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-white to-transparent"
-      /> */}
 
       <div className="relative mx-auto flex min-h-[68vh] w-full max-w-7xl flex-col justify-end px-6 pb-20 pt-32 sm:px-8 lg:min-h-[78vh] lg:pb-28 lg:pt-40">
         <motion.nav
