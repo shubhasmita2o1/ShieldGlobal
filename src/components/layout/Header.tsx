@@ -37,6 +37,7 @@ export function Header() {
   const [langOpen, setLangOpen] = useState(false);
   const [lang, setLang] = useState<LangCode>("en");
   const langRef = useRef<HTMLLIElement>(null);
+  const servicesRef = useRef<HTMLLIElement>(null);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   const currentLang = LANGS.find((l) => l.value === lang) ?? LANGS[0];
@@ -65,6 +66,25 @@ export function Header() {
       document.removeEventListener("keydown", onKey);
     };
   }, [langOpen]);
+
+  // Close services dropdown on outside click / Escape
+  useEffect(() => {
+    if (!openMenu) return;
+    const onPointer = (e: MouseEvent) => {
+      if (servicesRef.current && !servicesRef.current.contains(e.target as Node)) {
+        setOpenMenu(null);
+      }
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpenMenu(null);
+    };
+    document.addEventListener("mousedown", onPointer);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onPointer);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [openMenu]);
 
   const closeAll = () => {
     setOpen(false);
@@ -117,33 +137,28 @@ export function Header() {
               return (
                 <li
                   key={item.label}
+                  ref={item.children ? servicesRef : undefined}
                   className={`sgg-nav-item ${item.children ? "sgg-has-dropdown" : ""} ${
                     menuOpen ? "sgg-dropdown-open" : ""
                   }`}
-                  onMouseLeave={item.children ? () => setOpenMenu(null) : undefined}
                 >
                   {item.children ? (
                     <>
-                      <Link
-                        to={item.href}
+                      <button
+                        type="button"
                         className={`sgg-nav-link sgg-nav-toggle ${
                           active ? "sgg-nav-link-active" : ""
                         }`}
                         aria-haspopup="true"
                         aria-expanded={menuOpen}
-                        onMouseEnter={() => setOpenMenu(item.label)}
-                        onClick={(e) => {
-                          if (window.matchMedia("(max-width: 991.98px)").matches) {
-                            e.preventDefault();
-                            setOpenMenu(menuOpen ? null : item.label);
-                          } else {
-                            setOpen(false);
-                          }
+                        onClick={() => {
+                          setOpenMenu(menuOpen ? null : item.label);
+                          setLangOpen(false);
                         }}
                       >
                         {item.label}
                         <ChevronDown size={15} aria-hidden className="sgg-nav-caret" />
-                      </Link>
+                      </button>
                       <ul className="sgg-dropdown" aria-label={`${item.label} menu`}>
                         {item.children.map((child) => (
                           <li key={child.href}>

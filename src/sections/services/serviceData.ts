@@ -215,7 +215,7 @@ export const SERVICES: ServiceDetail[] = [
     company: "INFICORP TECHNOLOGY",
     websiteUrl: "https://www.inficorpgroup.com/",
     heroImage:
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=2000&q=80",
+      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=2000&q=80",
     intro:
       "We provide end-to-end manpower staffing solutions including recruitment, deployment, payroll management, statutory compliance, and workforce administration. Our services ensure compliant, flexible, and efficient workforce management tailored to business needs.",
     blocks: [
@@ -267,7 +267,7 @@ export const SERVICES: ServiceDetail[] = [
     title: "Media & Entertainment",
     company: "CineGlare Entertainment",
     heroImage:
-      "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=2000&q=80",
+      "https://images.pexels.com/photos/3062541/pexels-photo-3062541.jpeg?auto=compress&cs=tinysrgb&w=2000",
     intro:
       "Cineglare Entertainment, part of Shield Global Group, provides end-to-end media and entertainment solutions including corporate film production, corporate branding, celebrity management, event management, and advertisement video creation. With a creative and professional approach, Cineglare Entertainment supports organizations in enhancing brand presence and delivering impactful visual communication.",
     blocks: [

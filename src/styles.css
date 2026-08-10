@@ -369,17 +369,21 @@
   gap: 6px;
   background: transparent;
   border: 0;
-  font: inherit;
+  /* Explicitly match .sgg-nav-link so the text never looks different */
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
   cursor: pointer;
 }
-
 .sgg-nav-caret {
   transition: transform 0.28s ease;
   opacity: 0.7;
 }
 
-.sgg-dropdown-open > .sgg-nav-link .sgg-nav-caret,
-.sgg-has-dropdown:hover > .sgg-nav-link .sgg-nav-caret {
+.sgg-dropdown-open > .sgg-nav-toggle .sgg-nav-caret,
+.sgg-dropdown-open > .sgg-nav-link .sgg-nav-caret {
   transform: rotate(180deg);
   opacity: 1;
 }
@@ -432,14 +436,12 @@
     z-index: 60;
   }
 
-  .sgg-has-dropdown:hover > .sgg-dropdown,
-  .sgg-has-dropdown:focus-within > .sgg-dropdown,
   .sgg-dropdown-open > .sgg-dropdown {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transform: translate(-50%, 0);
-  }
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+}
 }
 
 @media (max-width: 991.98px) {
