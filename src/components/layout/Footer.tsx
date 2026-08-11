@@ -3,9 +3,7 @@ import {
   Facebook,
   Instagram,
   Linkedin,
-  Twitter,
   Youtube,
-  MessageCircle,
   MapPin,
   Phone,
   Mail,
@@ -14,43 +12,41 @@ import {
   Send,
   ChevronRight,
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import {
   HQ_ADDRESS_LINES,
   MAP_LINK,
   CONTACT_CHANNELS,
 } from "@/sections/contact/contactData";
 
-const quickLinks = [
-  { label: "Home", href: "/" },
-  { label: "About Us", href: "/about-us" },
-  { label: "Services", href: "/services" },
-  // { label: "Gallery", href: "/gallery" },
-  // { label: "Blogs", href: "/blogs" },
-  { label: "Testimonials", href: "/#testimonials" },
-  { label: "Contact", href: "/contact" },
-  { label: "Privacy Policy", href: "/privacy" },
-  { label: "Terms & Conditions", href: "/terms" },
-];
-
-const services = [
-  { label: "Global Manpower Recruitment", href: "/services" },
-  { label: "Staffing & Workforce Solutions", href: "/services/staffing-workforce-solutions" },
-  { label: "AI Powered Automation", href: "/services/ai-powered-automation" },
-  { label: "Media & Entertainment", href: "/services/media-entertainment" },
-];
-
 const socials = [
   { label: "Facebook", href: "https://facebook.com", Icon: Facebook },
   { label: "Instagram", href: "https://instagram.com", Icon: Instagram },
   { label: "LinkedIn", href: "https://linkedin.com", Icon: Linkedin },
-  // { label: "X (Twitter)", href: "https://twitter.com", Icon: Twitter },
   { label: "YouTube", href: "https://youtube.com", Icon: Youtube },
-  // { label: "WhatsApp", href: "https://wa.me/", Icon: MessageCircle },
 ];
 
 export function Footer() {
+  const { t } = useTranslation();
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+
+  const quickLinks = [
+    { label: t("footer.links.home"), href: "/" },
+    { label: t("footer.links.about"), href: "/about-us" },
+    { label: t("footer.links.services"), href: "/services" },
+    { label: t("footer.links.testimonials"), href: "/#testimonials" },
+    { label: t("footer.links.contact"), href: "/contact" },
+    { label: t("footer.links.privacy"), href: "/privacy" },
+    { label: t("footer.links.terms"), href: "/terms" },
+  ];
+
+  const services = [
+    { label: t("footer.services.manpower"), href: "/services" },
+    { label: t("footer.services.staffing"), href: "/services/staffing-workforce-solutions" },
+    { label: t("footer.services.automation"), href: "/services/ai-powered-automation" },
+    { label: t("footer.services.media"), href: "/services/media-entertainment" },
+  ];
 
   const onSubscribe = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -69,21 +65,16 @@ export function Footer() {
             <div className="sgg-footer-brand">
               <a
                 href="/"
-                aria-label="Shield Global Group home"
+                aria-label={t("footer.homeAria")}
                 className="sgg-footer-logo"
               >
                 <img src="/logo.png" alt="Shield Global Group" />
               </a>
-              <p className="sgg-footer-desc">
-                Shield Global Group is a diversified corporate house delivering
-                trusted HR, workforce, and consulting services to enterprises
-                worldwide.
-              </p>
+              <p className="sgg-footer-desc">{t("footer.desc")}</p>
               <p className="sgg-footer-mission">
-                <span>Our Mission:</span> To empower organizations with reliable
-                talent solutions and to shape sustainable, people-first growth.
+                <span>{t("footer.missionLabel")}</span> {t("footer.mission")}
               </p>
-              <div className="sgg-footer-socials" aria-label="Social media">
+              <div className="sgg-footer-socials" aria-label={t("footer.socialsAria")}>
                 {socials.map(({ label, href, Icon }) => (
                   <a
                     key={label}
@@ -100,11 +91,11 @@ export function Footer() {
             </div>
 
             {/* Quick Links */}
-            <nav aria-label="Quick links" className="sgg-footer-col">
-              <h4 className="sgg-footer-heading">Quick Links</h4>
+            <nav aria-label={t("footer.quickLinks")} className="sgg-footer-col">
+              <h4 className="sgg-footer-heading">{t("footer.quickLinks")}</h4>
               <ul>
                 {quickLinks.map((l) => (
-                  <li key={l.label}>
+                  <li key={l.href}>
                     <a href={l.href} className="sgg-footer-link">
                       <ChevronRight size={12} aria-hidden="true" />
                       <span>{l.label}</span>
@@ -115,11 +106,11 @@ export function Footer() {
             </nav>
 
             {/* Services */}
-            <nav aria-label="Services" className="sgg-footer-col">
-              <h4 className="sgg-footer-heading">Our Services</h4>
+            <nav aria-label={t("footer.ourServices")} className="sgg-footer-col">
+              <h4 className="sgg-footer-heading">{t("footer.ourServices")}</h4>
               <ul>
                 {services.map((l) => (
-                  <li key={l.label}>
+                  <li key={l.href}>
                     <a href={l.href} className="sgg-footer-link">
                       <ChevronRight size={12} aria-hidden="true" />
                       <span>{l.label}</span>
@@ -131,7 +122,7 @@ export function Footer() {
 
             {/* Get in Touch + Newsletter */}
             <div className="sgg-footer-col">
-              <h4 className="sgg-footer-heading">Get in Touch</h4>
+              <h4 className="sgg-footer-heading">{t("footer.getInTouch")}</h4>
               <ul className="sgg-footer-contact">
                 <li>
                   <MapPin size={16} aria-hidden="true" />
@@ -155,7 +146,7 @@ export function Footer() {
                 </li>
                 <li>
                   <Clock size={16} aria-hidden="true" />
-                  <span>Mon – Sat: 9:00 AM – 6:00 PM IST</span>
+                  <span>{t("footer.hours")}</span>
                 </li>
                 <li>
                   <ExternalLink size={16} aria-hidden="true" />
@@ -164,13 +155,13 @@ export function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    View on Google Maps
+                    {t("footer.viewMap")}
                   </a>
                 </li>
               </ul>
 
               <h4 className="sgg-footer-heading sgg-footer-heading-sm">
-                Newsletter
+                {t("footer.newsletter")}
               </h4>
               <form
                 className="sgg-footer-newsletter"
@@ -178,24 +169,24 @@ export function Footer() {
                 noValidate
               >
                 <label htmlFor="sgg-newsletter-email" className="sr-only">
-                  Email address
+                  {t("footer.emailLabel")}
                 </label>
                 <input
                   id="sgg-newsletter-email"
                   type="email"
                   required
-                  placeholder="Your email address"
+                  placeholder={t("footer.emailPlaceholder")}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
-                <button type="submit" aria-label="Subscribe to newsletter">
+                <button type="submit" aria-label={t("footer.subscribeAria")}>
                   <Send size={16} aria-hidden="true" />
-                  <span>Subscribe</span>
+                  <span>{t("footer.subscribe")}</span>
                 </button>
               </form>
               {submitted && (
                 <p className="sgg-footer-newsletter-success" role="status">
-                  Thanks — you’re subscribed.
+                  {t("footer.subscribeSuccess")}
                 </p>
               )}
             </div>
@@ -206,24 +197,23 @@ export function Footer() {
       <div className="sgg-footer-bottom">
         <div className="sgg-footer-container sgg-footer-bottom-inner">
           <p className="sgg-footer-copy">
-            &copy; {new Date().getFullYear()} Shield Global Group. All Rights
-            Reserved.
+            &copy; {new Date().getFullYear()} {t("footer.copyright")}
           </p>
-          <ul className="sgg-footer-legal" aria-label="Legal">
+          <ul className="sgg-footer-legal" aria-label={t("footer.legal")}>
             <li>
-              <a href="/privacy">Privacy Policy</a>
+              <a href="/privacy">{t("footer.links.privacy")}</a>
             </li>
             <li aria-hidden="true">•</li>
             <li>
-              <a href="/terms">Terms &amp; Conditions</a>
+              <a href="/terms">{t("footer.links.terms")}</a>
             </li>
             <li aria-hidden="true">•</li>
             <li>
-              <a href="/cookies">Cookie Policy</a>
+              <a href="/cookies">{t("footer.links.cookies")}</a>
             </li>
           </ul>
           <p className="sgg-footer-credit">
-            Designed &amp; Developed by <span>Shield Digital Studio</span>
+            {t("footer.credit")} <span>Shield Digital Studio</span>
           </p>
         </div>
       </div>

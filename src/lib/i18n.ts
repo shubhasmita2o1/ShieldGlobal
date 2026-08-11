@@ -3,8 +3,7 @@ import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 
 import en from "@/locales/en/translation.json";
-import ar from "@/locales/ar/translation.json"; // example second language
-// add more languages as needed
+import ar from "@/locales/ar/translation.json";
 
 const resources = {
   en: { translation: en },
@@ -17,9 +16,11 @@ i18n
   .init({
     resources,
     fallbackLng: "en",
+    supportedLngs: ["en", "ar"],
+    nonExplicitSupportedLngs: true, // en-US → en
     debug: import.meta.env.DEV,
     interpolation: {
-      escapeValue: false, // React already escapes
+      escapeValue: false,
     },
     detection: {
       order: ["localStorage", "navigator", "htmlTag"],

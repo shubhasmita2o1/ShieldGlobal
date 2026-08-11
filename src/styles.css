@@ -1514,3 +1514,32 @@ body.nav-open {
     animation: none;
   }
 }
+
+/* ============================================================
+   RTL support
+   ============================================================ */
+
+/* Flip nav underline origin in RTL */
+[dir="rtl"] .sgg-nav-link::after {
+  transform-origin: right center;
+}
+
+/* Language dropdown aligns to the left edge in RTL */
+[dir="rtl"] .sgg-lang-item > ul {
+  right: auto;
+  left: 0;
+}
+
+/* Footer / general: prefer logical spacing where you used physical left/right */
+[dir="rtl"] .sgg-footer-link {
+  /* if chevron feels wrong, you can rotate it */
+}
+
+[dir="rtl"] .sgg-footer-link svg {
+  transform: scaleX(-1); /* mirrors ChevronRight → looks like ChevronLeft */
+}
+
+/* Optional: mirror any hard-coded left/right paddings that break in RTL */
+[dir="rtl"] .sgg-container {
+  /* padding already uses left+right equally, so usually fine */
+}
