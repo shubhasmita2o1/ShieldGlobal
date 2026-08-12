@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useTranslation } from "react-i18next";
 import { MainLayout } from "@/layouts/MainLayout";
 import { HomeHero } from "@/sections/home/HomeHero";
 import { BrandStrip } from "@/sections/home/BrandStrip";
@@ -38,8 +37,6 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  const { t } = useTranslation();
-
   return (
     <MainLayout>
       <HomeHero />

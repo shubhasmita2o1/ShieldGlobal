@@ -3,7 +3,6 @@ import { createRouter } from "@tanstack/react-router";
 import { routeTree } from "./routeTree.gen";
 
 // ↓↓↓ ADD THIS LINE ↓↓↓
-import "@/lib/i18n";
 
 export const getRouter = () => {
   const queryClient = new QueryClient();
