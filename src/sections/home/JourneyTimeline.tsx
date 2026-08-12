@@ -81,7 +81,6 @@ const MILESTONES: Milestone[] = [
   },
 ];
 
-
 export function JourneyTimeline() {
   const trackRef = useRef<HTMLOListElement>(null);
   const [active, setActive] = useState(0);
@@ -105,7 +104,6 @@ export function JourneyTimeline() {
       });
     }
 
-    // Allow scroll-sync again after smooth scroll finishes
     window.setTimeout(() => {
       isClicking.current = false;
     }, 450);
@@ -118,7 +116,6 @@ export function JourneyTimeline() {
     const max = el.scrollWidth - el.clientWidth;
     setProgress(max > 0 ? el.scrollLeft / max : 0);
 
-    // Don't override while a button/dot is animating
     if (isClicking.current) return;
 
     const cards = Array.from(el.children) as HTMLElement[];
@@ -150,19 +147,78 @@ export function JourneyTimeline() {
     <section
       id="journey"
       aria-labelledby="journey-title"
-      className="relative overflow-hidden bg-[#faf8f5] py-24 lg:py-28"
+      className="relative overflow-hidden py-24 lg:py-28"
+      style={{
+        background:
+          "linear-gradient(145deg, #ffffff 0%, #f0f9ff 38%, #e0f2fe 72%, #f0f9ff 100%)",
+      }}
     >
+      {/* Animated popup gradients — stronger light-blue blobs that rise in & drift */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+        <motion.div
+          className="absolute -left-[14%] top-[-10%] h-[580px] w-[580px] rounded-full bg-[radial-gradient(circle,rgba(10,143,184,0.22)_0%,rgba(56,189,248,0.1)_42%,transparent_70%)] blur-2xl will-change-transform"
+          initial={{ opacity: 0, scale: 0.7, y: 48 }}
+          whileInView={{
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            transition: { duration: 1.15, ease: [0.22, 1, 0.36, 1] },
+          }}
+          viewport={{ once: true, amount: 0.2 }}
+          animate={{
+            x: [0, 28, 0],
+            y: [0, -18, 0],
+            transition: {
+              x: { duration: 14, repeat: Infinity, ease: "easeInOut" },
+              y: { duration: 14, repeat: Infinity, ease: "easeInOut" },
+            },
+          }}
+        />
+        <motion.div
+          className="absolute -right-[10%] top-[12%] h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle,rgba(14,165,233,0.2)_0%,rgba(125,211,252,0.09)_48%,transparent_72%)] blur-2xl will-change-transform"
+          initial={{ opacity: 0, scale: 0.65, y: 56 }}
+          whileInView={{
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            transition: { duration: 1.3, delay: 0.12, ease: [0.22, 1, 0.36, 1] },
+          }}
+          viewport={{ once: true, amount: 0.15 }}
+          animate={{
+            x: [0, -22, 0],
+            y: [0, 16, 0],
+            transition: {
+              x: { duration: 16, repeat: Infinity, ease: "easeInOut", delay: 0.4 },
+              y: { duration: 16, repeat: Infinity, ease: "easeInOut", delay: 0.4 },
+            },
+          }}
+        />
+        <motion.div
+          className="absolute bottom-[-14%] left-[28%] h-[460px] w-[680px] rounded-full bg-[radial-gradient(circle,rgba(10,143,184,0.18)_0%,rgba(186,230,253,0.1)_48%,transparent_70%)] blur-3xl will-change-transform"
+          initial={{ opacity: 0, scale: 0.75, y: 64 }}
+          whileInView={{
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            transition: { duration: 1.35, delay: 0.22, ease: [0.22, 1, 0.36, 1] },
+          }}
+          viewport={{ once: true, amount: 0.1 }}
+          animate={{
+            x: [0, 18, 0],
+            y: [0, -12, 0],
+            transition: {
+              x: { duration: 18, repeat: Infinity, ease: "easeInOut", delay: 0.8 },
+              y: { duration: 18, repeat: Infinity, ease: "easeInOut", delay: 0.8 },
+            },
+          }}
+        />
+      </div>
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(900px_420px_at_88%_-8%,rgba(10,143,184,0.07),transparent_62%),radial-gradient(700px_400px_at_-5%_105%,rgba(10,143,184,0.05),transparent_60%)]"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-neutral-300 to-transparent"
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-sky-300/60 to-transparent"
       />
 
       <div className="relative mx-auto w-full max-w-[1440px]">
-        {/* ── Header row ─────────────────────────────── */}
         <motion.div
           variants={stagger}
           initial="hidden"
@@ -212,9 +268,7 @@ export function JourneyTimeline() {
           </motion.div>
         </motion.div>
 
-        {/* ── Horizontal rail ───────────────────────── */}
         <div className="relative mt-14">
-
           <motion.ol
             ref={trackRef}
             onScroll={onScroll}
@@ -230,7 +284,6 @@ export function JourneyTimeline() {
                 variants={fadeUp}
                 className="group relative flex w-[85vw] shrink-0 flex-col snap-start sm:w-[380px] lg:w-[400px]"
               >
-                {/* timeline connector above the card */}
                 <div className="relative flex h-[46px] items-center">
                   <span
                     aria-hidden
@@ -243,21 +296,33 @@ export function JourneyTimeline() {
                     className={`relative h-2.5 w-2.5 rotate-45 border transition-all duration-500 ${
                       active === i
                         ? "border-[#0a8fb8] bg-[#0a8fb8]"
-                        : "border-neutral-300 bg-[#faf8f5] group-hover:border-[#0a8fb8]"
+                        : "border-neutral-300 bg-white/80 group-hover:border-[#0a8fb8]"
                     }`}
                   />
                 </div>
 
                 <article
-                  className={`relative flex flex-1 min-h-[340px] flex-col overflow-hidden rounded-2xl border bg-white/85 px-7 py-8 shadow-[0_1px_2px_rgba(16,24,40,0.04)] backdrop-blur-sm transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_26px_60px_-30px_rgba(16,24,40,0.24)] sm:px-8 sm:py-9 ${
+                  className={`relative flex flex-1 min-h-[340px] flex-col overflow-hidden rounded-2xl border px-7 py-8 shadow-[0_1px_2px_rgba(16,24,40,0.05)] backdrop-blur-sm transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_26px_60px_-30px_rgba(10,143,184,0.2)] sm:px-8 sm:py-9 ${
                     active === i
-                      ? "border-neutral-300"
-                      : "border-neutral-200/80 hover:border-neutral-300"
+                      ? "border-sky-300/60"
+                      : "border-white/80 hover:border-sky-200/70"
                   } ${m.flag ? "ring-1 ring-[#0a8fb8]/25" : ""}`}
+                  style={{
+                    background:
+                      "radial-gradient(120% 90% at 100% 0%, rgba(14,165,233,0.1) 0%, transparent 55%), linear-gradient(160deg, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.78) 100%)",
+                  }}
                 >
                   <span
                     aria-hidden
-                    className="pointer-events-none absolute right-5 top-3 select-none font-[Fraunces,serif] text-[92px] font-semibold leading-none tracking-tight text-neutral-900/[0.04]"
+                    className="pointer-events-none absolute -right-6 -top-8 h-40 w-40 rounded-full bg-[radial-gradient(circle,rgba(14,165,233,0.12)_0%,transparent_70%)] blur-xl"
+                  />
+                  <span
+                    aria-hidden
+                    className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-sky-200/40 to-transparent"
+                  />
+                  <span
+                    aria-hidden
+                    className="pointer-events-none absolute right-5 top-3 select-none font-[Fraunces,serif] text-[92px] font-semibold leading-none tracking-tight text-sky-900/[0.045]"
                   >
                     {m.year}
                   </span>
@@ -266,8 +331,8 @@ export function JourneyTimeline() {
                     <span className="font-[Fraunces,serif] text-[44px] font-semibold leading-none tracking-tight text-neutral-900">
                       {m.year}
                     </span>
-                    <span className="h-px flex-1 bg-neutral-200" />
-                    <span className="text-[11px] font-semibold tracking-[0.2em] text-neutral-400 tabular-nums">
+                    <span className="h-px flex-1 bg-sky-200/60" />
+                    <span className="text-[11px] font-semibold tracking-[0.2em] text-sky-700/45 tabular-nums">
                       {m.index}
                     </span>
                   </div>
@@ -284,8 +349,8 @@ export function JourneyTimeline() {
                     </p>
                   </div>
 
-                  <div className="relative mt-auto flex flex-wrap items-center gap-3 border-t border-neutral-200/80 pt-6">
-                    <span className="inline-flex items-center rounded-full border border-neutral-200 bg-[#faf8f5] px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-neutral-600">
+                  <div className="relative mt-auto flex flex-wrap items-center gap-3 border-t border-sky-100/80 pt-6">
+                    <span className="inline-flex items-center rounded-full border border-sky-100 bg-white/80 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-sky-900/65">
                       {m.tag}
                     </span>
                     {m.flag && (
@@ -301,7 +366,6 @@ export function JourneyTimeline() {
           </motion.ol>
         </div>
 
-        {/* ── Progress + index ──────────────────────── */}
         <div className="mt-10 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-6 px-6 sm:px-8 lg:px-12">
           <div className="h-px w-full bg-neutral-200">
             <div
