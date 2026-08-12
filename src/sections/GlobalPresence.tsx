@@ -263,12 +263,26 @@ export function GlobalPresence() {
           ].map((kpi) => (
             <div
               key={kpi.label}
-              className="rounded-2xl border border-white/[0.1] bg-white/[0.04] px-7 py-7 transition-colors duration-300 hover:border-[#0a8fb8]/40 hover:bg-white/[0.06]"
+              className="group relative overflow-hidden rounded-2xl border border-red-500/20 px-7 py-7 transition-all duration-300 hover:border-red-400/35"
             >
-              <p className="font-[Fraunces,serif] text-[36px] font-semibold leading-none tracking-tight text-white tabular-nums sm:text-[40px]">
+              {/* visible red gradient, fading into the section's own dark base */}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#5c1220]/85 via-[#3b0f18]/55 to-[#0a1220]"
+              />
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_140%_at_100%_0%,rgba(200,40,55,0.22),transparent_65%)] opacity-90 transition-opacity duration-300 group-hover:opacity-100"
+              />
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-red-400/35 to-transparent"
+              />
+
+              <p className="relative font-[Fraunces,serif] text-[36px] font-semibold leading-none tracking-tight text-white tabular-nums sm:text-[40px]">
                 {kpi.value}
               </p>
-              <p className="mt-3 text-[12px] font-semibold uppercase tracking-[0.16em] text-[#0a8fb8]">
+              <p className="relative mt-3 text-[12px] font-semibold uppercase tracking-[0.16em] text-[#ffb4a8]">
                 {kpi.label}
               </p>
             </div>
@@ -284,31 +298,45 @@ export function GlobalPresence() {
             return (
               <article
                 key={region}
-                className="rounded-2xl border border-white/[0.09] bg-white/[0.03] p-6 transition-colors duration-300 hover:border-[#0a8fb8]/35 hover:bg-white/[0.05]"
+                className="group relative overflow-hidden rounded-2xl border border-red-500/20 p-6 transition-all duration-300 hover:border-red-400/35"
               >
-                <header className="mb-4 flex items-baseline justify-between gap-3 border-b border-[#0a8fb8]/25 pb-3">
+                {/* visible red gradient, fading into the section's own dark base */}
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#5c1220]/85 via-[#3b0f18]/55 to-[#0a1220]"
+                />
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_140%_at_100%_0%,rgba(200,40,55,0.22),transparent_65%)] opacity-90 transition-opacity duration-300 group-hover:opacity-100"
+                />
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-red-400/35 to-transparent"
+                />
+
+                <header className="relative mb-4 flex items-baseline justify-between gap-3 border-b border-[#ffb4a8]/25 pb-3">
                   <h3 className="font-[Fraunces,serif] text-[15px] font-semibold tracking-tight text-white">
                     {region}
                   </h3>
-                  <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#0a8fb8]">
+                  <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#ffb4a8]">
                     {items.length} locations
                   </span>
                 </header>
 
-                <ul className="grid grid-cols-2 gap-x-4 gap-y-2">
+                <ul className="relative grid grid-cols-2 gap-x-4 gap-y-2">
                   {items.map((loc) => (
                     <li
                       key={loc.name}
                       className={`flex items-center gap-2 text-[13px] leading-snug transition-colors duration-150 ${
                         active === loc.name
                           ? "text-white"
-                          : "text-[#b5bccc] hover:text-white"
+                          : "text-[#d9cdd0] hover:text-white"
                       }`}
                       onMouseEnter={() => setActive(loc.name)}
                       onMouseLeave={() => setActive(null)}
                     >
                       <span
-                        className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#0a8fb8] shadow-[0_0_6px_rgba(10,143,184,0.55)]"
+                        className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#ffb4a8] shadow-[0_0_6px_rgba(255,180,168,0.55)]"
                         aria-hidden
                       />
                       <span>{loc.name}</span>

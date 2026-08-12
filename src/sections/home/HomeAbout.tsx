@@ -96,17 +96,31 @@ export function HomeAbout() {
               <motion.li
                 key={title}
                 variants={fadeUp}
-                className="group flex gap-4 rounded-2xl border border-red-500/30 bg-gradient-to-br from-[#3b0a14] via-[#5c1220] to-[#1a080c] p-5 backdrop-blur-sm transition-all duration-300 hover:border-red-400/50 hover:from-[#4a0e1a] hover:via-[#6e1628] hover:to-[#220a10] sm:p-6"
+                className="group relative flex gap-4 overflow-hidden rounded-2xl border border-red-500/20 bg-[#131f2e] p-5 backdrop-blur-sm transition-all duration-300 hover:border-red-400/35 sm:p-6"
               >
+                {/* visible red gradient, but it fades into the section's navy rather than sitting as a flat block */}
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#5c1220]/85 via-[#3b0f18]/55 to-[#131f2e] transition-opacity duration-300"
+                />
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_140%_at_100%_0%,rgba(200,40,55,0.22),transparent_65%)] opacity-90 transition-opacity duration-300 group-hover:opacity-100"
+                />
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-red-400/35 to-transparent"
+                />
+
                 {/* icon stays cyan */}
-                <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#0a8fb8]/15 text-[#7ed7ee] transition-colors group-hover:bg-[#0a8fb8] group-hover:text-white">
+                <span className="relative inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#0a8fb8]/15 text-[#7ed7ee] transition-colors group-hover:bg-[#0a8fb8] group-hover:text-white">
                   <Icon size={20} strokeWidth={1.75} />
                 </span>
-                <div className="min-w-0">
+                <div className="relative min-w-0">
                   <h3 className="font-[Fraunces,serif] text-lg font-semibold tracking-tight text-white">
                     {title}
                   </h3>
-                  <p className="mt-1.5 text-[13.5px] leading-relaxed text-[#c4a8ae]">
+                  <p className="mt-1.5 text-[13.5px] leading-relaxed text-[#e2d4d7]">
                     {body}
                   </p>
                 </div>
