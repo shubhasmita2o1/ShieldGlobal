@@ -1515,31 +1515,33 @@ body.nav-open {
   }
 }
 
-/* ============================================================
-   RTL support
-   ============================================================ */
 
-/* Flip nav underline origin in RTL */
-[dir="rtl"] .sgg-nav-link::after {
-  transform-origin: right center;
+
+/* ========== Google Translate Widget Styling ========== */
+
+/* ========== Google Translate — hide default UI ========== */
+
+/* Hide Google top banner completely */
+.goog-te-banner-frame,
+.goog-te-banner-frame.skiptranslate,
+iframe.goog-te-banner-frame {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  width: 0 !important;
 }
 
-/* Language dropdown aligns to the left edge in RTL */
-[dir="rtl"] .sgg-lang-item > ul {
-  right: auto;
-  left: 0;
+/* Prevent page shift */
+body {
+  top: 0 !important;
+  position: static !important;
 }
 
-/* Footer / general: prefer logical spacing where you used physical left/right */
-[dir="rtl"] .sgg-footer-link {
-  /* if chevron feels wrong, you can rotate it */
-}
-
-[dir="rtl"] .sgg-footer-link svg {
-  transform: scaleX(-1); /* mirrors ChevronRight → looks like ChevronLeft */
-}
-
-/* Optional: mirror any hard-coded left/right paddings that break in RTL */
-[dir="rtl"] .sgg-container {
-  /* padding already uses left+right equally, so usually fine */
+/* Hide the default Google select + gadget */
+#google_translate_element,
+.goog-te-gadget,
+.goog-te-combo,
+.goog-te-gadget-simple,
+.goog-logo-link {
+  display: none !important;
 }
