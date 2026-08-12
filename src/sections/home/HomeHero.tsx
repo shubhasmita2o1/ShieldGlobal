@@ -79,8 +79,7 @@ export function HomeHero() {
   return (
     <section
       aria-label="Shield Global Group introduction"
-      // was: h-[86svh] min-h-[480px]
-    className="relative isolate h-[100svh] min-h-[520px] w-full overflow-hidden bg-neutral-950"
+      className="relative isolate h-[100svh] min-h-[520px] w-full overflow-hidden bg-neutral-950"
     >
       <AnimatePresence mode="sync">
         <motion.video
@@ -132,7 +131,7 @@ export function HomeHero() {
 
       {/* ── Slide 1: centred brand intro ── */}
       {slide.kind === "intro" ? (
-        <div className="relative z-10 flex h-full flex-col items-center justify-center gap-1 px-5 pt-1 text-center sm:px-8">
+        <div className="relative z-10 flex h-full flex-col items-center justify-center gap-1 px-5 pt-1 text-center sm:px-8 -translate-y-10 sm:-translate-y-12">
           <motion.p
             key={`welcome-${index}`}
             {...fadeUp}
@@ -153,7 +152,7 @@ export function HomeHero() {
               delay: reduceMotion ? 0 : 0.26,
               ease: EASE,
             }}
-            className="font-['Cormorant_Garamond',serif] text-[clamp(42px,7.4vw,100px)] font-semibold leading-[1.06] tracking-[-0.012em] text-white [text-shadow:0_2px_28px_rgba(0,0,0,0.4)]"
+            className="font-['Playfair_Display',serif] text-[clamp(42px,7.4vw,100px)] font-semibold leading-[1.06] tracking-[-0.04em] text-white [text-shadow:0_2px_28px_rgba(0,0,0,0.4)]"
           >
             Shield Global
           </motion.h1>
@@ -165,7 +164,7 @@ export function HomeHero() {
               delay: reduceMotion ? 0 : 0.38,
               ease: EASE,
             }}
-            className="font-['Cormorant_Garamond',serif] text-[clamp(13px,1.55vw,21px)] font-semibold leading-[1.35] tracking-[0.4em] text-white/90 [text-shadow:0_1px_14px_rgba(0,0,0,0.35)]"
+            className="font-['Playfair_Display',serif] text-[clamp(13px,1.55vw,21px)] font-semibold leading-[1.35] tracking-[0.4em] text-white/90 [text-shadow:0_1px_14px_rgba(0,0,0,0.35)]"
           >
             GROUP
           </motion.p>
@@ -178,17 +177,18 @@ export function HomeHero() {
               ease: EASE,
             }}
             whileHover={{
-  y: reduceMotion ? 0 : -1,
-  boxShadow:
-    "0 10px 28px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.2)",
-}}
-className="mt-5 inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-full bg-gradient-to-r from-[rgba(100,220,210,0.9)] to-[rgba(220,215,140,0.9)] px-7 py-3 text-[clamp(13px,1.2vw,18px)] font-medium leading-none text-neutral-900 shadow-lg shadow-black/20 sm:px-9"
->
-  Connecting talent, technology &amp; entertainment
-</motion.span>
+              y: reduceMotion ? 0 : -1,
+              boxShadow:
+                "0 10px 28px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.2)",
+            }}
+            className="mt-5 inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-full bg-gradient-to-r from-[rgba(100,220,210,0.9)] to-[rgba(220,215,140,0.9)] px-7 py-3 text-[clamp(13px,1.2vw,18px)] font-medium leading-none text-neutral-900 shadow-lg shadow-black/20 sm:px-9"
+          >
+            Connecting talent, technology &amp; entertainment
+          </motion.span>
         </div>
       ) : (
-        <>{/* ── Slides 2–5: premium glass label card ── */}
+        <>
+          {/* ── Slides 2–5: premium glass label card ── */}
           <motion.div
             key={`label-${index}`}
             initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 16 }}
@@ -212,67 +212,63 @@ className="mt-5 inline-flex shrink-0 items-center justify-center whitespace-nowr
               {slide.subtitle}
             </p>
           </motion.div>
-
-          {/* ── Bottom tab bar ── */}
-          <motion.nav
-            aria-label="Group divisions"
-            initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: reduceMotion ? 0.3 : 0.85,
-              delay: reduceMotion ? 0 : 0.3,
-              ease: EASE,
-            }}
-            // was: bottom-5 ... sm:bottom-8 ... lg:bottom-12
-           // bottom nav className — raise from bottom
-            className="absolute bottom-[110px] left-1/2 z-10 w-[calc(100%-32px)] -translate-x-1/2 overflow-hidden rounded-[14px] border border-white/[0.14] bg-white/[0.055] shadow-[0_8px_32px_rgba(0,0,0,0.3)] backdrop-blur-xl sm:w-[calc(100%-48px)] lg:w-[calc(100%-120px)]"
-
-          >
-            <ul className="grid grid-cols-2 divide-x divide-y divide-white/[0.08] lg:flex lg:divide-y-0">
-              {TABS.map((tab) => {
-                const active = index === tab.slide;
-                const label = `${tab.line1} ${tab.line2}`;
-                return (
-                  <li key={tab.line1} className="relative flex min-w-0 flex-1">
-                    <motion.button
-                      type="button"
-                      onClick={() => setIndex(tab.slide)}
-                      aria-label={label}
-                      aria-current={active ? "true" : undefined}
-                      whileHover={{
-                        backgroundColor: active
-                          ? "rgba(255,255,255,0.16)"
-                          : "rgba(255,255,255,0.09)",
-                      }}
-                      whileTap={{ scale: reduceMotion ? 1 : 0.988 }}
-                      transition={{ duration: 0.2, ease: EASE }}
-                      className={`relative h-full w-full min-w-0 cursor-pointer border-0 px-2.5 py-2.5 text-center text-[clamp(11px,1.1vw,15.5px)] font-semibold leading-[1.3] tracking-[0.012em] transition-[background-color,color] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#00e5ff]/70 sm:px-4 sm:py-3 lg:px-5 lg:py-3.5 ${
-                        active
-                          ? "bg-white/[0.14] text-white"
-                          : "bg-transparent text-white/80"
-                      }`}
-                    >
-                      <span className="block truncate sm:whitespace-normal">
-                        {tab.line1}
-                      </span>
-                      <span className="block truncate sm:whitespace-normal">
-                        {tab.line2}
-                      </span>
-                      {/* Active accent indicator */}
-                      <span
-                        aria-hidden="true"
-                        className={`pointer-events-none absolute inset-x-2.5 bottom-0 h-[2px] rounded-full bg-[#00e5ff] transition-opacity duration-300 sm:inset-x-4 ${
-                          active ? "opacity-100" : "opacity-0"
-                        }`}
-                      />
-                    </motion.button>
-                  </li>
-                );
-              })}
-            </ul>
-          </motion.nav>
         </>
       )}
+
+      {/* ── Bottom tab bar — all slides including intro ── */}
+      <motion.nav
+        aria-label="Group divisions"
+        initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 18 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          duration: reduceMotion ? 0.3 : 0.85,
+          delay: reduceMotion ? 0 : 0.3,
+          ease: EASE,
+        }}
+        className="absolute bottom-[110px] left-1/2 z-10 w-[calc(100%-32px)] -translate-x-1/2 overflow-hidden rounded-[14px] border border-white/[0.14] bg-white/[0.055] shadow-[0_8px_32px_rgba(0,0,0,0.3)] backdrop-blur-xl sm:w-[calc(100%-48px)] lg:w-[calc(100%-120px)]"
+      >
+        <ul className="grid grid-cols-2 divide-x divide-y divide-white/[0.08] lg:flex lg:divide-y-0">
+          {TABS.map((tab) => {
+            const active = index === tab.slide;
+            const label = `${tab.line1} ${tab.line2}`;
+            return (
+              <li key={tab.line1} className="relative flex min-w-0 flex-1">
+                <motion.button
+                  type="button"
+                  onClick={() => setIndex(tab.slide)}
+                  aria-label={label}
+                  aria-current={active ? "true" : undefined}
+                  whileHover={{
+                    backgroundColor: active
+                      ? "rgba(255,255,255,0.16)"
+                      : "rgba(255,255,255,0.09)",
+                  }}
+                  whileTap={{ scale: reduceMotion ? 1 : 0.988 }}
+                  transition={{ duration: 0.2, ease: EASE }}
+                  className={`relative h-full w-full min-w-0 cursor-pointer border-0 px-2.5 py-2.5 text-center text-[clamp(11px,1.1vw,15.5px)] font-semibold leading-[1.3] tracking-[0.012em] transition-[background-color,color] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#00e5ff]/70 sm:px-4 sm:py-3 lg:px-5 lg:py-3.5 ${
+                    active
+                      ? "bg-white/[0.14] text-white"
+                      : "bg-transparent text-white/80"
+                  }`}
+                >
+                  <span className="block truncate sm:whitespace-normal">
+                    {tab.line1}
+                  </span>
+                  <span className="block truncate sm:whitespace-normal">
+                    {tab.line2}
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    className={`pointer-events-none absolute inset-x-2.5 bottom-0 h-[2px] rounded-full bg-[#00e5ff] transition-opacity duration-300 sm:inset-x-4 ${
+                      active ? "opacity-100" : "opacity-0"
+                    }`}
+                  />
+                </motion.button>
+              </li>
+            );
+          })}
+        </ul>
+      </motion.nav>
     </section>
   );
 }

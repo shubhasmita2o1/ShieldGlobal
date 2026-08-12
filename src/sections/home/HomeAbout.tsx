@@ -90,14 +90,15 @@ export function HomeAbout() {
             </motion.p>
           </div>
 
-          {/* Right — three vertical cards */}
+          {/* Right — three vertical cards (red gradient boxes) */}
           <motion.ul variants={stagger} className="grid gap-4">
             {VERTICALS.map(({ icon: Icon, title, body }) => (
               <motion.li
                 key={title}
                 variants={fadeUp}
-                className="group flex gap-4 rounded-2xl border border-white/[0.1] bg-white/[0.04] p-5 backdrop-blur-sm transition-colors duration-300 hover:border-[#0a8fb8]/35 hover:bg-white/[0.07] sm:p-6"
+                className="group flex gap-4 rounded-2xl border border-red-500/30 bg-gradient-to-br from-[#3b0a14] via-[#5c1220] to-[#1a080c] p-5 backdrop-blur-sm transition-all duration-300 hover:border-red-400/50 hover:from-[#4a0e1a] hover:via-[#6e1628] hover:to-[#220a10] sm:p-6"
               >
+                {/* icon stays cyan */}
                 <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#0a8fb8]/15 text-[#7ed7ee] transition-colors group-hover:bg-[#0a8fb8] group-hover:text-white">
                   <Icon size={20} strokeWidth={1.75} />
                 </span>
@@ -105,7 +106,7 @@ export function HomeAbout() {
                   <h3 className="font-[Fraunces,serif] text-lg font-semibold tracking-tight text-white">
                     {title}
                   </h3>
-                  <p className="mt-1.5 text-[13.5px] leading-relaxed text-[#9aa3b6]">
+                  <p className="mt-1.5 text-[13.5px] leading-relaxed text-[#c4a8ae]">
                     {body}
                   </p>
                 </div>

@@ -105,10 +105,18 @@ export function GoogleTranslate() {
   }, [open]);
 
   const applyingRef = useRef(false);
+  const lastTriggerAtRef = useRef(0);
 
   const applyToSelect = (code: LangCode, attemptsLeft = 10) => {
     const select = document.querySelector(".goog-te-combo") as HTMLSelectElement | null;
     if (select) {
+      if (select.value === code) {
+        // Already on this language — do NOT dispatch again. Re-firing
+        // "change" with an unchanged value is what was causing Google's
+        // widget to toggle back to the original text and re-translate,
+        // producing the English/Arabic/French flicker.
+        return;
+      }
       select.value = code;
       // Must bubble — Google's listener is attached above the element and
       // won't fire on a non-bubbling synthetic event.
@@ -128,16 +136,20 @@ export function GoogleTranslate() {
   // Every trigger of a translation goes through here. Google rewrites large
   // chunks of the DOM (wrapping text in <font> tags) as a side effect of
   // translating — those rewrites themselves look like "new content" to the
-  // MutationObserver below. Without this guard, the observer would see
-  // Google's own rewrite, re-trigger a translation, see that rewrite, and
-  // so on — which is exactly the English/Arabic/French flicker. Pausing
-  // observation while a translation is in flight breaks that loop.
+  // MutationObserver below. A translation pass over a full page can take
+  // several seconds, so the guard window has to comfortably outlast it, and
+  // triggers are also rate-limited so a slow first pass can't be interrupted
+  // by a second one before it settles.
+  const MIN_RETRIGGER_INTERVAL_MS = 6000;
+  const GUARD_WINDOW_MS = 5000;
+
   const triggerTranslate = (code: LangCode) => {
+    lastTriggerAtRef.current = Date.now();
     applyingRef.current = true;
     applyToSelect(code);
     window.setTimeout(() => {
       applyingRef.current = false;
-    }, 2000);
+    }, GUARD_WINDOW_MS);
   };
 
   const currentRef = useRef<LangCode>(current);
@@ -161,6 +173,7 @@ export function GoogleTranslate() {
       window.clearTimeout(debounceTimer);
       debounceTimer = window.setTimeout(() => {
         if (applyingRef.current) return;
+        if (Date.now() - lastTriggerAtRef.current < MIN_RETRIGGER_INTERVAL_MS) return;
         triggerTranslate(currentRef.current);
       }, 800);
     });
