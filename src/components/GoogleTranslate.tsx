@@ -23,6 +23,30 @@ function getCookie(name: string) {
   return match ? decodeURIComponent(match[2]) : null;
 }
 
+// Clear a cookie across every domain/path variant that either our own code
+// or Google's widget script might have used when setting it. A single
+// mismatched scope means the delete is a silent no-op and the old cookie
+// survives a refresh.
+function clearGoogTransCookie() {
+  const host = window.location.hostname;
+  const bareHost = host.replace(/^www\./, "");
+  const past = "expires=Thu, 01 Jan 1970 00:00:00 UTC";
+  const domainVariants = [
+    "", // no domain attribute (host-only cookie)
+    `; domain=${host}`,
+    `; domain=.${host}`,
+    `; domain=${bareHost}`,
+    `; domain=.${bareHost}`,
+  ];
+  const pathVariants = ["/", window.location.pathname];
+
+  for (const domain of domainVariants) {
+    for (const path of pathVariants) {
+      document.cookie = `googtrans=; ${past}; path=${path}${domain};`;
+    }
+  }
+}
+
 export function GoogleTranslate() {
   const [open, setOpen] = useState(false);
   const [current, setCurrent] = useState<LangCode>("en");
@@ -80,18 +104,88 @@ export function GoogleTranslate() {
     return () => document.removeEventListener("mousedown", handler);
   }, [open]);
 
+  const applyingRef = useRef(false);
+
+  const applyToSelect = (code: LangCode, attemptsLeft = 10) => {
+    const select = document.querySelector(".goog-te-combo") as HTMLSelectElement | null;
+    if (select) {
+      select.value = code;
+      // Must bubble — Google's listener is attached above the element and
+      // won't fire on a non-bubbling synthetic event.
+      select.dispatchEvent(new Event("change", { bubbles: true }));
+      return;
+    }
+    // .goog-te-combo isn't mounted yet (Google's async script/init hasn't
+    // finished) — retry briefly instead of assuming it's missing.
+    if (attemptsLeft > 0) {
+      window.setTimeout(() => applyToSelect(code, attemptsLeft - 1), 200);
+    } else {
+      // Genuinely unavailable — fall back to a reload so the cookie applies.
+      window.location.reload();
+    }
+  };
+
+  // Every trigger of a translation goes through here. Google rewrites large
+  // chunks of the DOM (wrapping text in <font> tags) as a side effect of
+  // translating — those rewrites themselves look like "new content" to the
+  // MutationObserver below. Without this guard, the observer would see
+  // Google's own rewrite, re-trigger a translation, see that rewrite, and
+  // so on — which is exactly the English/Arabic/French flicker. Pausing
+  // observation while a translation is in flight breaks that loop.
+  const triggerTranslate = (code: LangCode) => {
+    applyingRef.current = true;
+    applyToSelect(code);
+    window.setTimeout(() => {
+      applyingRef.current = false;
+    }, 2000);
+  };
+
+  const currentRef = useRef<LangCode>(current);
+  useEffect(() => {
+    currentRef.current = current;
+  }, [current]);
+
+  // React (Framer Motion, carousels, etc.) swaps content in and out on its
+  // own timers — the hero slider being the main example. Google Translate
+  // only rewrites whatever is in the DOM at the moment it's triggered, so
+  // newly-rendered text (a new slide's title/subtitle) stays untranslated
+  // until something tells Google to look again. Watch the page for content
+  // changes and re-apply the active language when they happen.
+  useEffect(() => {
+    let debounceTimer: number | undefined;
+
+    const observer = new MutationObserver(() => {
+      if (currentRef.current === "en") return; // nothing to (re)translate
+      if (applyingRef.current) return; // Google is mid-translation — ignore its own mutations
+
+      window.clearTimeout(debounceTimer);
+      debounceTimer = window.setTimeout(() => {
+        if (applyingRef.current) return;
+        triggerTranslate(currentRef.current);
+      }, 800);
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+      characterData: true,
+    });
+
+    return () => {
+      window.clearTimeout(debounceTimer);
+      observer.disconnect();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const changeLanguage = (code: LangCode) => {
     setCurrent(code);
     setOpen(false);
 
-    // Set the cookie so it persists on reload
     if (code === "en") {
-      // Reset to original
-      document.cookie =
-        "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-      document.cookie =
-        "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=." +
-        window.location.hostname;
+      // Reset to original: clear every scope variant, then reload so no
+      // stale cookie or in-memory widget state survives.
+      clearGoogTransCookie();
       window.location.reload();
       return;
     }
@@ -99,15 +193,7 @@ export function GoogleTranslate() {
     document.cookie = `googtrans=/en/${code}; path=/;`;
     document.cookie = `googtrans=/en/${code}; path=/; domain=.${window.location.hostname}`;
 
-    // Trigger the select if it exists
-    const select = document.querySelector(".goog-te-combo") as HTMLSelectElement;
-    if (select) {
-      select.value = code;
-      select.dispatchEvent(new Event("change"));
-    } else {
-      // Fallback: force reload so Google applies the cookie
-      window.location.reload();
-    }
+    triggerTranslate(code);
   };
 
   const currentLang = LANGS.find((l) => l.value === current) ?? LANGS[0];

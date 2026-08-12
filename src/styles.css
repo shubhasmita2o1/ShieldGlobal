@@ -1515,8 +1515,6 @@ body.nav-open {
   }
 }
 
-
-
 /* ========== Google Translate Widget Styling ========== */
 
 /* ========== Google Translate — hide default UI ========== */
@@ -1543,5 +1541,34 @@ body {
 .goog-te-combo,
 .goog-te-gadget-simple,
 .goog-logo-link {
+  display: none !important;
+}
+
+/* Hide the yellow highlight box Google draws around translated text */
+.goog-text-highlight {
+  background: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Hide the hover tooltip / pronunciation popup */
+.goog-tooltip,
+.goog-tooltip:hover,
+#goog-gt-tt,
+.goog-te-balloon-frame {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+/* Google wraps translated words in <font> tags with this class — strip any
+   residual box styling so translated text doesn't look "boxed" */
+.goog-text-highlight font,
+font.goog-text-highlight {
+  background: none !important;
+  box-shadow: none !important;
+}
+
+/* Any other top-level skiptranslate iframe Google injects (menu frame etc.) */
+body > .skiptranslate {
   display: none !important;
 }
