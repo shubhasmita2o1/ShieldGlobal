@@ -193,21 +193,17 @@ export function Testimonials() {
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: direction * -48 }}
                     transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                    className="relative min-h-[280px] overflow-hidden rounded-2xl border border-sky-200/60 p-8 shadow-[0_1px_2px_rgba(16,24,40,0.05)] transition-shadow duration-300 hover:border-sky-300/70 hover:shadow-[0_20px_50px_-28px_rgba(10,143,184,0.2)] sm:min-h-[300px] sm:p-9 lg:p-10"
-                    style={{
-                      background:
-                        "radial-gradient(120% 90% at 100% 0%, rgba(14,165,233,0.1) 0%, transparent 55%), linear-gradient(160deg, rgba(255,255,255,0.94) 0%, rgba(255,255,255,0.8) 100%)",
-                    }}
+                    className="relative min-h-[280px] overflow-hidden rounded-2xl border border-sky-200/80 bg-white p-8 shadow-[0_4px_24px_-4px_rgba(16,24,40,0.1),0_1px_3px_rgba(16,24,40,0.06)] transition-shadow duration-300 hover:border-sky-300 hover:shadow-[0_20px_50px_-20px_rgba(10,143,184,0.22)] sm:min-h-[300px] sm:p-9 lg:p-10"
                   >
                     <span
                       aria-hidden
-                      className="pointer-events-none absolute -right-6 -top-8 h-36 w-36 rounded-full bg-[radial-gradient(circle,rgba(14,165,233,0.12)_0%,transparent_70%)] blur-xl"
+                      className="pointer-events-none absolute -right-6 -top-8 h-36 w-36 rounded-full bg-[radial-gradient(circle,rgba(14,165,233,0.08)_0%,transparent_70%)] blur-xl"
                     />
                     <span
                       aria-hidden
-                      className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-sky-200/40 to-transparent"
+                      className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-sky-200/50 to-transparent"
                     />
-                    <div className="flex items-center gap-4">
+                    <div className="relative flex items-center gap-4">
                       <span
                         aria-hidden
                         className={
@@ -226,7 +222,7 @@ export function Testimonials() {
                         </p>
                       </div>
                     </div>
-                    <blockquote className="mt-7 text-[15px] leading-[1.85] text-sgg-ink-secondary sm:text-[16px]">
+                    <blockquote className="relative mt-7 text-[15px] leading-[1.85] text-sgg-ink-secondary sm:text-[16px]">
                       {active.quote}
                     </blockquote>
                   </motion.article>
@@ -237,18 +233,12 @@ export function Testimonials() {
                 aria-hidden
                 className="hidden w-[320px] shrink-0 opacity-50 lg:block"
               >
-                <div
-                  className="relative min-h-[280px] overflow-hidden rounded-2xl border border-sky-200/50 p-8 shadow-[0_1px_2px_rgba(16,24,40,0.04)] sm:min-h-[300px]"
-                  style={{
-                    background:
-                      "radial-gradient(120% 90% at 100% 0%, rgba(14,165,233,0.08) 0%, transparent 55%), linear-gradient(160deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.75) 100%)",
-                  }}
-                >
+                <div className="relative min-h-[280px] overflow-hidden rounded-2xl border border-sky-200/70 bg-white p-8 shadow-[0_4px_20px_-4px_rgba(16,24,40,0.08)] sm:min-h-[300px]">
                   <span
                     aria-hidden
-                    className="pointer-events-none absolute -right-6 -top-8 h-36 w-36 rounded-full bg-[radial-gradient(circle,rgba(14,165,233,0.1)_0%,transparent_70%)] blur-xl"
+                    className="pointer-events-none absolute -right-6 -top-8 h-36 w-36 rounded-full bg-[radial-gradient(circle,rgba(14,165,233,0.06)_0%,transparent_70%)] blur-xl"
                   />
-                  <div className="flex items-center gap-4">
+                  <div className="relative flex items-center gap-4">
                     <span
                       className={
                         "grid h-14 w-14 shrink-0 place-items-center rounded-full text-base font-semibold " +
@@ -266,7 +256,7 @@ export function Testimonials() {
                       </p>
                     </div>
                   </div>
-                  <p className="mt-7 line-clamp-5 text-[15px] leading-[1.85] text-sgg-ink-secondary sm:text-[16px]">
+                  <p className="relative mt-7 line-clamp-5 text-[15px] leading-[1.85] text-sgg-ink-secondary sm:text-[16px]">
                     {peek.quote}
                   </p>
                 </div>
