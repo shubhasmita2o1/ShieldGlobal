@@ -2,7 +2,13 @@ import { Reveal } from "./shared";
 
 export function FoundersMessage() {
   return (
-    <section className="relative bg-sgg-surface-raised py-10 sm:py-12 lg:py-14">
+    <section
+      className="relative overflow-hidden py-10 sm:py-12 lg:py-14"
+      style={{
+        background:
+          "linear-gradient(145deg, #ffffff 0%, #f0f9ff 38%, #e0f2fe 72%, #f0f9ff 100%)",
+      }}
+    >
       <div className="mx-auto max-w-5xl px-6 sm:px-8">
         <Reveal>
           <div className="flex items-center justify-center gap-3">
@@ -13,8 +19,8 @@ export function FoundersMessage() {
             <span className="h-px w-8 bg-[#0a8fb8]" />
           </div>
 
-          <div className="mt-6 rounded-2xl bg-[#0b1628] px-6 py-7 sm:px-10 sm:py-9 shadow-[0_20px_50px_-20px_rgba(15,23,42,0.45)]">
-            <blockquote className="font-[Montserrat,sans-serif] text-[14px] leading-[1.75] text-slate-200 sm:text-[15px] sm:leading-[1.8]">
+          <div className="mt-6 rounded-2xl border border-sky-200/60 bg-[#16273d]/92 px-6 py-7 sm:px-10 sm:py-9 shadow-[0_8px_30px_-12px_rgba(15,23,42,0.18)] backdrop-blur-sm">
+            <blockquote className="font-[Montserrat,sans-serif] text-[14px] leading-[1.75] text-slate-200/95 sm:text-[15px] sm:leading-[1.8]">
               <p>
                 At Shield Global Group, our vision is to build a diversified and
                 future-ready conglomerate delivering integrated solutions across
