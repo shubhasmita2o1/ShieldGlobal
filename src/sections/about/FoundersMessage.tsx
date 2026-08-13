@@ -4,44 +4,63 @@ import { Reveal, SectionEyebrow } from "./shared";
 
 export function FoundersMessage() {
   return (
-    <section className="relative bg-sgg-surface-raised py-24 sm:py-28 lg:py-32">
+    <section className="relative bg-sgg-surface-raised py-16 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-7xl px-6 sm:px-8">
-        <div className="grid items-center gap-14 lg:grid-cols-12">
-          <Reveal className="lg:col-span-5">
-            <div className="relative">
-              <div className="absolute -inset-4 -z-10 rounded-3xl bg-gradient-to-br from-[#0a8fb8]/15 via-transparent to-transparent" />
+        <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-12">
+          {/* Image column — smaller & more refined */}
+          <Reveal className="lg:col-span-4">
+            <div className="relative mx-auto w-full max-w-[280px] sm:max-w-[300px] lg:max-w-[260px]">
+              <div className="absolute -inset-2.5 -z-10 rounded-2xl bg-gradient-to-br from-[#0a8fb8]/12 via-transparent to-transparent" />
               <motion.div
                 whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                className="overflow-hidden rounded-3xl shadow-[0_30px_80px_-30px_rgba(15,23,42,0.35)]"
+                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                className="overflow-hidden rounded-2xl shadow-[0_16px_40px_-16px_rgba(15,23,42,0.28)] ring-1 ring-neutral-200/70"
               >
                 <img
                   src="http://shieldglobal.technoriya.com/Assets/founder.jpg"
                   alt="Founder, Shield Global Group"
                   loading="lazy"
-                  className="aspect-[4/5] w-full bg-neutral-100 object-contain"
+                  className="aspect-[3/4] w-full bg-neutral-100 object-cover object-top"
+                  onError={(e) => {
+                    const target = e.currentTarget;
+                    target.style.display = "none";
+                    const parent = target.parentElement;
+                    if (parent && !parent.querySelector(".img-fallback")) {
+                      const fallback = document.createElement("div");
+                      fallback.className =
+                        "img-fallback flex aspect-[3/4] w-full items-center justify-center bg-neutral-100 text-neutral-400";
+                      fallback.innerHTML =
+                        '<span class="text-sm font-medium">Founder photo</span>';
+                      parent.appendChild(fallback);
+                    }
+                  }}
                 />
               </motion.div>
-              <div className="absolute -bottom-6 left-6 rounded-xl bg-white px-5 py-3 shadow-lg ring-1 ring-neutral-200">
-                <p className="text-xs uppercase tracking-[0.2em] text-neutral-500">
+
+              {/* Name badge */}
+              <div className="absolute -bottom-3.5 left-3 rounded-lg bg-white px-3.5 py-2 shadow-md ring-1 ring-neutral-200">
+                <p className="text-[9px] font-semibold uppercase tracking-[0.16em] text-neutral-500">
                   Founder
                 </p>
-                <p className="text-sm font-semibold text-neutral-900">
+                <p className="text-[13px] font-semibold text-neutral-900">
                   Shield Global Group
                 </p>
               </div>
             </div>
           </Reveal>
 
-          <Reveal className="lg:col-span-7" delay={0.1}>
+          {/* Text column */}
+          <Reveal className="lg:col-span-8" delay={0.08}>
             <SectionEyebrow>Founder&apos;s Message</SectionEyebrow>
+
             <Quote
-              size={40}
-              className="mt-6 text-[#0a8fb8]/40"
+              size={28}
+              className="mt-4 text-[#0a8fb8]/35"
               strokeWidth={1.5}
               aria-hidden
             />
-            <blockquote className="mt-4 space-y-5 font-[Cormorant_Garamond,serif] text-xl leading-relaxed text-neutral-800 sm:text-2xl">
+
+            <blockquote className="mt-3 space-y-4 font-[Montserrat,sans-serif] text-[15px] leading-[1.75] text-neutral-700 sm:text-base sm:leading-[1.8]">
               <p>
                 At Shield Global Group, our vision is to build a diversified
                 and future-ready conglomerate delivering integrated solutions
@@ -53,17 +72,18 @@ export function FoundersMessage() {
                 through comprehensive and value-driven solutions.
               </p>
               <p>
-                Our objective is to create long-term partnerships by
-                connecting global talent, strengthening workforce capabilities,
-                driving technology-led transformation, and delivering impactful
-                brand experiences. We remain committed to sustainable growth,
+                Our objective is to create long-term partnerships by connecting
+                global talent, strengthening workforce capabilities, driving
+                technology-led transformation, and delivering impactful brand
+                experiences. We remain committed to sustainable growth,
                 operational excellence, and fostering enduring relationships
                 with our clients and stakeholders as we continue to expand our
                 footprint and contribute to business success across sectors.
               </p>
             </blockquote>
-            <footer className="mt-8 flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.2em] text-neutral-700">
-              <span className="h-px w-10 bg-neutral-400" />
+
+            <footer className="mt-6 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.18em] text-neutral-600">
+              <span className="h-px w-8 bg-neutral-300" />
               Founder, Shield Global Group
             </footer>
           </Reveal>

@@ -92,10 +92,12 @@ export function JourneyTimeline() {
     if (!el) return;
 
     const clamped = Math.min(MILESTONES.length - 1, Math.max(0, i));
+
     isClicking.current = true;
     setActive(clamped);
 
     const card = el.children[clamped] as HTMLElement | undefined;
+
     if (card) {
       card.scrollIntoView({
         behavior: "smooth",
@@ -114,11 +116,13 @@ export function JourneyTimeline() {
     if (!el) return;
 
     const max = el.scrollWidth - el.clientWidth;
+
     setProgress(max > 0 ? el.scrollLeft / max : 0);
 
     if (isClicking.current) return;
 
     const cards = Array.from(el.children) as HTMLElement[];
+
     if (!cards.length) return;
 
     const trackLeft = el.getBoundingClientRect().left;
@@ -127,8 +131,10 @@ export function JourneyTimeline() {
 
     let best = 0;
     let bestDist = Infinity;
+
     cards.forEach((card, i) => {
       const dist = Math.abs(card.getBoundingClientRect().left - origin);
+
       if (dist < bestDist) {
         bestDist = dist;
         best = i;
@@ -143,18 +149,22 @@ export function JourneyTimeline() {
   }, []);
 
   const nudge = (dir: -1 | 1) => scrollTo(active + dir);
+
   return (
     <section
       id="journey"
       aria-labelledby="journey-title"
-      className="relative overflow-hidden py-24 lg:py-28"
+      className="relative overflow-hidden py-16 sm:py-20 lg:py-24"
       style={{
         background:
           "linear-gradient(145deg, #ffffff 0%, #f0f9ff 38%, #e0f2fe 72%, #f0f9ff 100%)",
       }}
     >
-      {/* Animated popup gradients — stronger light-blue blobs that rise in & drift */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+      {/* Animated popup gradients */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 overflow-hidden"
+      >
         <motion.div
           className="absolute -left-[14%] top-[-10%] h-[580px] w-[580px] rounded-full bg-[radial-gradient(circle,rgba(10,143,184,0.22)_0%,rgba(56,189,248,0.1)_42%,transparent_70%)] blur-2xl will-change-transform"
           initial={{ opacity: 0, scale: 0.7, y: 48 }}
@@ -162,18 +172,30 @@ export function JourneyTimeline() {
             opacity: 1,
             scale: 1,
             y: 0,
-            transition: { duration: 1.15, ease: [0.22, 1, 0.36, 1] },
+            transition: {
+              duration: 1.15,
+              ease: [0.22, 1, 0.36, 1],
+            },
           }}
           viewport={{ once: true, amount: 0.2 }}
           animate={{
             x: [0, 28, 0],
             y: [0, -18, 0],
             transition: {
-              x: { duration: 14, repeat: Infinity, ease: "easeInOut" },
-              y: { duration: 14, repeat: Infinity, ease: "easeInOut" },
+              x: {
+                duration: 14,
+                repeat: Infinity,
+                ease: "easeInOut",
+              },
+              y: {
+                duration: 14,
+                repeat: Infinity,
+                ease: "easeInOut",
+              },
             },
           }}
         />
+
         <motion.div
           className="absolute -right-[10%] top-[12%] h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle,rgba(14,165,233,0.2)_0%,rgba(125,211,252,0.09)_48%,transparent_72%)] blur-2xl will-change-transform"
           initial={{ opacity: 0, scale: 0.65, y: 56 }}
@@ -181,18 +203,33 @@ export function JourneyTimeline() {
             opacity: 1,
             scale: 1,
             y: 0,
-            transition: { duration: 1.3, delay: 0.12, ease: [0.22, 1, 0.36, 1] },
+            transition: {
+              duration: 1.3,
+              delay: 0.12,
+              ease: [0.22, 1, 0.36, 1],
+            },
           }}
           viewport={{ once: true, amount: 0.15 }}
           animate={{
             x: [0, -22, 0],
             y: [0, 16, 0],
             transition: {
-              x: { duration: 16, repeat: Infinity, ease: "easeInOut", delay: 0.4 },
-              y: { duration: 16, repeat: Infinity, ease: "easeInOut", delay: 0.4 },
+              x: {
+                duration: 16,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 0.4,
+              },
+              y: {
+                duration: 16,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 0.4,
+              },
             },
           }}
         />
+
         <motion.div
           className="absolute bottom-[-14%] left-[28%] h-[460px] w-[680px] rounded-full bg-[radial-gradient(circle,rgba(10,143,184,0.18)_0%,rgba(186,230,253,0.1)_48%,transparent_70%)] blur-3xl will-change-transform"
           initial={{ opacity: 0, scale: 0.75, y: 64 }}
@@ -200,25 +237,41 @@ export function JourneyTimeline() {
             opacity: 1,
             scale: 1,
             y: 0,
-            transition: { duration: 1.35, delay: 0.22, ease: [0.22, 1, 0.36, 1] },
+            transition: {
+              duration: 1.35,
+              delay: 0.22,
+              ease: [0.22, 1, 0.36, 1],
+            },
           }}
           viewport={{ once: true, amount: 0.1 }}
           animate={{
             x: [0, 18, 0],
             y: [0, -12, 0],
             transition: {
-              x: { duration: 18, repeat: Infinity, ease: "easeInOut", delay: 0.8 },
-              y: { duration: 18, repeat: Infinity, ease: "easeInOut", delay: 0.8 },
+              x: {
+                duration: 18,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 0.8,
+              },
+              y: {
+                duration: 18,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 0.8,
+              },
             },
           }}
         />
       </div>
+
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-sky-300/60 to-transparent"
       />
 
       <div className="relative mx-auto w-full max-w-[1440px]">
+        {/* Header */}
         <motion.div
           variants={stagger}
           initial="hidden"
@@ -228,6 +281,7 @@ export function JourneyTimeline() {
         >
           <motion.div variants={fadeUp} className="min-w-0">
             <SectionEyebrow>Our Journey</SectionEyebrow>
+
             <h2
               id="journey-title"
               className="mt-4 font-[Fraunces,serif] text-4xl font-semibold leading-[1.05] tracking-tight text-neutral-900 sm:text-5xl"
@@ -246,7 +300,10 @@ export function JourneyTimeline() {
             technology and entertainment across four continents.
           </motion.p>
 
-          <motion.div variants={fadeUp} className="flex shrink-0 items-center gap-3">
+          <motion.div
+            variants={fadeUp}
+            className="flex shrink-0 items-center gap-3"
+          >
             <button
               type="button"
               aria-label="Previous milestone"
@@ -256,6 +313,7 @@ export function JourneyTimeline() {
             >
               <ArrowLeft className="h-4 w-4" />
             </button>
+
             <button
               type="button"
               aria-label="Next milestone"
@@ -268,6 +326,7 @@ export function JourneyTimeline() {
           </motion.div>
         </motion.div>
 
+        {/* Timeline */}
         <div className="relative mt-14">
           <motion.ol
             ref={trackRef}
@@ -276,21 +335,25 @@ export function JourneyTimeline() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.15 }}
-            className="flex min-h-[500px] snap-x snap-mandatory items-stretch gap-6 overflow-x-auto overflow-y-hidden scroll-smooth scroll-pl-6 px-6 pb-6 pt-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:scroll-pl-8 sm:px-8 lg:scroll-pl-12 lg:px-12"
+            className="flex min-h-[380px] snap-x snap-mandatory items-stretch gap-6 overflow-x-auto overflow-y-hidden scroll-smooth scroll-pl-6 px-6 pb-6 pt-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:scroll-pl-8 sm:px-8 lg:scroll-pl-12 lg:px-12"
           >
             {MILESTONES.map((m, i) => (
               <motion.li
                 key={m.index}
                 variants={fadeUp}
-                className="group relative flex w-[85vw] shrink-0 flex-col snap-start sm:w-[380px] lg:w-[400px]"
+                className="group relative flex w-[85vw] shrink-0 flex-col snap-start sm:w-[320px] lg:w-[340px]"
               >
+                {/* Timeline connector */}
                 <div className="relative flex h-[46px] items-center">
                   <span
                     aria-hidden
                     className={`absolute inset-x-0 top-1/2 h-px ${
-                      active === i ? "bg-[#0a8fb8]/45" : "bg-neutral-200"
+                      active === i
+                        ? "bg-[#0a8fb8]/45"
+                        : "bg-neutral-200"
                     } transition-colors`}
                   />
+
                   <span
                     aria-hidden
                     className={`relative h-2.5 w-2.5 rotate-45 border transition-all duration-500 ${
@@ -301,8 +364,9 @@ export function JourneyTimeline() {
                   />
                 </div>
 
+                {/* Card */}
                 <article
-                  className={`relative flex flex-1 min-h-[340px] flex-col overflow-hidden rounded-2xl border px-7 py-8 shadow-[0_1px_2px_rgba(16,24,40,0.05)] backdrop-blur-sm transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_26px_60px_-30px_rgba(10,143,184,0.2)] sm:px-8 sm:py-9 ${
+                  className={`relative flex flex-1 min-h-[280px] flex-col overflow-hidden rounded-2xl border px-5 py-6 shadow-[0_1px_2px_rgba(16,24,40,0.05)] backdrop-blur-sm transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_26px_60px_-30px_rgba(10,143,184,0.2)] sm:px-6 sm:py-7 ${
                     active === i
                       ? "border-sky-300/60"
                       : "border-white/80 hover:border-sky-200/70"
@@ -312,49 +376,61 @@ export function JourneyTimeline() {
                       "radial-gradient(120% 90% at 100% 0%, rgba(14,165,233,0.1) 0%, transparent 55%), linear-gradient(160deg, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.78) 100%)",
                   }}
                 >
+                  {/* Decorative glow */}
                   <span
                     aria-hidden
                     className="pointer-events-none absolute -right-6 -top-8 h-40 w-40 rounded-full bg-[radial-gradient(circle,rgba(14,165,233,0.12)_0%,transparent_70%)] blur-xl"
                   />
+
                   <span
                     aria-hidden
                     className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-sky-200/40 to-transparent"
                   />
+
+                  {/* Background Year */}
                   <span
                     aria-hidden
-                    className="pointer-events-none absolute right-5 top-3 select-none font-[Fraunces,serif] text-[92px] font-semibold leading-none tracking-tight text-sky-900/[0.045]"
+                    className="pointer-events-none absolute right-5 top-3 select-none font-[Fraunces,serif] text-[64px] font-semibold leading-none tracking-tight text-sky-900/[0.045]"
                   >
                     {m.year}
                   </span>
 
-                  <div className="relative flex items-center gap-4">
-                    <span className="font-[Fraunces,serif] text-[44px] font-semibold leading-none tracking-tight text-neutral-900">
+                  {/* Year */}
+                  <div className="relative flex items-center gap-3">
+                    <span className="font-[Fraunces,serif] text-[32px] font-semibold leading-none tracking-tight text-neutral-900">
                       {m.year}
                     </span>
+
                     <span className="h-px flex-1 bg-sky-200/60" />
-                    <span className="text-[11px] font-semibold tracking-[0.2em] text-sky-700/45 tabular-nums">
+
+                    <span className="font-[Fraunces,serif] text-[11px] font-semibold tracking-[0.2em] text-sky-700/45 tabular-nums">
                       {m.index}
                     </span>
                   </div>
 
-                  <div className="relative mt-7">
-                    <h3 className="font-[Fraunces,serif] text-[21px] font-semibold leading-snug tracking-tight text-neutral-900">
+                  {/* Content */}
+                  <div className="relative mt-6">
+                    <h3 className="font-[Montserrat,sans-serif] text-[17px] font-semibold leading-snug tracking-tight text-neutral-900">
                       {m.name}
                     </h3>
-                    <p className="mt-1.5 font-[Montserrat,sans-serif] text-[12px] font-medium uppercase tracking-[0.14em] text-[#0a8fb8]">
+
+                    <p className="mt-1.5 font-[Fraunces,serif] text-[12px] font-medium uppercase tracking-[0.14em] text-[#0a8fb8]">
                       {m.sub}
                     </p>
-                    <p className="mt-4 text-[14.5px] leading-[1.75] text-neutral-600">
+
+                    <p className="mt-4 font-[Fraunces,serif] text-[13.5px] leading-[1.7] text-neutral-600">
                       {m.desc}
                     </p>
                   </div>
 
-                  <div className="relative mt-auto flex flex-wrap items-center gap-3 border-t border-sky-100/80 pt-6">
-                    <span className="inline-flex items-center rounded-full border border-sky-100 bg-white/80 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-sky-900/65">
+                  {/* Footer Tags */}
+                  <div className="relative mt-auto flex flex-wrap items-center gap-3 border-t border-sky-100/80 pt-5">
+                    <span className="inline-flex items-center rounded-full border border-sky-100 bg-white/80 px-3 py-1.5 font-[Fraunces,serif] text-[11px] font-semibold uppercase tracking-[0.14em] text-sky-900/65">
                       {m.tag}
                     </span>
+
                     {m.flag && (
-                      <span className="inline-flex items-center gap-1.5 rounded-full bg-[#0a8fb8] px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-white">
+                      <span className="inline-flex items-center gap-1.5 rounded-full bg-[#0a8fb8] px-3 py-1.5 font-[Fraunces,serif] text-[11px] font-semibold uppercase tracking-[0.14em] text-white">
                         <ArrowUpRight className="h-3.5 w-3.5" />
                         {m.flag}
                       </span>
@@ -366,13 +442,17 @@ export function JourneyTimeline() {
           </motion.ol>
         </div>
 
+        {/* Progress */}
         <div className="mt-10 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-6 px-6 sm:px-8 lg:px-12">
           <div className="h-px w-full bg-neutral-200">
             <div
               className="h-px bg-[#0a8fb8] transition-[width] duration-200"
-              style={{ width: `${Math.max(8, progress * 100)}%` }}
+              style={{
+                width: `${Math.max(8, progress * 100)}%`,
+              }}
             />
           </div>
+
           <div className="flex shrink-0 items-center gap-6">
             <div className="hidden items-center gap-2 sm:flex">
               {MILESTONES.map((m, i) => (
@@ -389,6 +469,7 @@ export function JourneyTimeline() {
                 />
               ))}
             </div>
+
             <span className="font-[Fraunces,serif] text-sm font-semibold tabular-nums text-neutral-500">
               {MILESTONES[active].index}{" "}
               <span className="text-neutral-300">/ 08</span>
