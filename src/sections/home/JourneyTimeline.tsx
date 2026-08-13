@@ -90,7 +90,7 @@ const N = MILESTONES.length;
 // the real card render identically, so the snap is invisible.
 const EXTENDED: Milestone[] = [MILESTONES[N - 1], ...MILESTONES, MILESTONES[0]];
 
-const AUTOPLAY_MS = 4000;
+const AUTOPLAY_MS = 4200;
 const RESUME_DELAY_MS = 4500;
 const TRANSITION_MS = 800;
 const TRANSITION = { duration: TRANSITION_MS / 1000, ease: [0.22, 1, 0.36, 1] as const };
@@ -111,7 +111,6 @@ export function JourneyTimeline() {
   const [containerWidth, setContainerWidth] = useState(0);
 
   const resumeTimeoutRef = useRef<number | null>(null);
-  const snapTimeoutRef = useRef<number | null>(null);
   const touchStartX = useRef<number | null>(null);
 
   const activeIndex = ((trackIndex - 1) % N + N) % N;
@@ -148,41 +147,86 @@ export function JourneyTimeline() {
   useLayoutEffect(() => {
     measure();
     const t = window.setTimeout(measure, 200); // catch late font/layout settle
-    let ro: ResizeObserver | undefined;
-    if (typeof ResizeObserver !== "undefined" && viewportRef.current) {
-      ro = new ResizeObserver(() => measure());
-      ro.observe(viewportRef.current);
-    }
-    window.addEventListener("resize", measure);
+
+    // Plain debounced window resize only — a ResizeObserver on the viewport
+    // can re-fire mid-transition (transforms/scale don't change layout size,
+    // but some browsers still emit a tick) and was a source of the timer
+    // getting knocked off its cadence. Window resize is enough here since
+    // the track's own width never changes on its own.
+    let resizeTimer: number | null = null;
+    const onResize = () => {
+      if (resizeTimer) window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(measure, 120);
+    };
+    window.addEventListener("resize", onResize);
+
     return () => {
       window.clearTimeout(t);
-      ro?.disconnect();
-      window.removeEventListener("resize", measure);
+      if (resizeTimer) window.clearTimeout(resizeTimer);
+      window.removeEventListener("resize", onResize);
     };
   }, [measure]);
 
   // ---- Infinite-loop snap: after crossing a clone, jump back silently ----
+  // Rebuilt to match the technique already proven in the Partners marquee:
+  // that section is pure CSS (a @keyframes animation on a duplicated list)
+  // with zero JS timing involved, which is why it never stutters. This
+  // track is a discrete "step to a position" carousel rather than a
+  // continuously drifting one, so it can't be pure @keyframes — but it can
+  // use the same underlying principle: a plain CSS `transition` on
+  // `transform`, with the loop-reset driven by the browser's own native
+  // `transitionend` event instead of a JS animation library's completion
+  // callback or a guessed setTimeout. `transitionend` only ever fires when
+  // the browser has actually finished painting the transition, so the snap
+  // can never land mid-glide.
+  const trackIndexRef = useRef(trackIndex);
   useEffect(() => {
-    if (trackIndex !== 0 && trackIndex !== N + 1) return;
+    trackIndexRef.current = trackIndex;
+  }, [trackIndex]);
 
-    if (snapTimeoutRef.current) window.clearTimeout(snapTimeoutRef.current);
-    snapTimeoutRef.current = window.setTimeout(
-      () => {
-        setJumping(true);
-        setTrackIndex(trackIndex === 0 ? N : 1);
-      },
-      reducedMotion ? 0 : TRANSITION_MS,
-    );
+  const snap = useCallback((target: number) => {
+    setJumping(true);
+    setTrackIndex(target);
+  }, []);
 
-    return () => {
-      if (snapTimeoutRef.current) window.clearTimeout(snapTimeoutRef.current);
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+
+    const onTransitionEnd = (e: TransitionEvent) => {
+      if (e.target !== el || e.propertyName !== "transform") return;
+      const idx = trackIndexRef.current;
+      if (idx === 0) snap(N);
+      else if (idx === N + 1) snap(1);
     };
-  }, [trackIndex, reducedMotion]);
 
+    el.addEventListener("transitionend", onTransitionEnd);
+    return () => el.removeEventListener("transitionend", onTransitionEnd);
+  }, [snap]);
+
+  // Reduced-motion (or an instant target already at rest, e.g. clicking a
+  // dot while jumping) never fires transitionend, so cover that case too.
+  useEffect(() => {
+    if (!reducedMotion) return;
+    if (trackIndex === 0) snap(N);
+    else if (trackIndex === N + 1) snap(1);
+  }, [trackIndex, reducedMotion, snap]);
+
+  // Once the "no transition" snap frame has actually been painted, restore
+  // normal transitions. Double rAF guarantees the browser painted the
+  // jumped position at least once before transitions re-enable — a single
+  // rAF can still land before paint on some browsers and cause a flash of
+  // the old glide animation.
   useEffect(() => {
     if (!jumping) return;
-    const raf = requestAnimationFrame(() => setJumping(false));
-    return () => cancelAnimationFrame(raf);
+    let raf2 = 0;
+    const raf1 = requestAnimationFrame(() => {
+      raf2 = requestAnimationFrame(() => setJumping(false));
+    });
+    return () => {
+      cancelAnimationFrame(raf1);
+      if (raf2) cancelAnimationFrame(raf2);
+    };
   }, [jumping]);
 
   // ---- Pause / resume ----
@@ -223,14 +267,25 @@ export function JourneyTimeline() {
     goToReal(i);
   };
 
-  // ---- Autoplay: single interval, always cleaned up before the next one starts ----
+  // ---- Autoplay: one steady interval, independent of trackIndex ----
+  // Deliberately NOT depending on trackIndex here. The infinite-loop "snap"
+  // above also changes trackIndex once per full cycle (to reset off the
+  // cloned card), and if the interval were rebuilt on every trackIndex
+  // change it would restart its countdown right after that snap too —
+  // producing a short extra gap/stutter once per loop. A ref keeps the
+  // callback fresh without that coupling.
+  const goNextRef = useRef(goNext);
+  useEffect(() => {
+    goNextRef.current = goNext;
+  }, [goNext]);
+
   useEffect(() => {
     if (isPaused || reducedMotion) return;
     const id = window.setInterval(() => {
-      setTrackIndex((i) => i + 1);
+      goNextRef.current();
     }, AUTOPLAY_MS);
     return () => window.clearInterval(id);
-  }, [isPaused, reducedMotion, trackIndex]);
+  }, [isPaused, reducedMotion]);
 
   // ---- Touch swipe ----
   const onTouchStart = (e: React.TouchEvent) => {
@@ -252,7 +307,13 @@ export function JourneyTimeline() {
   };
 
   const paddingX = Math.max(0, (containerWidth - cardWidth) / 2);
-  const transition = jumping || reducedMotion ? INSTANT : TRANSITION;
+  const cssTransition =
+    jumping || reducedMotion
+      ? "none"
+      : `transform ${TRANSITION_MS}ms cubic-bezier(0.22, 1, 0.36, 1)`;
+  // Kept for the per-card scale/opacity, which stay on Framer Motion since
+  // getting those a frame early/late is cosmetically harmless.
+  const cardTransition = jumping || reducedMotion ? INSTANT : TRANSITION;
 
   return (
     <section
@@ -447,11 +508,14 @@ export function JourneyTimeline() {
             onTouchStart={onTouchStart}
             onTouchEnd={onTouchEnd}
           >
-            <motion.ol
+            <ol
               ref={trackRef}
-              animate={{ x: -trackIndex * step }}
-              transition={transition}
-              style={{ paddingLeft: paddingX, paddingRight: paddingX }}
+              style={{
+                paddingLeft: paddingX,
+                paddingRight: paddingX,
+                transform: `translate3d(${-trackIndex * step}px, 0, 0)`,
+                transition: cssTransition,
+              }}
               className="flex min-h-[380px] items-stretch gap-6 pb-6 pt-1 will-change-transform"
             >
               {EXTENDED.map((m, i) => {
@@ -489,7 +553,7 @@ export function JourneyTimeline() {
                         scale: isActive ? 1 : near ? 0.96 : 0.93,
                         opacity: isActive ? 1 : near ? 0.85 : 0.6,
                       }}
-                      transition={transition}
+                      transition={cardTransition}
                       className={`relative flex flex-1 min-h-[280px] flex-col overflow-hidden rounded-2xl border px-5 py-6 backdrop-blur-sm sm:px-6 sm:py-7 ${
                         isActive
                           ? "border-sky-300/70 shadow-[0_26px_60px_-30px_rgba(10,143,184,0.28)]"
@@ -564,7 +628,7 @@ export function JourneyTimeline() {
                   </li>
                 );
               })}
-            </motion.ol>
+            </ol>
           </div>
         </motion.div>
 
