@@ -2,33 +2,28 @@ import { Reveal } from "./shared";
 
 export function FoundersMessage() {
   return (
-    <section
-      className="relative overflow-hidden py-12 sm:py-14 lg:py-16"
-      style={{
-        background:
-          "linear-gradient(145deg, #ffffff 0%, #f0f9ff 38%, #e0f2fe 72%, #f0f9ff 100%)",
-      }}
-    >
+    <section className="relative overflow-hidden bg-[image:var(--sgg-g-charcoal)] py-12 sm:py-14 lg:py-16 text-sgg-ink-inverse">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 overflow-hidden"
-      >
-        <div className="absolute -left-[10%] top-[-20%] h-[360px] w-[360px] rounded-full bg-[radial-gradient(circle,rgba(10,143,184,0.14)_0%,transparent_70%)] blur-2xl" />
-        <div className="absolute -right-[8%] bottom-[-24%] h-[320px] w-[320px] rounded-full bg-[radial-gradient(circle,rgba(14,165,233,0.12)_0%,transparent_70%)] blur-2xl" />
-      </div>
+        className="absolute inset-0 opacity-[0.07]"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle at 20% 20%, var(--sgg-ink-accent) 0px, transparent 40%), radial-gradient(circle at 80% 60%, var(--sgg-ink-accent-dark) 0px, transparent 45%)",
+        }}
+      />
 
       <div className="relative mx-auto max-w-5xl px-6 sm:px-8">
         <Reveal>
           <div className="flex items-center justify-center gap-3">
-            <span className="h-px w-8 bg-[#0a8fb8]" />
-            <span className="text-xs font-semibold uppercase tracking-[0.22em] text-[#0a8fb8]">
+            <span className="h-px w-8 bg-sgg-ink-accent-dark" />
+            <span className="text-xs font-semibold uppercase tracking-[0.22em] text-sgg-ink-accent-dark">
               Founder's Message
             </span>
-            <span className="h-px w-8 bg-[#0a8fb8]" />
+            <span className="h-px w-8 bg-sgg-ink-accent-dark" />
           </div>
 
-          <div className="mt-6 rounded-2xl border border-sky-200/80 bg-white px-6 py-7 sm:px-10 sm:py-9 shadow-[0_4px_24px_-4px_rgba(16,24,40,0.1),0_1px_3px_rgba(16,24,40,0.06)]">
-            <blockquote className="font-[Montserrat,sans-serif] text-[14px] leading-[1.75] text-slate-600 sm:text-[15px] sm:leading-[1.8]">
+          <div className="mt-6 rounded-2xl border border-sgg-border-dark bg-white/[0.06] px-6 py-7 sm:px-10 sm:py-9 backdrop-blur-sm">
+            <blockquote className="font-[Montserrat,sans-serif] text-[14px] leading-[1.75] text-sgg-ink-inverse-2 sm:text-[15px] sm:leading-[1.8]">
               <p>
                 At Shield Global Group, our vision is to build a diversified and
                 future-ready conglomerate delivering integrated solutions across
@@ -49,7 +44,7 @@ export function FoundersMessage() {
                 footprint and contribute to business success across sectors.
               </p>
 
-              <footer className="mt-6 text-[13px] font-medium text-slate-500">
+              <footer className="mt-6 text-[13px] font-medium text-sgg-ink-inverse-2/80">
                 &mdash; Founder, Shield Global Group
               </footer>
             </blockquote>
