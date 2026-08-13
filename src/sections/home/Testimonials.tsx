@@ -78,14 +78,58 @@ export function Testimonials() {
   const peek = TESTIMONIALS[(index + 1) % TESTIMONIALS.length];
 
   return (
-   <section
+    <section
       id="testimonials"
       aria-labelledby="testimonials-title"
-      className="relative overflow-hidden bg-sgg-surface-canvas py-20 sm:py-24 lg:py-28"
+      className="relative overflow-hidden py-20 sm:py-24 lg:py-28"
+      style={{
+        background:
+          "linear-gradient(145deg, #ffffff 0%, #f0f9ff 38%, #e0f2fe 72%, #f0f9ff 100%)",
+      }}
     >
+      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+        <motion.div
+          className="absolute -left-[14%] top-[-12%] h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle,rgba(10,143,184,0.2)_0%,rgba(56,189,248,0.09)_42%,transparent_70%)] blur-2xl will-change-transform"
+          initial={{ opacity: 0, scale: 0.7, y: 48 }}
+          whileInView={{
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            transition: { duration: 1.15, ease: [0.22, 1, 0.36, 1] },
+          }}
+          viewport={{ once: true, amount: 0.2 }}
+          animate={{
+            x: [0, 24, 0],
+            y: [0, -16, 0],
+            transition: {
+              x: { duration: 14, repeat: Infinity, ease: "easeInOut" },
+              y: { duration: 14, repeat: Infinity, ease: "easeInOut" },
+            },
+          }}
+        />
+        <motion.div
+          className="absolute -right-[10%] bottom-[-16%] h-[480px] w-[480px] rounded-full bg-[radial-gradient(circle,rgba(14,165,233,0.18)_0%,rgba(125,211,252,0.08)_48%,transparent_72%)] blur-2xl will-change-transform"
+          initial={{ opacity: 0, scale: 0.65, y: 56 }}
+          whileInView={{
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            transition: { duration: 1.3, delay: 0.12, ease: [0.22, 1, 0.36, 1] },
+          }}
+          viewport={{ once: true, amount: 0.15 }}
+          animate={{
+            x: [0, -20, 0],
+            y: [0, 14, 0],
+            transition: {
+              x: { duration: 16, repeat: Infinity, ease: "easeInOut", delay: 0.4 },
+              y: { duration: 16, repeat: Infinity, ease: "easeInOut", delay: 0.4 },
+            },
+          }}
+        />
+      </div>
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(900px_400px_at_50%_-20%,rgba(47,211,232,0.08),transparent_60%)]"
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-sky-300/60 to-transparent"
       />
 
       <div className="relative mx-auto w-full max-w-[1440px] px-6 sm:px-8 lg:px-12">
@@ -149,8 +193,20 @@ export function Testimonials() {
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: direction * -48 }}
                     transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                    className="min-h-[280px] rounded-2xl border border-sgg-border-default bg-sgg-surface-raised p-8 shadow-[var(--sgg-e1)] transition-shadow duration-300 sm:min-h-[300px] sm:p-9 lg:p-10"
+                    className="relative min-h-[280px] overflow-hidden rounded-2xl border border-sky-200/60 p-8 shadow-[0_1px_2px_rgba(16,24,40,0.05)] transition-shadow duration-300 hover:border-sky-300/70 hover:shadow-[0_20px_50px_-28px_rgba(10,143,184,0.2)] sm:min-h-[300px] sm:p-9 lg:p-10"
+                    style={{
+                      background:
+                        "radial-gradient(120% 90% at 100% 0%, rgba(14,165,233,0.1) 0%, transparent 55%), linear-gradient(160deg, rgba(255,255,255,0.94) 0%, rgba(255,255,255,0.8) 100%)",
+                    }}
                   >
+                    <span
+                      aria-hidden
+                      className="pointer-events-none absolute -right-6 -top-8 h-36 w-36 rounded-full bg-[radial-gradient(circle,rgba(14,165,233,0.12)_0%,transparent_70%)] blur-xl"
+                    />
+                    <span
+                      aria-hidden
+                      className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-sky-200/40 to-transparent"
+                    />
                     <div className="flex items-center gap-4">
                       <span
                         aria-hidden
@@ -181,7 +237,17 @@ export function Testimonials() {
                 aria-hidden
                 className="hidden w-[320px] shrink-0 opacity-50 lg:block"
               >
-                <div className="min-h-[280px] rounded-2xl border border-sgg-border-default bg-sgg-surface-raised p-8 shadow-[var(--sgg-e1)] sm:min-h-[300px]">
+                <div
+                  className="relative min-h-[280px] overflow-hidden rounded-2xl border border-sky-200/50 p-8 shadow-[0_1px_2px_rgba(16,24,40,0.04)] sm:min-h-[300px]"
+                  style={{
+                    background:
+                      "radial-gradient(120% 90% at 100% 0%, rgba(14,165,233,0.08) 0%, transparent 55%), linear-gradient(160deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.75) 100%)",
+                  }}
+                >
+                  <span
+                    aria-hidden
+                    className="pointer-events-none absolute -right-6 -top-8 h-36 w-36 rounded-full bg-[radial-gradient(circle,rgba(14,165,233,0.1)_0%,transparent_70%)] blur-xl"
+                  />
                   <div className="flex items-center gap-4">
                     <span
                       className={
