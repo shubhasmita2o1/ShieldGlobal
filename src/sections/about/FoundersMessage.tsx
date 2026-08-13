@@ -9,7 +9,6 @@ export function FoundersMessage() {
           "linear-gradient(145deg, #ffffff 0%, #f0f9ff 38%, #e0f2fe 72%, #f0f9ff 100%)",
       }}
     >
-      {/* Soft ambient glow like testimonials */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 overflow-hidden"
@@ -28,8 +27,8 @@ export function FoundersMessage() {
             <span className="h-px w-8 bg-[#0a8fb8]" />
           </div>
 
-          <div className="mt-6 rounded-2xl border border-sky-200/70 bg-[#1a3352]/80 px-6 py-7 sm:px-10 sm:py-9 shadow-[0_6px_24px_-8px_rgba(15,23,42,0.12)] backdrop-blur-md">
-            <blockquote className="font-[Montserrat,sans-serif] text-[14px] leading-[1.75] text-slate-100/95 sm:text-[15px] sm:leading-[1.8]">
+          <div className="mt-6 rounded-2xl border border-sky-200/80 bg-white px-6 py-7 sm:px-10 sm:py-9 shadow-[0_4px_24px_-4px_rgba(16,24,40,0.1),0_1px_3px_rgba(16,24,40,0.06)]">
+            <blockquote className="font-[Montserrat,sans-serif] text-[14px] leading-[1.75] text-slate-600 sm:text-[15px] sm:leading-[1.8]">
               <p>
                 At Shield Global Group, our vision is to build a diversified and
                 future-ready conglomerate delivering integrated solutions across
@@ -50,7 +49,7 @@ export function FoundersMessage() {
                 footprint and contribute to business success across sectors.
               </p>
 
-              <footer className="mt-6 text-[13px] font-medium text-sky-200/70">
+              <footer className="mt-6 text-[13px] font-medium text-slate-500">
                 &mdash; Founder, Shield Global Group
               </footer>
             </blockquote>
