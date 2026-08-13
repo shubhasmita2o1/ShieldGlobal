@@ -1,12 +1,16 @@
 import { useEffect, useRef, useState } from "react";
+import { animate, motion, useInView, useReducedMotion } from "framer-motion";
 import {
-  animate,
-  motion,
-  useInView,
-  useReducedMotion,
-} from "framer-motion";
-import { Award, Building2, Globe2, Layers, Users, Briefcase } from "lucide-react";
+  Award,
+  Building2,
+  Globe2,
+  Layers,
+  Users,
+  Briefcase,
+  FileDown,
+} from "lucide-react";
 import { fadeUp, stagger, SectionEyebrow } from "@/sections/about/shared";
+import achievementsVideo from "@/assets/HV4.mp4.asset.json";
 
 type Stat = {
   icon: typeof Award;
@@ -88,6 +92,8 @@ function CountUp({ value, suffix }: { value: number; suffix?: string }) {
 }
 
 export function Achievements() {
+  const reduceMotion = useReducedMotion();
+
   return (
     <section
       aria-labelledby="achievements-title"
@@ -108,48 +114,86 @@ export function Achievements() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.2 }}
+          className="grid items-stretch gap-10 lg:grid-cols-[45fr_55fr] lg:gap-16"
         >
-          <motion.div variants={fadeUp} className="max-w-2xl">
-            <SectionEyebrow>Achievements</SectionEyebrow>
-            <h2
-              id="achievements-title"
-              className="mt-4 font-[Fraunces,serif] text-3xl font-semibold leading-[1.08] tracking-tight text-white sm:text-4xl lg:text-[2.75rem]"
+          {/* LEFT — stats + CTA */}
+          <div className="flex min-w-0 flex-col">
+            <motion.div variants={fadeUp}>
+              <SectionEyebrow>Achievements</SectionEyebrow>
+              <h2
+                id="achievements-title"
+                className="mt-4 font-[Fraunces,serif] text-3xl font-semibold leading-[1.08] tracking-tight text-white sm:text-4xl lg:text-[2.5rem]"
+              >
+                A record measured in{" "}
+                <span className="text-white/40">scale and continuity</span>
+              </h2>
+              <p className="mt-4 max-w-xl text-[14.5px] leading-[1.8] text-[#c2c8d6]">
+                Almost two decades of cross-border delivery across Asia, Africa,
+                the Middle East and Europe — four business verticals under one
+                group.
+              </p>
+            </motion.div>
+
+            <motion.ul
+              variants={stagger}
+              className="mt-8 grid grid-cols-2 gap-x-8 gap-y-7 border-t border-white/10 pt-7 sm:grid-cols-3 sm:gap-x-6"
             >
-              A record measured in{" "}
-              <span className="text-white/40">scale and continuity</span>
-            </h2>
-            <p className="mt-5 max-w-xl text-[15px] leading-[1.85] text-[#c2c8d6]">
-              Milestones built over almost two decades of cross-border delivery
-              across three business verticals.
-            </p>
+              {STATS.map(({ icon: Icon, value, suffix, label }) => (
+                <motion.li key={label} variants={fadeUp} className="min-w-0">
+                  <Icon
+                    size={15}
+                    strokeWidth={1.75}
+                    aria-hidden
+                    className="text-[#0a8fb8]"
+                  />
+                  <p className="mt-2.5 font-[Fraunces,serif] text-[28px] font-semibold leading-none tracking-tight text-white tabular-nums sm:text-[30px] lg:text-[34px]">
+                    <CountUp value={value} suffix={suffix} />
+                  </p>
+                  <h3 className="mt-2 text-[10.5px] font-semibold uppercase leading-snug tracking-[0.14em] text-[#7ed7ee]">
+                    {label}
+                  </h3>
+                </motion.li>
+              ))}
+            </motion.ul>
+
+            <motion.div variants={fadeUp} className="mt-8">
+              <a
+                href="/company-profile.pdf"
+                download
+                aria-label="Download the Shield Global Group company profile (PDF)"
+                className="group inline-flex items-center gap-3 rounded-full bg-[#0a8fb8] px-7 py-3.5 text-[13px] font-semibold uppercase tracking-[0.14em] text-white transition-colors duration-300 hover:bg-[#0b7ea3] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7ed7ee] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a1220]"
+              >
+                <FileDown size={17} strokeWidth={1.9} aria-hidden />
+                Download Company Profile
+              </a>
+            </motion.div>
+          </div>
+
+          {/* RIGHT — cinematic video */}
+          <motion.div
+            variants={fadeUp}
+            className="relative min-w-0 overflow-hidden rounded-3xl border border-white/10"
+          >
+            <video
+              className="h-[220px] w-full object-cover sm:h-[300px] lg:absolute lg:inset-0 lg:h-full"
+              src={achievementsVideo.url}
+              autoPlay={!reduceMotion}
+              loop
+              muted
+              playsInline
+              preload="metadata"
+              aria-label="Shield Global Group industrial and corporate operations footage"
+            />
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0a1220]/75 via-[#0a1220]/20 to-transparent"
+            />
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 bg-[#0a8fb8]/10 mix-blend-overlay"
+            />
           </motion.div>
 
-          {/* Single horizontal row — scrollable on smaller screens */}
-          <motion.ul
-            variants={stagger}
-            className="mt-12 flex gap-px overflow-x-auto rounded-3xl border border-white/[0.1] bg-white/[0.08] scrollbar-thin lg:mt-16 lg:overflow-visible"
-          >
-            {STATS.map(({ icon: Icon, value, suffix, label, detail }) => (
-              <motion.li
-                key={label}
-                variants={fadeUp}
-                className="group min-w-[200px] flex-1 bg-[#0d1725] p-6 transition-colors duration-300 hover:bg-[#101f31] sm:min-w-[220px] sm:p-7 lg:min-w-0 lg:p-8"
-              >
-                <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#0a8fb8]/15 text-[#7ed7ee] transition-colors group-hover:bg-[#0a8fb8] group-hover:text-white">
-                  <Icon size={18} strokeWidth={1.75} aria-hidden />
-                </span>
-                <p className="mt-5 font-[Fraunces,serif] text-[32px] font-semibold leading-none tracking-tight text-white tabular-nums sm:text-[36px] lg:text-[40px]">
-                  <CountUp value={value} suffix={suffix} />
-                </p>
-                <h3 className="mt-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#0a8fb8] sm:text-[12px]">
-                  {label}
-                </h3>
-                <p className="mt-2 text-[12.5px] leading-relaxed text-[#9aa3b6] sm:text-[13px]">
-                  {detail}
-                </p>
-              </motion.li>
-            ))}
-          </motion.ul>
         </motion.div>
       </div>
     </section>
