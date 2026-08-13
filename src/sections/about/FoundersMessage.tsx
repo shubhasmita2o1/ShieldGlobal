@@ -3,7 +3,7 @@ import { Reveal } from "./shared";
 
 export function FoundersMessage() {
   return (
-    <section className="relative bg-sgg-surface-raised py-16 sm:py-20 lg:py-24">
+    <section className="relative bg-sgg-surface-raised py-10 sm:py-12 lg:py-14">
       <div className="mx-auto max-w-3xl px-6 sm:px-8">
         <Reveal>
           {/* Centered eyebrow */}
@@ -15,15 +15,15 @@ export function FoundersMessage() {
             <span className="h-px w-8 bg-[#0a8fb8]" />
           </div>
 
-          <div className="relative mt-8 text-center">
+          <div className="relative mt-5 text-center">
             <Quote
-              size={40}
+              size={32}
               className="mx-auto text-[#0a8fb8]/25"
               strokeWidth={1.25}
               aria-hidden
             />
 
-            <blockquote className="mt-6 space-y-5 font-[Montserrat,sans-serif] text-[15px] leading-[1.8] text-neutral-700 sm:text-base sm:leading-[1.85]">
+            <blockquote className="mt-4 space-y-4 font-[Montserrat,sans-serif] text-[15px] leading-[1.75] text-neutral-700 sm:text-base sm:leading-[1.8]">
               <p>
                 &ldquo;At Shield Global Group, our vision is to build a
                 diversified and future-ready conglomerate delivering integrated
@@ -47,7 +47,7 @@ export function FoundersMessage() {
               </p>
             </blockquote>
 
-            <footer className="mt-8 flex items-center justify-center gap-3 text-xs font-semibold uppercase tracking-[0.18em] text-neutral-600">
+            <footer className="mt-5 flex items-center justify-center gap-3 text-xs font-semibold uppercase tracking-[0.18em] text-neutral-600">
               <span className="h-px w-8 bg-neutral-300" />
               Founder, Shield Global Group
               <span className="h-px w-8 bg-neutral-300" />
