@@ -10,7 +10,6 @@ import {
   FileDown,
 } from "lucide-react";
 import { fadeUp, stagger, SectionEyebrow } from "@/sections/about/shared";
-import achievementsVideo from "@/assets/HV4.mp4.asset.json";
 
 type Stat = {
   icon: typeof Award;
@@ -176,7 +175,7 @@ export function Achievements() {
           >
             <video
               className="h-[220px] w-full object-cover sm:h-[300px] lg:absolute lg:inset-0 lg:h-full"
-              src={achievementsVideo.url}
+              src="/achievement.mp4"
               autoPlay={!reduceMotion}
               loop
               muted
@@ -193,7 +192,6 @@ export function Achievements() {
               className="pointer-events-none absolute inset-0 bg-[#0a8fb8]/10 mix-blend-overlay"
             />
           </motion.div>
-
         </motion.div>
       </div>
     </section>
