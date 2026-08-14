@@ -41,21 +41,13 @@ export function ServiceBlockSection({ block }: { block: ServiceBlock }) {
 
   if (block.variant === "cards") {
     return (
-      <section className="relative overflow-hidden">
+      <section className="relative overflow-hidden bg-[image:var(--sgg-g-hero)]">
         <div
           aria-hidden
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(165deg, #1a2a3e 0%, #243447 45%, #1e3146 100%)",
-          }}
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0"
+          className="pointer-events-none absolute inset-0 opacity-[0.07]"
           style={{
             backgroundImage:
-              "radial-gradient(ellipse 70% 50% at 90% 10%, rgba(47, 211, 232, 0.08), transparent 50%), radial-gradient(ellipse 50% 40% at 10% 90%, rgba(46, 124, 246, 0.07), transparent 50%)",
+              "radial-gradient(circle at 20% 20%, var(--sgg-ink-accent) 0px, transparent 40%), radial-gradient(circle at 80% 60%, var(--sgg-ink-accent-dark) 0px, transparent 45%)",
           }}
         />
         <div className="relative mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20 lg:py-24">
