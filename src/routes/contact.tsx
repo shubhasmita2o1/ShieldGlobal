@@ -39,7 +39,7 @@ export const Route = createFileRoute("/contact")({
           name: "Shield Global Group",
           url: "/",
           email: "info@shieldglobalindia.com",
-          telephone: "+22 28678678",
+          telephone: "+22 2235056652",
           address: {
             "@type": "PostalAddress",
             streetAddress: "104, Hinal Residency, Dahanukarwadi Junction, Kandivali West",
