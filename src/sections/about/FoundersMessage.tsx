@@ -2,7 +2,7 @@ import { Reveal } from "./shared";
 
 export function FoundersMessage() {
   return (
-    <section className="relative overflow-hidden bg-[image:var(--sgg-g-charcoal)] py-12 sm:py-14 lg:py-16 text-sgg-ink-inverse">
+    <section className="relative overflow-hidden bg-[image:var(--sgg-g-hero)] py-12 sm:py-14 lg:py-16 text-sgg-ink-inverse">
       <div
         aria-hidden
         className="absolute inset-0 opacity-[0.07]"
