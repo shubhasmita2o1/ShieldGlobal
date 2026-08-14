@@ -8,8 +8,24 @@ export function ServiceBlockSection({ block }: { block: ServiceBlock }) {
 
   if (block.variant === "dark") {
     return (
-      <section className="bg-sgg-surface-dark">
-        <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20 lg:py-24">
+      <section className="relative overflow-hidden">
+        <div
+          aria-hidden
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(160deg, #08111e 0%, #0c1a2e 40%, #14263f 100%)",
+          }}
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0"
+          style={{
+            backgroundImage:
+              "radial-gradient(ellipse 70% 50% at 15% 20%, rgba(47, 211, 232, 0.14), transparent 55%), radial-gradient(ellipse 60% 45% at 90% 80%, rgba(46, 124, 246, 0.12), transparent 50%)",
+          }}
+        />
+        <div className="relative mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20 lg:py-24">
           <BlockHeading block={block} tone="dark" />
           <motion.ul
             className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
@@ -23,9 +39,9 @@ export function ServiceBlockSection({ block }: { block: ServiceBlock }) {
                 key={item}
                 variants={fadeUp}
                 whileHover={{ y: -4 }}
-                className="flex items-center gap-4 rounded-2xl border border-sgg-border-dark bg-white/[0.04] p-5 backdrop-blur-sm transition-colors duration-300 hover:border-sgg-border-accent hover:bg-white/[0.08]"
+                className="flex items-center gap-4 rounded-2xl border border-sgg-border-dark bg-gradient-to-br from-white/[0.08] to-white/[0.02] p-5 backdrop-blur-sm transition-colors duration-300 hover:border-sgg-border-accent hover:from-white/[0.12] hover:to-white/[0.04]"
               >
-                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-sgg-ink-accent-dark/15 text-sgg-ink-accent-dark">
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-sgg-ink-accent-dark/25 to-sgg-ink-accent/15 text-sgg-ink-accent-dark">
                   <Icon size={20} aria-hidden="true" />
                 </span>
                 <span className="min-w-0 text-base font-medium text-sgg-ink-inverse">
@@ -41,8 +57,24 @@ export function ServiceBlockSection({ block }: { block: ServiceBlock }) {
 
   if (block.variant === "cards") {
     return (
-      <section className="bg-sgg-surface-raised">
-        <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20 lg:py-24">
+      <section className="relative overflow-hidden">
+        <div
+          aria-hidden
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(180deg, #f4f8fc 0%, #eef4fa 45%, #e8f0f7 100%)",
+          }}
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0"
+          style={{
+            backgroundImage:
+              "radial-gradient(ellipse 80% 50% at 100% 0%, rgba(46, 124, 246, 0.06), transparent 50%), radial-gradient(ellipse 60% 40% at 0% 100%, rgba(47, 211, 232, 0.07), transparent 50%)",
+          }}
+        />
+        <div className="relative mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20 lg:py-24">
           <BlockHeading block={block} />
           <motion.ul
             className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
@@ -56,13 +88,13 @@ export function ServiceBlockSection({ block }: { block: ServiceBlock }) {
                 key={item}
                 variants={fadeUp}
                 whileHover={{ y: -6 }}
-                className="group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-sgg-border-default bg-sgg-surface-raised p-7 shadow-[var(--sgg-e1)] transition-all duration-300 hover:border-sgg-border-accent hover:shadow-[var(--sgg-e3)]"
+                className="group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-sgg-border-default bg-gradient-to-br from-white via-[#f8fbfd] to-[#eef5fb] p-7 shadow-[var(--sgg-e1)] transition-all duration-300 hover:border-sgg-border-accent hover:shadow-[var(--sgg-e3)]"
               >
                 <span
                   aria-hidden="true"
                   className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-[image:var(--sgg-g-cta)] transition-transform duration-500 group-hover:scale-x-100"
                 />
-                <span className="grid h-12 w-12 place-items-center rounded-xl bg-sgg-surface-dark text-sgg-ink-inverse transition-colors duration-300 group-hover:bg-sgg-ink-accent">
+                <span className="grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br from-[#08111e] to-[#14263f] text-sgg-ink-inverse transition-colors duration-300 group-hover:from-sgg-ink-accent group-hover:to-sgg-ink-accent-dark">
                   <Icon size={20} aria-hidden="true" />
                 </span>
                 <h3 className="mt-6 text-lg font-semibold leading-snug text-sgg-ink-primary">
@@ -78,8 +110,24 @@ export function ServiceBlockSection({ block }: { block: ServiceBlock }) {
 
   if (block.variant === "checks") {
     return (
-      <section className="bg-sgg-surface-raised">
-        <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20 lg:py-24">
+      <section className="relative overflow-hidden">
+        <div
+          aria-hidden
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(165deg, #edf3f9 0%, #f5f8fc 40%, #e8f1f8 100%)",
+          }}
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0"
+          style={{
+            backgroundImage:
+              "radial-gradient(ellipse 70% 45% at 0% 50%, rgba(46, 124, 246, 0.06), transparent 55%), radial-gradient(ellipse 50% 40% at 100% 30%, rgba(47, 211, 232, 0.08), transparent 50%)",
+          }}
+        />
+        <div className="relative mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20 lg:py-24">
           <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
             <Reveal className="lg:col-span-4">
               <SectionEyebrow>{block.eyebrow}</SectionEyebrow>
@@ -102,7 +150,7 @@ export function ServiceBlockSection({ block }: { block: ServiceBlock }) {
                 <motion.li
                   key={item}
                   variants={fadeUp}
-                  className="flex gap-3.5 rounded-xl border border-transparent p-3 transition-colors duration-300 hover:border-sgg-border-default hover:bg-sgg-surface-tinted"
+                  className="flex gap-3.5 rounded-xl border border-transparent p-3 transition-colors duration-300 hover:border-sgg-border-default hover:bg-white/70"
                 >
                   <CheckCircle2
                     size={20}
@@ -123,8 +171,24 @@ export function ServiceBlockSection({ block }: { block: ServiceBlock }) {
 
   /* tiles */
   return (
-    <section className="border-y border-sgg-border-default bg-sgg-surface-sunken">
-      <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
+    <section className="relative overflow-hidden">
+      <div
+        aria-hidden
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(180deg, #e4ecf5 0%, #eaf1f8 50%, #e2ebf4 100%)",
+        }}
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage:
+            "radial-gradient(ellipse 60% 40% at 20% 0%, rgba(47, 211, 232, 0.1), transparent 50%), radial-gradient(ellipse 50% 35% at 90% 100%, rgba(46, 124, 246, 0.07), transparent 50%)",
+        }}
+      />
+      <div className="relative mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
         <BlockHeading block={block} />
         <motion.ul
           className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
@@ -138,9 +202,9 @@ export function ServiceBlockSection({ block }: { block: ServiceBlock }) {
               key={item}
               variants={fadeUp}
               whileHover={{ y: -4 }}
-              className="group flex items-center gap-4 rounded-2xl border border-sgg-border-default bg-sgg-surface-raised p-5 shadow-[var(--sgg-e1)] transition-shadow duration-300 hover:border-sgg-border-accent hover:shadow-[var(--sgg-e3)]"
+              className="group flex items-center gap-4 rounded-2xl border border-sgg-border-default bg-gradient-to-br from-white via-[#f7fafc] to-[#eef4fa] p-5 shadow-[var(--sgg-e1)] transition-shadow duration-300 hover:border-sgg-border-accent hover:shadow-[var(--sgg-e3)]"
             >
-              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-sgg-ink-accent/10 text-sgg-ink-accent transition-colors duration-300 group-hover:bg-sgg-ink-accent group-hover:text-white">
+              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-sgg-ink-accent/15 to-sgg-ink-accent-dark/10 text-sgg-ink-accent transition-colors duration-300 group-hover:from-sgg-ink-accent group-hover:to-sgg-ink-accent-dark group-hover:text-white">
                 <Icon size={20} aria-hidden="true" />
               </span>
               <span className="min-w-0 text-base font-medium leading-snug text-sgg-ink-primary">
