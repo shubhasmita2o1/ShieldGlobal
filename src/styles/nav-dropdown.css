@@ -1,0 +1,100 @@
+/* Services dropdown — stable hover & clearer mobile toggle */
+
+.sgg-nav-toggle-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+}
+
+.sgg-nav-caret-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin-left: -4px;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.sgg-nav-caret-btn:hover,
+.sgg-nav-caret-btn:focus-visible {
+  background: rgba(0, 188, 212, 0.08);
+  outline: none;
+}
+
+.sgg-dropdown-open > .sgg-nav-toggle-wrap .sgg-nav-caret {
+  transform: rotate(180deg);
+  opacity: 1;
+}
+
+.sgg-dropdown-link {
+  white-space: nowrap;
+  padding: 12px 14px;
+  line-height: 1.4;
+}
+
+.sgg-dropdown-link-active {
+  background: rgba(0, 188, 212, 0.1);
+  color: #0a8fb8;
+  font-weight: 600;
+}
+
+@media (min-width: 992px) {
+  .sgg-has-dropdown {
+    position: relative;
+  }
+
+  /* Flush under trigger — removes the hover gap that closed the menu */
+  .sgg-dropdown {
+    top: 100% !important;
+    transform: translate(-50%, 4px) !important;
+    min-width: 300px !important;
+    padding: 10px !important;
+    padding-top: 14px !important;
+    z-index: 80 !important;
+    box-shadow: 0 16px 40px -12px rgba(15, 23, 42, 0.22) !important;
+  }
+
+  .sgg-dropdown::before {
+    content: "";
+    position: absolute;
+    top: -14px;
+    left: 0;
+    right: 0;
+    height: 16px;
+  }
+
+  .sgg-dropdown-open > .sgg-dropdown {
+    transform: translate(-50%, 0) !important;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .sgg-nav-toggle-wrap {
+    display: flex;
+    width: 100%;
+    align-items: center;
+  }
+
+  .sgg-nav-toggle-wrap > .sgg-nav-link {
+    flex: 1 1 auto;
+    width: auto;
+  }
+
+  .sgg-nav-caret-btn {
+    width: 40px;
+    height: 40px;
+    margin-left: 0;
+    flex-shrink: 0;
+  }
+
+  .sgg-dropdown-link {
+    white-space: normal;
+  }
+}
