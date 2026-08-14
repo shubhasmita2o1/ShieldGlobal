@@ -129,7 +129,7 @@ function EsgBlock({
       className="scroll-mt-28 grid items-center gap-12 lg:grid-cols-12 lg:gap-16"
     >
       <Reveal className={`lg:col-span-6 ${reverse ? "lg:order-2" : ""}`}>
-        <div className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#d6f3fa] via-[#e8f7fc] to-[#c5ebf8] p-[3px] shadow-[0_25px_60px_-28px_rgba(10,143,184,0.45)]">
+        <div className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#14263f] via-[#0c1727] to-[#08111e] p-[3px] shadow-[0_25px_60px_-28px_rgba(8,17,30,0.55)]">
           <div className="overflow-hidden rounded-[21px] bg-white">
             <img
               src={item.image}
@@ -137,7 +137,7 @@ function EsgBlock({
               loading="lazy"
               className="block w-full transition-transform duration-[900ms] ease-out group-hover:scale-[1.04]"
             />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-[#08111e]/35 via-transparent to-[#2fd3e8]/20" />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-[#08111e]/40 via-transparent to-[#14263f]/15" />
           </div>
         </div>
       </Reveal>
@@ -146,7 +146,7 @@ function EsgBlock({
         className={`lg:col-span-6 ${reverse ? "lg:order-1" : ""}`}
         delay={0.1}
       >
-        <div className="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-[#0a8fb8] to-[#2fd3e8] px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white shadow-md shadow-cyan-500/25">
+        <div className="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-[#08111e] to-[#14263f] px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white shadow-md shadow-slate-900/30">
           <Icon size={16} strokeWidth={2} />
           ESG Initiative
         </div>
@@ -171,7 +171,7 @@ function EsgBlock({
                   >
                     <span
                       aria-hidden
-                      className="mt-2 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-to-br from-[#0a8fb8] to-[#2fd3e8]"
+                      className="mt-2 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-to-br from-[#08111e] to-[#2e7cf6]"
                     />
                     {li}
                   </li>
@@ -181,9 +181,9 @@ function EsgBlock({
           ))}
         </div>
 
-        <div className="mt-8 rounded-2xl border border-red-200/80 bg-gradient-to-br from-[#fde8e8] via-[#fef2f2] to-[#fcdcdc] px-6 py-5 shadow-sm">
-          <div className="mb-2 h-1 w-12 rounded-full bg-gradient-to-r from-[#e23a2e] to-[#f07167]" />
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#c62828]">
+        <div className="mt-8 rounded-2xl border border-[#14263f]/25 bg-gradient-to-br from-[#e8eef5] via-[#dce6f0] to-[#cfdceb] px-6 py-5 shadow-sm">
+          <div className="mb-2 h-1 w-12 rounded-full bg-gradient-to-r from-[#08111e] to-[#2e7cf6]" />
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#14263f]">
             Our Commitment
           </p>
           <p className="mt-2 text-[15px] leading-relaxed text-neutral-800">
@@ -248,9 +248,9 @@ export function EsgSection() {
               key={id}
               href={`#${id}`}
               variants={fadeUp}
-              className="group flex items-center gap-3 rounded-xl border border-cyan-300/50 bg-gradient-to-br from-white via-[#f0fafc] to-[#d9f3f9] px-4 py-4 text-left text-sm font-medium text-neutral-800 shadow-md shadow-cyan-500/10 transition-all hover:-translate-y-1 hover:border-[#0a8fb8]/60 hover:shadow-lg hover:shadow-cyan-500/20"
+              className="group flex items-center gap-3 rounded-xl border border-[#14263f]/20 bg-gradient-to-br from-[#e8eef5] via-[#dce6f0] to-[#c5d4e8] px-4 py-4 text-left text-sm font-medium text-neutral-800 shadow-md shadow-slate-900/10 transition-all hover:-translate-y-1 hover:border-[#14263f]/40 hover:shadow-lg hover:shadow-slate-900/15"
             >
-              <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-[#0a8fb8] to-[#2fd3e8] text-white shadow-md shadow-cyan-500/30 transition-transform group-hover:scale-110">
+              <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-[#08111e] to-[#14263f] text-white shadow-md shadow-slate-900/30 transition-transform group-hover:scale-110">
                 <Icon size={18} strokeWidth={1.75} />
               </span>
               <span className="min-w-0 leading-snug">{title}</span>
