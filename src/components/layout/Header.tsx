@@ -45,10 +45,14 @@ export function Header() {
     setOpenMenu(null);
   };
 
-  const isActive = (href: string) => {
+  /** Top-level nav: exact match, or prefix for section roots (e.g. /services/*). */
+  const isNavActive = (href: string) => {
     if (href === "/") return pathname === "/";
     return pathname === href || pathname.startsWith(`${href}/`);
   };
+
+  /** Dropdown items: exact path only so /services does not light up on every child page. */
+  const isDropdownActive = (href: string) => pathname === href;
 
   const isMobile = () =>
     typeof window !== "undefined" &&
@@ -113,7 +117,7 @@ export function Header() {
           <ul className="sgg-nav">
             {NAV_ITEMS.map((item) => {
               const menuOpen = openMenu === item.label;
-              const active = isActive(item.href);
+              const active = isNavActive(item.href);
 
               return (
                 <li
@@ -142,7 +146,6 @@ export function Header() {
                           }`}
                           onClick={() => {
                             if (isMobile()) {
-                              /* on mobile, main link still navigates; caret toggles */
                               closeAll();
                             } else {
                               setOpen(false);
@@ -187,7 +190,9 @@ export function Header() {
                             <Link
                               to={child.href}
                               className={`sgg-dropdown-link ${
-                                isActive(child.href) ? "sgg-dropdown-link-active" : ""
+                                isDropdownActive(child.href)
+                                  ? "sgg-dropdown-link-active"
+                                  : ""
                               }`}
                               onClick={closeAll}
                             >
