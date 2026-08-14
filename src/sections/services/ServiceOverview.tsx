@@ -9,7 +9,7 @@ export function ServiceOverview({ service }: { service: ServiceDetail }) {
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(165deg, #d4eef6 0%, #dff3f8 40%, #d0ebf4 100%)",
+            "linear-gradient(180deg, #eef2f7 0%, #f4f6f9 50%, #e8edf4 100%)",
         }}
       />
       <div
@@ -17,7 +17,7 @@ export function ServiceOverview({ service }: { service: ServiceDetail }) {
         className="pointer-events-none absolute inset-0"
         style={{
           backgroundImage:
-            "radial-gradient(ellipse 70% 50% at 10% 30%, rgba(47, 211, 232, 0.18), transparent 55%), radial-gradient(ellipse 50% 40% at 95% 70%, rgba(46, 124, 246, 0.1), transparent 50%)",
+            "radial-gradient(ellipse 55% 40% at 50% 0%, rgba(46, 124, 246, 0.06), transparent 55%)",
         }}
       />
       <div className="relative mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20 lg:py-24">
