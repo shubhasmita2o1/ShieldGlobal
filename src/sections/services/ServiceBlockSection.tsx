@@ -41,17 +41,25 @@ export function ServiceBlockSection({ block }: { block: ServiceBlock }) {
 
   if (block.variant === "cards") {
     return (
-      <section className="relative overflow-hidden bg-[#fafbfc]">
+      <section className="relative overflow-hidden">
+        <div
+          aria-hidden
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(165deg, #1a2a3e 0%, #243447 45%, #1e3146 100%)",
+          }}
+        />
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0"
           style={{
             backgroundImage:
-              "radial-gradient(ellipse 70% 45% at 100% 0%, rgba(46, 124, 246, 0.05), transparent 55%), linear-gradient(180deg, #ffffff 0%, #f7f9fc 100%)",
+              "radial-gradient(ellipse 70% 50% at 90% 10%, rgba(47, 211, 232, 0.08), transparent 50%), radial-gradient(ellipse 50% 40% at 10% 90%, rgba(46, 124, 246, 0.07), transparent 50%)",
           }}
         />
         <div className="relative mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20 lg:py-24">
-          <BlockHeading block={block} />
+          <BlockHeading block={block} tone="dark" />
           <motion.ul
             className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
             variants={stagger}
@@ -64,7 +72,7 @@ export function ServiceBlockSection({ block }: { block: ServiceBlock }) {
                 key={item}
                 variants={fadeUp}
                 whileHover={{ y: -6 }}
-                className="group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-sgg-border-default bg-white p-7 shadow-[var(--sgg-e1)] transition-all duration-300 hover:border-sgg-border-accent hover:shadow-[var(--sgg-e3)]"
+                className="group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-white p-7 shadow-[0_8px_28px_-10px_rgba(0,0,0,0.35)] transition-all duration-300 hover:border-sgg-ink-accent-dark/40 hover:shadow-[0_14px_32px_-10px_rgba(0,0,0,0.4)]"
               >
                 <span
                   aria-hidden="true"
