@@ -153,7 +153,7 @@ export function ServiceBlockSection({ block }: { block: ServiceBlock }) {
     );
   }
 
-  /* tiles — clearly deeper than white card sections */
+  /* tiles — dark navy cards on light blue-gray section */
   return (
     <section className="relative overflow-hidden">
       <div
@@ -186,12 +186,12 @@ export function ServiceBlockSection({ block }: { block: ServiceBlock }) {
               key={item}
               variants={fadeUp}
               whileHover={{ y: -4 }}
-              className="group flex items-center gap-4 rounded-2xl border border-white/80 bg-white/90 p-5 shadow-[var(--sgg-e1)] backdrop-blur-sm transition-shadow duration-300 hover:border-sgg-border-accent hover:shadow-[var(--sgg-e3)]"
+              className="group flex items-center gap-4 rounded-2xl border border-white/10 bg-gradient-to-br from-[#0a1628] via-[#12253c] to-[#0c1a2e] p-5 shadow-[0_8px_24px_-8px_rgba(10,18,32,0.35)] transition-all duration-300 hover:border-sgg-ink-accent-dark/40 hover:from-[#12253c] hover:to-[#16304a] hover:shadow-[0_12px_28px_-8px_rgba(10,18,32,0.45)]"
             >
-              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-sgg-ink-accent/15 to-sgg-ink-accent-dark/10 text-sgg-ink-accent transition-colors duration-300 group-hover:from-sgg-ink-accent group-hover:to-sgg-ink-accent-dark group-hover:text-white">
+              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-sgg-ink-accent-dark/30 to-sgg-ink-accent/20 text-sgg-ink-accent-dark transition-colors duration-300 group-hover:from-sgg-ink-accent-dark group-hover:to-sgg-ink-accent group-hover:text-[#08111e]">
                 <Icon size={20} aria-hidden="true" />
               </span>
-              <span className="min-w-0 text-base font-medium leading-snug text-sgg-ink-primary">
+              <span className="min-w-0 text-base font-medium leading-snug text-sgg-ink-inverse">
                 {item}
               </span>
             </motion.li>
