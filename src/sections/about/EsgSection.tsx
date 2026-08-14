@@ -181,9 +181,9 @@ function EsgBlock({
           ))}
         </div>
 
-        <div className="mt-8 rounded-2xl border border-cyan-200/80 bg-gradient-to-br from-[#e0f7fc] via-[#ecfbfd] to-[#d4f1f9] px-6 py-5 shadow-sm">
-          <div className="mb-2 h-1 w-12 rounded-full bg-gradient-to-r from-[#0a8fb8] to-[#2fd3e8]" />
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#0a8fb8]">
+        <div className="mt-8 rounded-2xl border border-red-200/80 bg-gradient-to-br from-[#fde8e8] via-[#fef2f2] to-[#fcdcdc] px-6 py-5 shadow-sm">
+          <div className="mb-2 h-1 w-12 rounded-full bg-gradient-to-r from-[#e23a2e] to-[#f07167]" />
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#c62828]">
             Our Commitment
           </p>
           <p className="mt-2 text-[15px] leading-relaxed text-neutral-800">
@@ -216,12 +216,6 @@ export function EsgSection() {
           backgroundImage:
             "radial-gradient(ellipse 90% 55% at 0% 5%, rgba(47, 211, 232, 0.28), transparent 55%), radial-gradient(ellipse 80% 50% at 100% 25%, rgba(46, 124, 246, 0.18), transparent 55%), radial-gradient(ellipse 70% 45% at 50% 100%, rgba(10, 143, 184, 0.22), transparent 55%), radial-gradient(circle 40% at 70% 70%, rgba(47, 211, 232, 0.12), transparent 50%)",
         }}
-      />
-
-      {/* Top accent bar */}
-      <div
-        aria-hidden
-        className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-[#0a8fb8] via-[#2fd3e8] to-[#2e7cf6]"
       />
 
       <div className="relative mx-auto max-w-7xl px-6 sm:px-8">
