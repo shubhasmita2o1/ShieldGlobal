@@ -129,14 +129,14 @@ function EsgBlock({
       className="scroll-mt-28 grid items-center gap-12 lg:grid-cols-12 lg:gap-16"
     >
       <Reveal className={`lg:col-span-6 ${reverse ? "lg:order-2" : ""}`}>
-        <div className="group relative overflow-hidden rounded-3xl bg-neutral-100 shadow-[0_25px_60px_-30px_rgba(15,23,42,0.35)] ring-1 ring-neutral-200/60">
+        <div className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-neutral-100 via-cyan-50/40 to-sky-50/60 shadow-[0_25px_60px_-30px_rgba(15,23,42,0.35)] ring-1 ring-cyan-200/40">
           <img
             src={item.image}
             alt={item.title}
             loading="lazy"
             className="block w-full transition-transform duration-[900ms] ease-out group-hover:scale-[1.04]"
           />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-neutral-950/25 via-transparent to-transparent" />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-[#0a1220]/30 via-transparent to-cyan-400/10" />
         </div>
       </Reveal>
 
@@ -144,7 +144,7 @@ function EsgBlock({
         className={`lg:col-span-6 ${reverse ? "lg:order-1" : ""}`}
         delay={0.1}
       >
-        <div className="inline-flex items-center gap-3 rounded-full bg-[#e6f6fb] px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#0a8fb8]">
+        <div className="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-[#e6f6fb] to-[#d0f0f8] px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#0a8fb8] shadow-sm ring-1 ring-cyan-200/50">
           <Icon size={16} strokeWidth={2} />
           ESG Initiative
         </div>
@@ -169,7 +169,7 @@ function EsgBlock({
                   >
                     <span
                       aria-hidden
-                      className="mt-2 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-[#0a8fb8]"
+                      className="mt-2 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-to-br from-[#0a8fb8] to-[#2fd3e8]"
                     />
                     {li}
                   </li>
@@ -179,7 +179,7 @@ function EsgBlock({
           ))}
         </div>
 
-        <div className="mt-8 rounded-2xl border-l-4 border-[#0a8fb8] bg-neutral-50 px-6 py-5">
+        <div className="mt-8 rounded-2xl border-l-4 border-[#0a8fb8] bg-gradient-to-r from-cyan-50/90 via-sky-50/60 to-transparent px-6 py-5 shadow-sm ring-1 ring-cyan-100/80">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#0a8fb8]">
             Our Commitment
           </p>
@@ -194,8 +194,18 @@ function EsgBlock({
 
 export function EsgSection() {
   return (
-    <section className="relative bg-sgg-surface-sunken py-24 sm:py-28 lg:py-32">
-      <div className="mx-auto max-w-7xl px-6 sm:px-8">
+    <section className="relative overflow-hidden bg-gradient-to-b from-sgg-surface-sunken via-[#eef6fa] to-sgg-surface-tinted py-24 sm:py-28 lg:py-32">
+      {/* Soft brand gradient washes */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage:
+            "radial-gradient(ellipse 80% 50% at 10% 0%, rgba(47, 211, 232, 0.12), transparent 55%), radial-gradient(ellipse 70% 45% at 90% 30%, rgba(46, 124, 246, 0.08), transparent 50%), radial-gradient(ellipse 60% 40% at 50% 100%, rgba(10, 143, 184, 0.07), transparent 50%)",
+        }}
+      />
+
+      <div className="relative mx-auto max-w-7xl px-6 sm:px-8">
         <Reveal className="flex flex-col items-center text-center">
           <SectionHeading
             align="center"
@@ -204,7 +214,9 @@ export function EsgSection() {
               <>
                 Responsible by design.
                 <br className="hidden sm:block" />
-                <span className="text-[#0a8fb8]">Sustainable by intent.</span>
+                <span className="bg-gradient-to-r from-[#0a8fb8] to-[#2fd3e8] bg-clip-text text-transparent">
+                  Sustainable by intent.
+                </span>
               </>
             }
             intro="Four focused programs across ethics, energy, community and family — reflecting our long-term commitment to people, planet and progress."
@@ -223,9 +235,9 @@ export function EsgSection() {
               key={id}
               href={`#${id}`}
               variants={fadeUp}
-              className="group flex items-center gap-3 rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-4 text-left text-sm font-medium text-neutral-800 transition-all hover:-translate-y-0.5 hover:border-[#0a8fb8]/40 hover:bg-white hover:shadow-md"
+              className="group flex items-center gap-3 rounded-xl border border-cyan-200/60 bg-gradient-to-br from-white via-cyan-50/40 to-sky-50/30 px-4 py-4 text-left text-sm font-medium text-neutral-800 shadow-sm transition-all hover:-translate-y-0.5 hover:border-[#0a8fb8]/50 hover:from-white hover:to-cyan-50 hover:shadow-md"
             >
-              <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white text-[#0a8fb8] ring-1 ring-neutral-200 transition-colors group-hover:bg-[#0a8fb8] group-hover:text-white group-hover:ring-transparent">
+              <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-[#0a8fb8] to-[#2fd3e8] text-white shadow-sm ring-1 ring-cyan-300/30 transition-transform group-hover:scale-105">
                 <Icon size={18} strokeWidth={1.75} />
               </span>
               <span className="min-w-0 leading-snug">{title}</span>
