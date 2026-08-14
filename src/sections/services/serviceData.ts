@@ -56,7 +56,7 @@ export const SERVICES: ServiceDetail[] = [
       {
         eyebrow: "What we do",
         heading: "Our Recruitment Services",
-        subheading: "Technical & Non Technical Hiring",
+        // subheading: "Technical & Non Technical Hiring",
         icon: Briefcase,
         variant: "cards",
         items: [
