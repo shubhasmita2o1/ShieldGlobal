@@ -54,6 +54,19 @@ export const SERVICES: ServiceDetail[] = [
       "Shield Global HR Solutions is a leading international manpower recruitment company, delivering end-to-end workforce solutions to employers across Asia, Africa, Europe and Canada. With a strong sourcing presence in 21 countries, we specialize in identifying, screening, and deploying skilled, semi-skilled, and unskilled manpower tailored to diverse industry needs.",
     blocks: [
       {
+        eyebrow: "What we do",
+        heading: "Our Recruitment Services",
+        subheading: "Technical & Non Technical Hiring",
+        icon: Briefcase,
+        variant: "cards",
+        items: [
+          "Bulk Hiring – Blue Collars",
+          "Ethical Recruitment",
+          "Global Executive Search",
+          "Project-Based Recruitment",
+        ],
+      },
+      {
         eyebrow: "Reach",
         heading: "Global Recruitment coverage",
         icon: Globe2,
@@ -65,19 +78,6 @@ export const SERVICES: ServiceDetail[] = [
           "Singapore",
           "Malaysia",
           "Russia",
-        ],
-      },
-      {
-        eyebrow: "What we do",
-        heading: "Our Recruitment Services",
-        subheading: "Technical & Non Technical Hiring",
-        icon: Briefcase,
-        variant: "cards",
-        items: [
-          "Bulk Hiring – Blue Collars",
-          "Ethical Recruitment",
-          "Global Executive Search",
-          "Project-Based Recruitment",
         ],
       },
       {
