@@ -129,16 +129,14 @@ function EsgBlock({
       className="scroll-mt-28 grid items-center gap-12 lg:grid-cols-12 lg:gap-16"
     >
       <Reveal className={`lg:col-span-6 ${reverse ? "lg:order-2" : ""}`}>
-        <div className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#14263f] via-[#0c1727] to-[#08111e] p-[3px] shadow-[0_25px_60px_-28px_rgba(8,17,30,0.55)]">
-          <div className="overflow-hidden rounded-[21px] bg-white">
-            <img
-              src={item.image}
-              alt={item.title}
-              loading="lazy"
-              className="block w-full transition-transform duration-[900ms] ease-out group-hover:scale-[1.04]"
-            />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-[#08111e]/40 via-transparent to-[#14263f]/15" />
-          </div>
+        <div className="group relative overflow-hidden rounded-3xl shadow-[0_25px_60px_-28px_rgba(8,17,30,0.45)]">
+          <img
+            src={item.image}
+            alt={item.title}
+            loading="lazy"
+            className="block w-full transition-transform duration-[900ms] ease-out group-hover:scale-[1.04]"
+          />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-[#08111e]/25 via-transparent to-transparent" />
         </div>
       </Reveal>
 
