@@ -31,7 +31,9 @@ export function CorporateGovernance() {
             <h2 className="mt-4 font-[Fraunces,serif] text-3xl font-semibold leading-[1.1] tracking-tight sm:text-4xl lg:text-5xl">
               Built on integrity.
               <br />
-              Governed with accountability.
+              <span className="bg-gradient-to-r from-[#2fd3e8] via-[#5edff0] to-[#2fd3e8] bg-clip-text text-transparent">
+                Governed with accountability.
+              </span>
             </h2>
             <div className="mt-8 inline-flex items-center gap-3 rounded-full border border-sgg-border-dark bg-white/5 px-5 py-3 text-sm text-sgg-ink-inverse-2 backdrop-blur">
               <Leaf size={16} className="text-sgg-ink-accent-dark" />
