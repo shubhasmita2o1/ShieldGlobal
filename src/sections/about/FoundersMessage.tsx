@@ -22,7 +22,15 @@ export function FoundersMessage() {
             <span className="h-px w-8 bg-sgg-ink-accent-dark" />
           </div>
 
-          <div className="mt-6 rounded-2xl border border-sgg-border-dark bg-white/[0.06] px-6 py-7 sm:px-10 sm:py-9 backdrop-blur-sm">
+          <h2 className="mt-5 text-center font-[Fraunces,serif] text-3xl font-semibold leading-[1.15] tracking-tight sm:text-4xl lg:text-[2.75rem]">
+            Built on trust.
+            <br />
+            <span className="bg-gradient-to-r from-[#2fd3e8] via-[#5edff0] to-[#2fd3e8] bg-clip-text text-transparent">
+              Driven by vision.
+            </span>
+          </h2>
+
+          <div className="mt-8 rounded-2xl border border-sgg-border-dark bg-white/[0.06] px-6 py-7 sm:px-10 sm:py-9 backdrop-blur-sm">
             <blockquote className="font-[Montserrat,sans-serif] text-[14px] leading-[1.75] text-sgg-ink-inverse-2 sm:text-[15px] sm:leading-[1.8]">
               <p>
                 At Shield Global Group, our vision is to build a diversified and
