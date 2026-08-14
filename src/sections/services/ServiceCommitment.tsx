@@ -10,7 +10,7 @@ export function ServiceCommitment({ service }: { service: ServiceDetail }) {
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(180deg, #e2ebf4 0%, #eaf1f8 50%, #dde8f2 100%)",
+            "linear-gradient(180deg, #eef2f7 0%, #f4f6f9 50%, #e8edf4 100%)",
         }}
       />
       <div
@@ -18,7 +18,7 @@ export function ServiceCommitment({ service }: { service: ServiceDetail }) {
         className="pointer-events-none absolute inset-0"
         style={{
           backgroundImage:
-            "radial-gradient(ellipse 60% 45% at 50% 0%, rgba(46, 124, 246, 0.08), transparent 55%), radial-gradient(ellipse 50% 40% at 80% 100%, rgba(47, 211, 232, 0.1), transparent 50%)",
+            "radial-gradient(ellipse 55% 40% at 50% 0%, rgba(46, 124, 246, 0.06), transparent 55%)",
         }}
       />
       <div className="relative mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20 lg:py-24">
