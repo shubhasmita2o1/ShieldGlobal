@@ -8,24 +8,8 @@ export function ServiceBlockSection({ block }: { block: ServiceBlock }) {
 
   if (block.variant === "dark") {
     return (
-      <section className="relative overflow-hidden">
-        <div
-          aria-hidden
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(160deg, #08111e 0%, #0c1a2e 40%, #14263f 100%)",
-          }}
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0"
-          style={{
-            backgroundImage:
-              "radial-gradient(ellipse 70% 50% at 15% 20%, rgba(47, 211, 232, 0.14), transparent 55%), radial-gradient(ellipse 60% 45% at 90% 80%, rgba(46, 124, 246, 0.12), transparent 50%)",
-          }}
-        />
-        <div className="relative mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20 lg:py-24">
+      <section className="bg-sgg-surface-dark">
+        <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20 lg:py-24">
           <BlockHeading block={block} tone="dark" />
           <motion.ul
             className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
@@ -39,9 +23,9 @@ export function ServiceBlockSection({ block }: { block: ServiceBlock }) {
                 key={item}
                 variants={fadeUp}
                 whileHover={{ y: -4 }}
-                className="group flex items-center gap-4 rounded-2xl border border-white/10 bg-gradient-to-br from-[#1a2d48] via-[#162840] to-[#122238] p-5 shadow-[0_6px_20px_-6px_rgba(0,0,0,0.4)] transition-all duration-300 hover:border-sgg-ink-accent-dark/35 hover:from-[#1e3554] hover:to-[#16304a]"
+                className="flex items-center gap-4 rounded-2xl border border-sgg-border-dark bg-white/[0.06] p-5 transition-colors duration-300 hover:border-sgg-border-accent hover:bg-white/[0.1]"
               >
-                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-[#0d3a4a] to-[#0a2a38] text-sgg-ink-accent-dark ring-1 ring-sgg-ink-accent-dark/20 transition-colors duration-300 group-hover:from-sgg-ink-accent-dark/40 group-hover:to-sgg-ink-accent/25">
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-sgg-ink-accent-dark/15 text-sgg-ink-accent-dark">
                   <Icon size={20} aria-hidden="true" />
                 </span>
                 <span className="min-w-0 text-base font-medium text-sgg-ink-inverse">
