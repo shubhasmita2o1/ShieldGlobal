@@ -11,6 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import "../styles.css";
+import "../styles/nav-dropdown.css";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { useDocumentDirection } from "@/hooks/use-document-direction";
 
