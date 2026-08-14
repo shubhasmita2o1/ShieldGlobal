@@ -12,7 +12,7 @@ const GOVERNANCE_COMPANIES = [
 
 export function CorporateGovernance() {
   return (
-    <section className="relative overflow-hidden bg-[image:var(--sgg-g-charcoal)] py-24 text-sgg-ink-inverse sm:py-28 lg:py-32">
+    <section className="relative overflow-hidden bg-[image:var(--sgg-g-hero)] py-24 text-sgg-ink-inverse sm:py-28 lg:py-32">
       <div
         aria-hidden
         className="absolute inset-0 opacity-[0.07]"
