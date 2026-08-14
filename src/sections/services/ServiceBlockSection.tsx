@@ -39,9 +39,9 @@ export function ServiceBlockSection({ block }: { block: ServiceBlock }) {
                 key={item}
                 variants={fadeUp}
                 whileHover={{ y: -4 }}
-                className="flex items-center gap-4 rounded-2xl border border-sgg-border-dark bg-gradient-to-br from-white/[0.08] to-white/[0.02] p-5 backdrop-blur-sm transition-colors duration-300 hover:border-sgg-border-accent hover:from-white/[0.12] hover:to-white/[0.04]"
+                className="group flex items-center gap-4 rounded-2xl border border-white/10 bg-gradient-to-br from-[#1a2d48] via-[#162840] to-[#122238] p-5 shadow-[0_6px_20px_-6px_rgba(0,0,0,0.4)] transition-all duration-300 hover:border-sgg-ink-accent-dark/35 hover:from-[#1e3554] hover:to-[#16304a]"
               >
-                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-sgg-ink-accent-dark/25 to-sgg-ink-accent/15 text-sgg-ink-accent-dark">
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-[#0d3a4a] to-[#0a2a38] text-sgg-ink-accent-dark ring-1 ring-sgg-ink-accent-dark/20 transition-colors duration-300 group-hover:from-sgg-ink-accent-dark/40 group-hover:to-sgg-ink-accent/25">
                   <Icon size={20} aria-hidden="true" />
                 </span>
                 <span className="min-w-0 text-base font-medium text-sgg-ink-inverse">
