@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { SERVICES } from "@/sections/services/serviceData";
@@ -25,6 +25,7 @@ const NAV_ITEMS: NavItem[] = [
 export function Header() {
   const [open, setOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState<string | null>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   useEffect(() => {
@@ -32,6 +33,12 @@ export function Header() {
     document.body.classList.toggle("nav-open", open);
     return () => document.body.classList.remove("nav-open");
   }, [open]);
+
+  useEffect(() => {
+    return () => {
+      if (closeTimer.current) clearTimeout(closeTimer.current);
+    };
+  }, []);
 
   const closeAll = () => {
     setOpen(false);
@@ -41,6 +48,23 @@ export function Header() {
   const isActive = (href: string) => {
     if (href === "/") return pathname === "/";
     return pathname === href || pathname.startsWith(`${href}/`);
+  };
+
+  const isMobile = () =>
+    typeof window !== "undefined" &&
+    window.matchMedia("(max-width: 991.98px)").matches;
+
+  const openDropdown = (label: string) => {
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current);
+      closeTimer.current = null;
+    }
+    setOpenMenu(label);
+  };
+
+  const scheduleCloseDropdown = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    closeTimer.current = setTimeout(() => setOpenMenu(null), 180);
   };
 
   return (
@@ -97,36 +121,74 @@ export function Header() {
                   className={`sgg-nav-item ${item.children ? "sgg-has-dropdown" : ""} ${
                     menuOpen ? "sgg-dropdown-open" : ""
                   }`}
-                  onMouseLeave={item.children ? () => setOpenMenu(null) : undefined}
+                  onMouseEnter={
+                    item.children && !isMobile()
+                      ? () => openDropdown(item.label)
+                      : undefined
+                  }
+                  onMouseLeave={
+                    item.children && !isMobile()
+                      ? scheduleCloseDropdown
+                      : undefined
+                  }
                 >
                   {item.children ? (
                     <>
-                      <Link
-                        to={item.href}
-                        className={`sgg-nav-link sgg-nav-toggle ${
-                          active ? "sgg-nav-link-active" : ""
-                        }`}
-                        aria-haspopup="true"
-                        aria-expanded={menuOpen}
-                        onMouseEnter={() => setOpenMenu(item.label)}
-                        onClick={(e) => {
-                          if (window.matchMedia("(max-width: 991.98px)").matches) {
+                      <div className="sgg-nav-toggle-wrap">
+                        <Link
+                          to={item.href}
+                          className={`sgg-nav-link ${
+                            active ? "sgg-nav-link-active" : ""
+                          }`}
+                          onClick={() => {
+                            if (isMobile()) {
+                              /* on mobile, main link still navigates; caret toggles */
+                              closeAll();
+                            } else {
+                              setOpen(false);
+                              setOpenMenu(null);
+                            }
+                          }}
+                        >
+                          {item.label}
+                        </Link>
+                        <button
+                          type="button"
+                          className="sgg-nav-caret-btn"
+                          aria-label={`${menuOpen ? "Close" : "Open"} ${item.label} menu`}
+                          aria-expanded={menuOpen}
+                          aria-haspopup="true"
+                          onClick={(e) => {
                             e.preventDefault();
-                            setOpenMenu(menuOpen ? null : item.label);
-                          } else {
-                            setOpen(false);
-                          }
-                        }}
+                            e.stopPropagation();
+                            if (menuOpen) {
+                              setOpenMenu(null);
+                            } else {
+                              openDropdown(item.label);
+                            }
+                          }}
+                        >
+                          <ChevronDown
+                            size={15}
+                            aria-hidden
+                            className="sgg-nav-caret"
+                          />
+                        </button>
+                      </div>
+                      <ul
+                        className="sgg-dropdown"
+                        aria-label={`${item.label} menu`}
+                        onMouseEnter={
+                          !isMobile() ? () => openDropdown(item.label) : undefined
+                        }
                       >
-                        {item.label}
-                        <ChevronDown size={15} aria-hidden className="sgg-nav-caret" />
-                      </Link>
-                      <ul className="sgg-dropdown" aria-label={`${item.label} menu`}>
                         {item.children.map((child) => (
                           <li key={child.href}>
                             <Link
                               to={child.href}
-                              className="sgg-dropdown-link"
+                              className={`sgg-dropdown-link ${
+                                isActive(child.href) ? "sgg-dropdown-link-active" : ""
+                              }`}
                               onClick={closeAll}
                             >
                               {child.label}
