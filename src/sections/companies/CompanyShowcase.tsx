@@ -48,7 +48,7 @@ const COMPANIES = [
       "Performance analytics",
     ],
     image:
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1600&q=80",
     website: "https://www.inficorpgroup.com/",
   },
   {
@@ -64,7 +64,7 @@ const COMPANIES = [
       "Celebrity management",
     ],
     image:
-      "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1600&q=80",
+      "https://images.pexels.com/photos/3062541/pexels-photo-3062541.jpeg?auto=compress&cs=tinysrgb&w=1600",
     website: "/contact", // replace when you have the live URL
   },
 ];
@@ -96,6 +96,9 @@ export function CompanyShowcase() {
           {COMPANIES.map(
             ({ name, icon: Icon, focus, description, highlights, image, website }) => {
               const isExternal = website.startsWith("http");
+              const hideOverlay =
+                name === "Shield Global HR Solutions" ||
+                name === "Shield Workforce Solutions";
 
               return (
                 <motion.article
@@ -112,10 +115,12 @@ export function CompanyShowcase() {
                       loading="lazy"
                       className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                     />
-                    <div
-                      aria-hidden
-                      className="absolute inset-0 bg-gradient-to-t from-neutral-950/70 via-neutral-950/10 to-transparent"
-                    />
+                    {!hideOverlay && (
+                      <div
+                        aria-hidden
+                        className="absolute inset-0 bg-gradient-to-t from-neutral-950/70 via-neutral-950/10 to-transparent"
+                      />
+                    )}
                     <span className="absolute left-5 top-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/95 text-[#0a8fb8] shadow-sm">
                       <Icon size={20} strokeWidth={1.75} aria-hidden />
                     </span>
@@ -154,7 +159,7 @@ export function CompanyShowcase() {
                         : {})}
                       className="mt-8 inline-flex w-fit items-center gap-2 rounded-full border border-neutral-200 px-5 py-2.5 text-sm font-semibold text-neutral-900 transition-colors hover:border-[#0a8fb8] hover:bg-[#0a8fb8] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0a8fb8]"
                     >
-                      Know more
+                      Visit {name}
                       <ArrowRight size={15} aria-hidden />
                     </a>
                   </div>

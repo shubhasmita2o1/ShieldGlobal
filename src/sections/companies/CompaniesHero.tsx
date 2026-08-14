@@ -5,7 +5,7 @@ export function CompaniesHero() {
     <section className="relative isolate overflow-hidden bg-neutral-900 text-white">
       <div
         aria-hidden
-        className="absolute inset-0 bg-cover bg-center opacity-50"
+        className="absolute inset-0 bg-cover bg-center opacity-80"
         style={{
           backgroundImage:
             "url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2400&q=80')",
@@ -13,7 +13,7 @@ export function CompaniesHero() {
       />
       <div
         aria-hidden
-        className="absolute inset-0 bg-gradient-to-b from-neutral-950/85 via-neutral-950/70 to-neutral-950/95"
+        className="absolute inset-0 bg-gradient-to-b from-neutral-950/45 via-neutral-950/25 to-neutral-950/60"
       />
 
       <div className="relative mx-auto flex min-h-[52vh] w-full max-w-7xl flex-col justify-end px-6 pb-16 pt-28 sm:px-8 lg:min-h-[60vh] lg:pb-24 lg:pt-36">

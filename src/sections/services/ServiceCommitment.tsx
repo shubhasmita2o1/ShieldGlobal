@@ -10,12 +10,12 @@ export function ServiceCommitment({ service }: { service: ServiceDetail }) {
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(180deg, #eef2f7 0%, #f4f6f9 50%, #e8edf4 100%)",
+            "linear-gradient(180deg, #F6FAFC 0%, #EEF4F8 55%, #E8F1F5 100%)",
         }}
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0"
+        className="pointer-events-none absolute inset-0 opacity-60 sm:opacity-100"
         style={{
           backgroundImage:
             "radial-gradient(ellipse 55% 40% at 50% 0%, rgba(46, 124, 246, 0.06), transparent 55%)",

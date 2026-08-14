@@ -6,6 +6,7 @@ import { BlockHeading, Reveal, SectionEyebrow, fadeUp, stagger } from "./shared"
 export function ServiceBlockSection({ block }: { block: ServiceBlock }) {
   const Icon = block.icon;
 
+  /* dark — the single dark navy anchor section (Industries We Serve) */
   if (block.variant === "dark") {
     return (
       <section className="bg-sgg-surface-dark">
@@ -23,7 +24,7 @@ export function ServiceBlockSection({ block }: { block: ServiceBlock }) {
                 key={item}
                 variants={fadeUp}
                 whileHover={{ y: -4 }}
-                className="flex items-center gap-4 rounded-2xl border border-sgg-border-dark bg-white/[0.06] p-5 transition-colors duration-300 hover:border-sgg-border-accent hover:bg-white/[0.1]"
+                className="flex items-center gap-4 rounded-2xl border border-white/[0.07] bg-[#182333] p-5 shadow-[0_10px_28px_-16px_rgba(0,0,0,0.7)] transition-colors duration-300 hover:border-sgg-border-accent hover:bg-[#1d2a3d]"
               >
                 <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-sgg-ink-accent-dark/15 text-sgg-ink-accent-dark">
                   <Icon size={20} aria-hidden="true" />
@@ -39,19 +40,28 @@ export function ServiceBlockSection({ block }: { block: ServiceBlock }) {
     );
   }
 
+  /* cards — service offerings on a soft blue-grey section */
   if (block.variant === "cards") {
     return (
-      <section className="relative overflow-hidden bg-[image:var(--sgg-g-hero)]">
+      <section className="relative overflow-hidden">
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 opacity-[0.07]"
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(180deg, #DEE9F0 0%, #D3E1EA 55%, #CBDCE7 100%)",
+          }}
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 opacity-60 sm:opacity-100"
           style={{
             backgroundImage:
-              "radial-gradient(circle at 20% 20%, var(--sgg-ink-accent) 0px, transparent 40%), radial-gradient(circle at 80% 60%, var(--sgg-ink-accent-dark) 0px, transparent 45%)",
+              "radial-gradient(ellipse 55% 40% at 15% 0%, rgba(46, 124, 246, 0.06), transparent 55%), radial-gradient(ellipse 50% 35% at 90% 100%, rgba(47, 211, 232, 0.06), transparent 55%)",
           }}
         />
         <div className="relative mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20 lg:py-24">
-          <BlockHeading block={block} tone="dark" />
+          <BlockHeading block={block} />
           <motion.ul
             className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
             variants={stagger}
@@ -64,7 +74,7 @@ export function ServiceBlockSection({ block }: { block: ServiceBlock }) {
                 key={item}
                 variants={fadeUp}
                 whileHover={{ y: -6 }}
-                className="group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-white p-7 shadow-[0_8px_28px_-10px_rgba(0,0,0,0.35)] transition-all duration-300 hover:border-sgg-ink-accent-dark/40 hover:shadow-[0_14px_32px_-10px_rgba(0,0,0,0.4)]"
+                className="group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-[rgba(15,40,60,0.08)] bg-white/75 p-7 shadow-[0_8px_25px_rgba(15,35,50,0.06)] backdrop-blur-[2px] transition-all duration-300 hover:border-[rgba(15,40,60,0.16)] hover:bg-white/90 hover:shadow-[0_14px_32px_rgba(15,35,50,0.1)]"
               >
                 <span
                   aria-hidden="true"
@@ -84,15 +94,23 @@ export function ServiceBlockSection({ block }: { block: ServiceBlock }) {
     );
   }
 
+  /* checks — benefits / why choose us on a soft light blue-grey section */
   if (block.variant === "checks") {
     return (
-      <section className="relative overflow-hidden bg-[#f8fafc]">
+      <section className="relative overflow-hidden">
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0"
+          className="absolute inset-0"
+          style={{
+            background: "linear-gradient(135deg, #D8E4EC 0%, #C9DAE6 100%)",
+          }}
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 opacity-60 sm:opacity-100"
           style={{
             backgroundImage:
-              "radial-gradient(ellipse 55% 40% at 0% 80%, rgba(47, 211, 232, 0.07), transparent 50%), linear-gradient(180deg, #f8fafc 0%, #ffffff 100%)",
+              "radial-gradient(circle at 10% 20%, rgba(15, 45, 70, 0.05), transparent 32%), radial-gradient(ellipse 50% 40% at 95% 90%, rgba(47, 211, 232, 0.06), transparent 55%)",
           }}
         />
         <div className="relative mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20 lg:py-24">
@@ -118,7 +136,7 @@ export function ServiceBlockSection({ block }: { block: ServiceBlock }) {
                 <motion.li
                   key={item}
                   variants={fadeUp}
-                  className="flex gap-3.5 rounded-xl border border-transparent p-3 transition-colors duration-300 hover:border-sgg-border-default hover:bg-sgg-surface-tinted"
+                  className="flex gap-3.5 rounded-xl border border-transparent p-3 transition-colors duration-300 hover:border-[rgba(15,40,60,0.08)] hover:bg-white/60"
                 >
                   <CheckCircle2
                     size={20}
@@ -137,23 +155,22 @@ export function ServiceBlockSection({ block }: { block: ServiceBlock }) {
     );
   }
 
-  /* tiles — dark navy cards on light blue-gray section */
+  /* tiles — global presence / countries: navy cards on a cool light section */
   return (
     <section className="relative overflow-hidden">
       <div
         aria-hidden
         className="absolute inset-0"
         style={{
-          background:
-            "linear-gradient(180deg, #d8e4f0 0%, #e2ebf4 40%, #d5e2ef 100%)",
+          background: "linear-gradient(135deg, #F7FAFC 0%, #EFF5F8 100%)",
         }}
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0"
+        className="pointer-events-none absolute inset-0 opacity-50 sm:opacity-100"
         style={{
           backgroundImage:
-            "radial-gradient(ellipse 60% 40% at 15% 0%, rgba(47, 211, 232, 0.12), transparent 50%), radial-gradient(ellipse 50% 35% at 90% 100%, rgba(46, 124, 246, 0.08), transparent 50%)",
+            "radial-gradient(ellipse 60% 40% at 15% 0%, rgba(47, 211, 232, 0.08), transparent 50%), radial-gradient(ellipse 50% 35% at 90% 100%, rgba(46, 124, 246, 0.06), transparent 50%)",
         }}
       />
       <div className="relative mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
@@ -170,9 +187,9 @@ export function ServiceBlockSection({ block }: { block: ServiceBlock }) {
               key={item}
               variants={fadeUp}
               whileHover={{ y: -4 }}
-              className="group flex items-center gap-4 rounded-2xl border border-white/10 bg-gradient-to-br from-[#0a1628] via-[#12253c] to-[#0c1a2e] p-5 shadow-[0_8px_24px_-8px_rgba(10,18,32,0.35)] transition-all duration-300 hover:border-sgg-ink-accent-dark/40 hover:from-[#12253c] hover:to-[#16304a] hover:shadow-[0_12px_28px_-8px_rgba(10,18,32,0.45)]"
+              className="group flex items-center gap-4 rounded-2xl border border-white/[0.08] bg-gradient-to-br from-[#14263f] via-[#182b45] to-[#12253c] p-5 shadow-[0_8px_22px_-12px_rgba(10,18,32,0.35)] transition-all duration-300 hover:border-sgg-ink-accent-dark/40 hover:from-[#182b45] hover:to-[#1b3350] hover:shadow-[0_12px_26px_-12px_rgba(10,18,32,0.45)]"
             >
-              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-sgg-ink-accent-dark/30 to-sgg-ink-accent/20 text-sgg-ink-accent-dark transition-colors duration-300 group-hover:from-sgg-ink-accent-dark group-hover:to-sgg-ink-accent group-hover:text-[#08111e]">
+              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-sgg-ink-accent-dark/15 text-sgg-ink-accent-dark transition-colors duration-300 group-hover:bg-sgg-ink-accent-dark/25">
                 <Icon size={20} aria-hidden="true" />
               </span>
               <span className="min-w-0 text-base font-medium leading-snug text-sgg-ink-inverse">
