@@ -81,9 +81,9 @@ export function CorporateGovernance() {
                 <motion.li
                   key={c}
                   variants={fadeUp}
-                  className="group flex items-center gap-3 rounded-xl border border-sgg-border-dark bg-white/[0.04] px-4 py-4 text-sm font-medium text-sgg-ink-inverse-2 backdrop-blur transition-all hover:border-sgg-border-accent"
+                  className="group flex items-center gap-3 rounded-xl border border-red-500/30 bg-gradient-to-br from-[#3a1515]/80 via-[#2a1010]/70 to-[#1a0c0c]/90 px-4 py-4 text-sm font-medium text-sgg-ink-inverse-2 backdrop-blur transition-all hover:border-red-400/50 hover:from-[#4a1a1a]/90 hover:to-[#2a1010]"
                 >
-                  <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-sgg-ink-accent/20 text-sgg-ink-accent-dark">
+                  <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-[#e23a2e] to-[#f07167] text-white shadow-md shadow-red-500/30">
                     <ShieldCheck size={16} strokeWidth={2} />
                   </span>
                   {c}
