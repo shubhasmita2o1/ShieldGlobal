@@ -349,7 +349,7 @@ export function JourneyTimeline() {
 
                     {/* Year + index */}
                     <div className="relative flex items-center gap-3">
-                      <span className="font-[Fraunces,serif] text-[30px] font-semibold leading-none tracking-tight text-neutral-900 sm:text-[32px]">
+                      <span className="font-[Montserrat,sans-serif] text-[30px] font-semibold leading-none tracking-tight text-neutral-900 sm:text-[32px]">
                         {m.year}
                       </span>
                       <span className="h-px flex-1 bg-sky-200/60" />
