@@ -53,7 +53,7 @@ export function GroupIdentity() {
               variants={fadeUp}
               whileHover={{ y: -6 }}
               transition={{ type: "spring", stiffness: 200, damping: 20 }}
-              className="group relative flex flex-col rounded-2xl border border-neutral-200/80 bg-white p-8 shadow-[0_1px_2px_rgba(15,23,42,0.04)] transition-shadow duration-300 hover:shadow-[0_20px_50px_-20px_rgba(10,143,184,0.35)]"
+              className="group relative flex flex-col rounded-2xl border border-neutral-200/80 bg-[#f4fafc] p-8 shadow-[0_1px_2px_rgba(15,23,42,0.04)] transition-shadow duration-300 hover:shadow-[0_20px_50px_-20px_rgba(10,143,184,0.35)]"
             >
               <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#e6f6fb] text-[#0a8fb8] transition-colors group-hover:bg-[#0a8fb8] group-hover:text-white">
                 <Icon size={22} strokeWidth={1.75} />
